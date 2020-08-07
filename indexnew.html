@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WebRTC Demo</title>
+
+  <style>
+
+
+    .video-overlay {
+      position: fixed;
+	  bottom: 0; 
+
+    }
+
+    .video-inside {
+      width: 30%;
+      height: 30%;
+    }
+
+    .video-outside {
+      background-color: black !important;
+         border: 1px solid black;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;;
+    }
+	
+	    .buttony
+	{
+		position: fixed;
+		right:0;
+    }
+
+
+
+    }
+  </style>
+  
+
+</head>
+
+<body>
+	
+        <video class="video-outside" id="remoteVideo" autoplay></video>
+        
+		 <div class="video-overlay">
+          <video class="video-inside" id="localVideo" autoplay muted></video>
+
+        </div>
+		
+		 <div class="buttony">
+        <button id="callButton">Connect</button>
+        <button id="hangupButton">Disconnect</button>
+
+		</div>
+
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script>
+  
+
+	
+    var hostArray = window.location.host.split(':');
+    var serverLoc = 'wss://' + hostArray[0] + ':443/'
+    var socket = new WebSocket(serverLoc);
+
+    var localvid = document.getElementById('localvideo');
+    var remotevid = document.getElementById('remotevideo');
+    //var localStream = null;
+    var pc = null;
+    var mediaFlowing = false;
+    var useH264 = true;
+	
+	var localStream = null;
+	//let pc1;
+	//let pc2;
+
+    var offerOptions = {
+      'mandatory': {
+        'offerToReceiveAudio': true,
+        'offerToReceiveVideo': true
+      }
+    };
+	
+	/*
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+ */
+
+	socket.addEventListener("message", onWebSocketMessage, false);
+
+	//const startButton = document.getElementById('startButton');
+	const callButton = document.getElementById('callButton');
+	const hangupButton = document.getElementById('hangupButton');
+	callButton.disabled = true;
+	hangupButton.disabled = true;
+	//startButton.addEventListener('click', start);
+	callButton.addEventListener('click', call);
+	hangupButton.addEventListener('click', hangup);
+
+	let startTime;
+	const localVideo = document.getElementById('localVideo');
+	const remoteVideo = document.getElementById('remoteVideo');
+
+	localVideo.addEventListener('loadedmetadata', function() {
+	  console.log(`Local video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
+	});
+
+	remoteVideo.addEventListener('loadedmetadata', function() {
+	  console.log(`Remote video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
+	});
+
+	remoteVideo.addEventListener('resize', () => {
+	  console.log(`Remote video size changed to ${remoteVideo.videoWidth}x${remoteVideo.videoHeight}`);
+	  // We'll use the first onsize callback as an indication that video has started
+	  // playing out.
+	  if (startTime) {
+	    const elapsedTime = window.performance.now() - startTime;
+	    console.log('Setup time: ' + elapsedTime.toFixed(3) + 'ms');
+	    startTime = null;
+	  }
+	});
+	
+	start();
+	
+	
+
+	function getName(pc) {
+	  return 'pc';
+	}
+
+	/*function getOtherPc(pc) {
+	  return (pc === pc1) ? pc2 : pc1;
+	}*/
+
+	async function start() {
+	  console.log('Requesting local stream');
+	  var constraints = {
+        "audio": true,
+        "video": {
+          "width": {
+            "min": "320"
+          },
+          "height": {
+            "min": "240"
+          },
+          "frameRate": {
+            "min": "8",
+            "max": "10"
+          }
+        }
+      };
+	  //startButton.disabled = true;
+	  try {
+	    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+	    console.log('Received local stream');
+	    localVideo.srcObject = stream;
+	    localStream = stream;
+	    callButton.disabled = false;
+		mediaFlowing= true;
+	  } catch (e) {
+	    alert(`getUserMedia() error: ${e.name}`);
+	  }
+	}
+
+	/*function getSelectedSdpSemantics() {
+	  const sdpSemanticsSelect = document.querySelector('#sdpSemantics');
+	  const option = sdpSemanticsSelect.options[sdpSemanticsSelect.selectedIndex];
+	  return option.value === '' ? {} : {sdpSemantics: option.value};
+	}*/
+
+	async function call() {
+	  callButton.disabled = true;
+	  hangupButton.disabled = false;
+	  console.log('Starting call');
+	  startTime = window.performance.now();
+	  const videoTracks = localStream.getVideoTracks();
+	  const audioTracks = localStream.getAudioTracks();
+	  if (videoTracks.length > 0) {
+	    console.log(`Using video device: ${videoTracks[0].label}`);
+	  }
+	  if (audioTracks.length > 0) {
+	    console.log(`Using audio device: ${audioTracks[0].label}`);
+	  }
+	  var configuration = {
+        "iceServers": []
+      };
+	  console.log('RTCPeerConnection configuration:', configuration);
+	  pc = new RTCPeerConnection(configuration);
+	  console.log('Created local peer connection object pc');
+	  pc.addEventListener('icecandidate', e => onIceCandidate(pc, e));
+	  //pc2 = new RTCPeerConnection(configuration);
+	  //console.log('Created remote peer connection object pc2');
+	  //pc2.addEventListener('icecandidate', e => onIceCandidate(pc2, e));
+	  pc.addEventListener('iceconnectionstatechange', e => onIceStateChange(pc, e));
+	  //pc2.addEventListener('iceconnectionstatechange', e => onIceStateChange(pc2, e));
+	  pc.addEventListener('track', gotRemoteStream);
+
+	  localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+	  console.log('Added local stream to pc');
+
+	  try {
+	    console.log('pc createOffer start');
+	    const offer = await pc.createOffer(offerOptions);
+	    await onCreateOfferSuccess(offer);
+	  } catch (e) {
+	    onCreateSessionDescriptionError(e);
+	  }
+	}
+
+	function onCreateSessionDescriptionError(error) {
+	  console.log(`Failed to create session description: ${error.toString()}`);
+	}
+
+	async function onCreateOfferSuccess(desc) {
+	  //console.log(`Offer from pc1\n${desc.sdp}`);
+	  console.log('pc setLocalDescription start', desc);
+	  try {
+	    await pc.setLocalDescription(desc);
+		
+		socket.send(JSON.stringify({
+        "messageType": "offer",
+        "peerDescription": desc
+      }));
+		
+	    onSetLocalSuccess(pc);
+	  } catch (e) {
+	    onSetSessionDescriptionError();
+	  }
+/*
+	  console.log('pc2 setRemoteDescription start');
+	  try {
+	    await pc2.setRemoteDescription(desc);
+	    onSetRemoteSuccess(pc2);
+	  } catch (e) {
+	    onSetSessionDescriptionError();
+	  }
+	  
+
+	  console.log('pc2 createAnswer start');
+	  // Since the 'remote' side has no media stream we need
+	  // to pass in the right constraints in order for it to
+	  // accept the incoming offer of audio and video.
+	  try {
+	    const answer = await pc2.createAnswer();
+	    await onCreateAnswerSuccess(answer);
+	  } catch (e) {
+	    onCreateSessionDescriptionError(e);
+	  }*/
+	}
+
+	function onSetLocalSuccess(pc) {
+	  console.log(`${getName(pc)} setLocalDescription complete`);
+	}
+
+	function onSetRemoteSuccess(pc) {
+	  console.log(`${getName(pc)} setRemoteDescription complete`);
+	}
+
+	function onSetSessionDescriptionError(error) {
+	  console.log(`Failed to set session description: ${error.toString()}`);
+	}
+
+	function gotRemoteStream(e) {
+	  if (remoteVideo.srcObject !== e.streams[0]) {
+	    remoteVideo.srcObject = e.streams[0];
+	    console.log('pc2 received remote stream');
+	  }
+	}
+
+	function onCreateAnswerSuccess(desc) {
+	  console.log(`Answer from pc:\n${desc.sdp}`);
+	  console.log('pc setLocalDescription start');
+	  try {
+	    pc.setLocalDescription(desc);
+		
+		socket.send(JSON.stringify({
+        "messageType": "answer",
+        "peerDescription": sessionDescription
+      }));
+		
+	    onSetLocalSuccess(pc);
+	  } catch (e) {
+	    onSetSessionDescriptionError(e);
+	  }
+	  /*console.log('pc1 setRemoteDescription start');
+	  try {
+	    await pc.setRemoteDescription(desc);
+	    onSetRemoteSuccess(pc);
+	  } catch (e) {
+	    onSetSessionDescriptionError(e);
+	  }*/
+	}
+
+	async function onIceCandidate(pc, event) {
+	  try {
+		socket.send(JSON.stringify({
+            "messageType": "iceCandidate",
+            "candidate": event.candidate
+          }));
+		  
+	    await (pc.addIceCandidate(event.candidate));
+		
+          
+		  
+	    onAddIceCandidateSuccess(pc);
+	  } catch (e) {
+	    onAddIceCandidateError(pc, e);
+	  }
+	  console.log(`${getName(pc)} ICE candidate:\n${event.candidate ? event.candidate.candidate : '(null)'}`);
+	}
+
+	function onAddIceCandidateSuccess(pc) {
+	  console.log(`${getName(pc)} addIceCandidate success`);
+	}
+
+	function onAddIceCandidateError(pc, error) {
+	  console.log(`${getName(pc)} failed to add ICE Candidate: ${error.toString()}`);
+	}
+
+	function onIceStateChange(pc, event) {
+	  if (pc) {
+	    console.log(`${getName(pc)} ICE state: ${pc.iceConnectionState}`);
+	    console.log('ICE state change event: ', event);
+	  }
+	}
+
+	function hangup() {
+	  console.log('Ending call');
+	  pc.close();
+	  //pc2.close();
+	  pc = null;
+	  //pc2 = null;
+	  hangupButton.disabled = true;
+	  callButton.disabled = false;
+	}
+	
+	
+	
+
+    // process messages from web socket
+	function onWebSocketMessage(evt) {
+		var message = JSON.parse(evt.data);
+		
+		//console.log(message);
+		
+		if (message.messageType === 'offer') {
+        console.log("Received offer...")
+        console.log(message);
+        /*if (!mediaFlowing) {
+          createPeerConnection();
+          mediaFlowing = true;
+        }*/
+        console.log('Creating remote session description...' );
+
+        var remoteDescription = new RTCSessionDescription(message.peerDescription);
+		//console.log(remoteDescription );
+		/*
+          pc.setRemoteDescription(new RTCSessionDescription(remoteDescription), function() {
+          console.log('Sending answer...');
+          pc.createAnswer(onCreateAnswerSuccess, onCreateAnswerFailed);
+        }, function() {
+          console.log('Error setting remote description');
+        });*/
+		
+		try {
+	    pc.setRemoteDescription(remoteDescription);
+	    onSetRemoteSuccess(pc);
+	  } catch (e) {
+	    onSetSessionDescriptionError();
+	  }
+
+      } else if (message.messageType === 'answer' && mediaFlowing) {
+        console.log('Received answer...');
+        console.log('Setting remote session description...' );
+        var remoteDescription = message.peerDescription;
+        
+        pc.setRemoteDescription(new RTCSessionDescription(remoteDescription));
+
+      } else if (message.messageType === "iceCandidate" && mediaFlowing) {
+        console.log('Received ICE candidate...');
+        var candidate = new RTCIceCandidate({
+          sdpMLineIndex: message.candidate.sdpMLineIndex,
+          sdpMid: message.candidate.sdpMid,
+          candidate: message.candidate.candidate
+        });
+        pc.addIceCandidate(candidate);
+
+      } else if (message.messageType === 'bye' && mediaFlowing) {
+        // console.log("Received bye");
+        stop();
+				
+      }
+	  
+	  else
+		{
+		console.log ("none. it's useless");
+		}
+    }
+    
+
+   
+  </script>
+
+  
+</body>
+
+</html>

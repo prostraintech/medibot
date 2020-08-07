@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+  <title>Medibot Telepresence</title>
+
+  <style>
+
+
+	    .video-overlay {
+	      position: fixed;
+		  bottom: 0; 
+
+	    }
+
+	    .video-inside {
+	      width: 30%;
+	      height: 30%;
+	    }
+
+	    .video-outside {
+	      background-color: black !important;
+ position: fixed;
+ left:0;
+ bottom:0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+	    }
+		
+		.buttony
+		{
+		  position: fixed;
+		  right:0;
+	    }
+
+
+
+    }
+  </style>
+
+</head>
+
+<body>
+	
+        <video class="video-outside" id="remotevideo" autoplay></video>
+        
+		 <div class="video-overlay">
+          <video class="video-inside" id="localvideo" autoplay muted></video>
+
+        </div>
+		
+		 <div class="buttony">
+        <button type="button" onclick="connect();">Connect</button>
+        <button type="button" onclick="disconnect();">Disconnect</button>
+
+		</div>
+  
+  <script src="/socket.io.js"></script>
+  <script src="/adapter.js"></script>
+  <script src="/webrtc.js"></script>
+  <script src="/gamepad.js"></script>
+
+  
+</body>
+
+</html>
