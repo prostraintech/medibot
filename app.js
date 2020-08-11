@@ -20,6 +20,10 @@ var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
  baudRate: 115200
 });
 
+arduinoSerialPort.on('error',function() {
+  console.log('Serial Port ' + arduinoCOMPort + ' is not available');
+});
+
 const parser = new Readline();
 arduinoSerialPort.pipe(parser);
 
