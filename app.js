@@ -83,7 +83,7 @@ socket.on('button', (status) => {
     
 });
 
-}
+});
 
 
 /*
