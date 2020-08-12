@@ -79,7 +79,7 @@ socket.on('button', (status) => {
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
   //arduinoSerialPort.write(res+'\n');
-  console.log("pressed");
+  console.log(status.toString());
     
 });
 
