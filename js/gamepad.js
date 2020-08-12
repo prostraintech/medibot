@@ -33,7 +33,7 @@ function getGamepadState() {
 		
 		var xAxis= gamepad.axes[0];
 		var yAxis= gamepad.axes[1];
-    const pressed = 0;
+    var pressed = 0;
     
 		if (xAxis > 0.1)
 		{
