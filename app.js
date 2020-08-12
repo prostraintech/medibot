@@ -73,7 +73,8 @@ io.on('connection', (socket) => {
 		console.log(res);
 			
   });
-  
+
+socket.on('button', (status) => {
   socket.emit('button',status);
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
