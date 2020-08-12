@@ -67,22 +67,6 @@ function getGamepadState() {
       pressed = 0;
     }
 
-		
-
-			
-		/*
-		        // Filter out only the buttons which are pressed
-        const pressedButtons = gamepad.buttons
-            .map((button, id) => ({id, button}))
-            .filter(isPressed);
-
-        // Print the pressed buttons to our HTML
-        for (const button of pressedButtons) {
-            console.log(button);
-            //log(`Button ${button.id} was pressed.`)
-        }
-		*/
-
     }
 
     function buttonPressed(b) {
@@ -92,9 +76,7 @@ function getGamepadState() {
       return b == 1.0;
     }
 	
-	    function isPressed({button: {pressed}}) {
-        return !!pressed;
-    }
+
 	
 		socket.on('navi', function(msg){
 			console.log(msg);
