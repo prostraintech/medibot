@@ -33,7 +33,8 @@ function getGamepadState() {
 		
 		var xAxis= gamepad.axes[0];
 		var yAxis= gamepad.axes[1];
-		
+    const pressed = 0;
+    
 		if (xAxis > 0.1)
 		{
 			//console.log("going right");
@@ -54,7 +55,16 @@ function getGamepadState() {
     }
     
     if (buttonPressed(gamepad.buttons[0])) {
+      pressed++;
+      if (pressed = 1)
+      {
       socket.emit('button', "check temperature" )
+      }
+    }
+
+    else
+    {
+      pressed = 0;
     }
 
 		
