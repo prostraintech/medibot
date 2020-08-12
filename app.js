@@ -24,15 +24,15 @@ arduinoSerialPort.on('error',function() {
   console.log('Serial Port ' + arduinoCOMPort + ' is not available');
 });
 
-const parser = new Readline();
-arduinoSerialPort.pipe(parser);
-
 //const parser = arduinoSerialPort.pipe(new Delimiter({ delimiter: '\n' }))
 //const parser = arduinoSerialPort.pipe(new InterByteTimeout({interval: 30}));
 
 arduinoSerialPort.on('open',function() {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
+
+const parser = new Readline();
+arduinoSerialPort.pipe(parser);
 
 parser.on('data',function(line) {
   console.log('Data: ' + line);
@@ -67,14 +67,19 @@ io.on('connection', (socket) => {
 	
 	socket.on('navi', (status) => {
 		socket.emit('navi',status);
-		//onsole.log(status);
+		//console.log(status);
 		var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
 		arduinoSerialPort.write(res+'\n');
 		console.log(res);
-		
-	
-	
-	});
+			
+  });
+  
+  socket.emit('button',status);
+  //console.log(status);
+  //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
+  //arduinoSerialPort.write(res+'\n');
+  console.log(status);
+    
 });
 
 
