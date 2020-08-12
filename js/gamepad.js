@@ -53,7 +53,7 @@ function getGamepadState() {
 			socket.emit('navi', gamepad.axes[1]);
     }
     
-    if (isPressed(gamepad.buttons[0])) {
+    if (buttonPressed(gamepad.buttons[0])) {
       socket.emit('button', "check temperature" )
     }
 
@@ -73,6 +73,13 @@ function getGamepadState() {
         }
 		*/
 
+    }
+
+    function buttonPressed(b) {
+      if (typeof(b) == "object") {
+        return b.pressed;
+      }
+      return b == 1.0;
     }
 	
 	    function isPressed({button: {pressed}}) {
