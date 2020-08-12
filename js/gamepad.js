@@ -1,5 +1,5 @@
 const refreshRate = 100;
-
+var pressed = 0;
 
 
 window.addEventListener("gamepadconnected", (event) => {
@@ -33,7 +33,7 @@ function getGamepadState() {
 		
 		var xAxis= gamepad.axes[0];
 		var yAxis= gamepad.axes[1];
-    var pressed = 0;
+    
     
 		if (xAxis > 0.1)
 		{
