@@ -35,24 +35,37 @@ function getGamepadState() {
 		var yAxis= gamepad.axes[1];
     
     
-		if (xAxis > 0.1)
+		if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.1 && yAxis>-0.5)  //straight slow
 		{
 			//console.log("going right");
-			socket.emit('navi', gamepad.axes[0]);
+			socket.emit('navi', 2);
 		}
-		else if (xAxis < -0.1)
+		else if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.5)       //straight fast
 		{
       //console.log("going left");
-      socket.emit('navi', gamepad.axes[0]);
+      socket.emit('navi', 4);
 		}
 		
-		if (yAxis > 0.1)
+		else if (xAxis>0.5 && yAxis<-0.25)                //turn right
 		{
-			//socket.emit('navi', gamepad.axes[1]);
-		}
-		else if (yAxis < -0.1)
+      //socket.emit('navi', gamepad.axes[1]);
+      socket.emit('navi', 6);
+    }
+    
+    else if (xAxis<-0.5 && yAxis<-0.25)                //turn left
 		{
-			socket.emit('navi', gamepad.axes[1]);
+      //socket.emit('navi', gamepad.axes[1]);
+      socket.emit('navi', 8);
+    }
+    
+		else if (xAxis>0.5 && yAxis>-0.25)            //rotate right
+		{
+			socket.emit('navi', 10);
+    }
+
+    else if (xAxis<-0.5 && yAxis>-0.25)            //rotate left
+		{
+			socket.emit('navi', 12);
     }
     
     if (buttonPressed(gamepad.buttons[0])) {

@@ -68,7 +68,8 @@ io.on('connection', (socket) => {
 	socket.on('navi', (status) => {
 		socket.emit('navi',status);
 		//console.log(status);
-		var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
+    var res = status.toString();
+    //1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
 		arduinoSerialPort.write(res+'\n');
 		console.log(res);
 			
