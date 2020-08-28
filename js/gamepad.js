@@ -48,7 +48,7 @@ function getGamepadState() {
 		
 		if (yAxis > 0.1)
 		{
-			socket.emit('navi', gamepad.axes[1]);
+			//socket.emit('navi', gamepad.axes[1]);
 		}
 		else if (yAxis < -0.1)
 		{
