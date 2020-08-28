@@ -42,7 +42,8 @@ function getGamepadState() {
 		}
 		else if (xAxis < -0.1)
 		{
-			//console.log("going left");
+      //console.log("going left");
+      socket.emit('navi', gamepad.axes[0]);
 		}
 		
 		if (yAxis > 0.1)
