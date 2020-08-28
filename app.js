@@ -17,7 +17,7 @@ const Readline = require('@serialport/parser-readline');
 var arduinoCOMPort = "/dev/tty0";
 
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
- baudRate: 115200
+ baudRate: 9600
 });
 
 arduinoSerialPort.on('error',function() {
