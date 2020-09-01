@@ -79,7 +79,7 @@ function getGamepadState() {
       sendstop++;
       if (sendstop<10)
       {
-      //socket.emit('navi', 0);
+        socket.emit('navi', 0);
       }
     }
     
