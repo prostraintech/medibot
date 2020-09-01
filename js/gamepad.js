@@ -60,7 +60,7 @@ function getGamepadState() {
     
 		else if (xAxis>0.5 && yAxis>-0.25)            //rotate right
 		{
-			socket.emit('navi', 10);
+			socket.emit('navi', 99);
     }
 
     else if (xAxis<-0.5 && yAxis>-0.25)            //rotate left
