@@ -31,12 +31,12 @@ arduinoSerialPort.on('open',function() {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
-const parser = new Readline();
-arduinoSerialPort.pipe(parser);
+//const parser = new Readline();
+//arduinoSerialPort.pipe(parser);
 
-parser.on('data',function(line) {
-  console.log('Data: ' + line);
-});
+//parser.on('data',function(line) {
+//  console.log('Data: ' + line);
+//});
 
 
 app.use(express.static(__dirname + '/js'));
