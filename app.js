@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 });
 
 https.listen(443, () => {
-  console.log((new Date()) + " Umair is chewing on port 443");
+  console.log((new Date()) + " Node server started on port 443");
 });
 
 var io = require('socket.io')(https);
