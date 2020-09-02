@@ -7,6 +7,7 @@ var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
 }, app);
+var cmd = 0;
 
 var SerialPort = require("serialport");
 //const Delimiter = require('@serialport/parser-delimiter')
@@ -66,7 +67,6 @@ io.on('connection', (socket) => {
 	});
 	
 	socket.on('navi', (status) => {
-    var cmd = 0;
     socket.emit('navi',status);
     if (cmd != status) {
       cmd = status;
