@@ -35,9 +35,6 @@ function getGamepadState() {
     var yAxis= gamepad.axes[1];
     var pointTurnAxis= gamepad.axes[5];
     var sendstop = 0;
-    var slow = 0;
-    var fast = 0;
-    
     
 		//if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.1 && yAxis>-0.5)  //straight slow
 		//{
@@ -49,11 +46,7 @@ function getGamepadState() {
     if (yAxis<-0.1 && yAxis>-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //straight slow
 		{
       //console.log("straight slow");
-      if (slow<1) {
       socket.emit('navi', 1);
-      }
-      slow++;
-      fast = 0;
      // sendstop = 0;
     }
     
@@ -67,11 +60,7 @@ function getGamepadState() {
     else if (yAxis<-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)       //straight fast
 		{
       //console.log("straight fast");
-      if (fast<1) {
       socket.emit('navi', 2);
-      }
-      fast++;
-      slow = 0;
       //sendstop = 0;
     }
     
@@ -79,8 +68,6 @@ function getGamepadState() {
 		{
       //console.log("rotate right");
       socket.emit('navi', 3);
-      fast = 0;
-      slow = 0;
       //sendstop = 0;
     }
     
@@ -88,8 +75,6 @@ function getGamepadState() {
 		{
       //console.log("rotate left");
       socket.emit('navi', 4);
-      fast = 0;
-      slow = 0;
       //sendstop = 0;
 		}
 		
