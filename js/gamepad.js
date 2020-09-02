@@ -128,11 +128,11 @@ function getGamepadState() {
     //}
     
     if (buttonPressed(gamepad.buttons[0])) {
-      pressed++;
-      if (pressed == 1)
+      if (pressed<1)
       {
-      socket.emit('button', "check temperature" )
+      socket.emit('navi', 9)
       }
+      pressed++;
     }
 
     else
