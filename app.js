@@ -66,12 +66,17 @@ io.on('connection', (socket) => {
 	});
 	
 	socket.on('navi', (status) => {
-		socket.emit('navi',status);
-		//console.log(status);
-    var res = status.toString();
-    //1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
-		arduinoSerialPort.write(res+'\n');
-		console.log(res);
+    var cmd = 0;
+    socket.emit('navi',status);
+    if (cmd != status) {
+      cmd = status;
+      //console.log(status);
+      var res = cmd.toString();
+      //1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
+      arduinoSerialPort.write(res+'\n');
+      console.log(res);
+    }
+    
 			
   });
 
