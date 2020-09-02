@@ -119,13 +119,13 @@ function getGamepadState() {
       //sendstop = 0;
     //}
 
-    //else {
-      //sendstop++;
-      //if (sendstop<10)
-      //{
-        //socket.emit('navi', 0);
-      //}
-    //}
+    else {
+      sendstop++;
+      if (sendstop==1)
+      {
+        socket.emit('navi', 0);
+      }
+    }
     
     if (buttonPressed(gamepad.buttons[0])) {
       if (pressed<1)
