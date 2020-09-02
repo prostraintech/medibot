@@ -69,7 +69,7 @@ function getGamepadState() {
       //console.log("straight fast");
       //if (fast<1) {
       socket.emit('navi', 2);
-      }
+      //}
       //fast++;
       //slow = 0;
       //sendstop = 0;
