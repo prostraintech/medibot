@@ -72,10 +72,11 @@ io.on('connection', (socket) => {
     if (cmd != status) {
       cmd = status;
       //console.log(status);
-      var res = cmd.toString();
-      //1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
-      arduinoSerialPort.write(res+'\n');
-      console.log(res);
+      sendData();
+    }
+
+    else if(cmd == status) {
+      setInterval(sendData, 1000);
     }
 
     // else if (cmd==status) {
@@ -94,6 +95,12 @@ io.on('connection', (socket) => {
     
 			
   });
+
+  function sendData() {
+    var res = cmd.toString();
+    arduinoSerialPort.write(res+'\n');
+    console.log(res);
+  }
 
 socket.on('button', (status) => {
   socket.emit('button',status);
