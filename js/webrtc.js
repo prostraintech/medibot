@@ -241,4 +241,4 @@
 	
 
     startMedia();
-	console.log("Umair is eating!!");
+	console.log("Connected to Medibot");
