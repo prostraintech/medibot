@@ -7,7 +7,7 @@ var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
 }, app);
-var cmd = 0;
+var cmd = 8;
 var count = 0;
 
 var SerialPort = require("serialport");
