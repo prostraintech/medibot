@@ -56,6 +56,17 @@ function getGamepadState() {
       //fast = 0;
      // sendstop = 0;
     }
+
+    else if (yAxis>0.1 && pointTurnAxis<0.5 && pointTurnAxis>-0.5 && !buttonPressed(gamepad.buttons[0]))  //straight slow
+		{
+      //console.log("straight slow");
+      //if (slow<1) {
+      socket.emit('navi', 1);
+     // }
+      //slow++;
+      //fast = 0;
+     // sendstop = 0;
+    }
     
 		//else if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.5)       //straight fast
 		//{
