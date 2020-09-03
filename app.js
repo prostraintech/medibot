@@ -73,6 +73,7 @@ io.on('connection', (socket) => {
       cmd = status;
       //console.log(status);
       sendData();
+      count = 0;
     }
 
     count++;
@@ -88,9 +89,10 @@ io.on('connection', (socket) => {
 
   function sendData() {
     var res = cmd.toString();
+    var count_string = count.toString();
     arduinoSerialPort.write(res+'\n');
-    //console.log(res);
-    //console.log(val);
+    console.log(res);
+    console.log(count_string);
   }
 
 socket.on('button', (status) => {
