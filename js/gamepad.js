@@ -144,7 +144,7 @@ function getGamepadState() {
       //socket.emit('navi', 9)
       //}
       //pressed++;
-    }
+    
 
     else
     {
@@ -164,4 +164,6 @@ function getGamepadState() {
 	
 		socket.on('navi', function(msg){
 			console.log(msg);
-		});
+    });
+    
+  }

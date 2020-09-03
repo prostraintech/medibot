@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
     }
 
     else if(cmd == status) {
-      setInterval(sendData, 1000);
+      setInterval(sendData, 200);
     }
 
     // else if (cmd==status) {
