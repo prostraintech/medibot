@@ -75,25 +75,15 @@ io.on('connection', (socket) => {
       sendData();
     }
 
-    else if(cmd == status) {
-      setInterval(sendData, 2000);
-    }
+    count++;
 
-    // else if (cmd==status) {
-      
-    //   if (count<10000) {
-    //     count++;
-    //   }
-
-    //   // else if (count == 10000) {
-    //   //   count = 0;
-    //   //   res = cmd.toString();
-    //   //   arduinoSerialPort.write(res+'\n');
-    //   //   console.log(res);
-    //   // }
+    // else if(cmd == status) {
+    //   setInterval(sendData, 2000);
     // }
-    
-			
+      if (count == 1000) {
+        count = 0;
+        sendData();
+      }
   });
 
   function sendData() {
