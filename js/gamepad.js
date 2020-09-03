@@ -162,6 +162,6 @@ function getGamepadState() {
 	
 
 	
-		socket.on('navi', function(msg){
-			console.log(msg);
-		});
+		// socket.on('navi', function(msg){
+		// 	console.log(msg);
+		// });
