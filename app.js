@@ -88,9 +88,9 @@ io.on('connection', (socket) => {
 
   function sendData() {
     var res = cmd.toString();
-    var val = arduinoSerialPort.write(res+'\n');
-    console.log(res);
-    console.log(val);
+    arduinoSerialPort.write(res+'\n');
+    //console.log(res);
+    //console.log(val);
   }
 
 socket.on('button', (status) => {
