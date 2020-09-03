@@ -79,11 +79,12 @@ io.on('connection', (socket) => {
     }
 
     else if (cmd==status) {
+      
       if (count<10) {
         count++;
       }
 
-      if (count == 10) {
+      else if (count == 10) {
         count = 0;
         res = cmd.toString();
         arduinoSerialPort.write(res+'\n');
