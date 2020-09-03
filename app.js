@@ -80,16 +80,17 @@ io.on('connection', (socket) => {
     // else if(cmd == status) {
     //   setInterval(sendData, 2000);
     // }
-      if (count == 1000) {
-        count = 0;
-        sendData();
-      }
+    if (count == 1000) {
+      sendData()
+      count = 0;
+    }
   });
 
   function sendData() {
     var res = cmd.toString();
-    arduinoSerialPort.write(res+'\n');
+    var val = arduinoSerialPort.write(res+'\n');
     console.log(res);
+    console.log(val);
   }
 
 socket.on('button', (status) => {
