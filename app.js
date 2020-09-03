@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
       //console.log(status);
       sendData();
       //count = 0;
-    }
+  //  }
 
     //count++;
 
@@ -104,4 +104,3 @@ socket.on('button', (status) => {
     
 });
 
-});
