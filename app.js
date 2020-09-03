@@ -78,19 +78,19 @@ io.on('connection', (socket) => {
       console.log(res);
     }
 
-    else if (cmd==status) {
+    // else if (cmd==status) {
       
-      if (count<10) {
-        count++;
-      }
+    //   if (count<10000) {
+    //     count++;
+    //   }
 
-      else if (count == 10) {
-        count = 0;
-        res = cmd.toString();
-        arduinoSerialPort.write(res+'\n');
-        console.log(res);
-      }
-    }
+    //   // else if (count == 10000) {
+    //   //   count = 0;
+    //   //   res = cmd.toString();
+    //   //   arduinoSerialPort.write(res+'\n');
+    //   //   console.log(res);
+    //   // }
+    // }
     
 			
   });
