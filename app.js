@@ -69,30 +69,30 @@ io.on('connection', (socket) => {
   
 	socket.on('navi', (status) => {
     socket.emit('navi',status);
-    if (cmd != status) {
-      cmd = status;
+    //if (cmd != status) {
+     // cmd = status;
       //console.log(status);
       sendData();
-      count = 0;
+      //count = 0;
     }
 
-    count++;
+    //count++;
 
     // else if(cmd == status) {
     //   setInterval(sendData, 2000);
     // }
-    if (count == 1000) {
-      sendData()
-      count = 0;
-    }
+    //if (count == 1000) {
+      //sendData()
+      //count = 0;
+    //}
   });
 
   function sendData() {
     var res = cmd.toString();
-    var count_string = count.toString();
+   // var count_string = count.toString();
     arduinoSerialPort.write(res+'\n');
     console.log(res);
-    console.log(count_string);
+   // console.log(count_string);
   }
 
 socket.on('button', (status) => {
