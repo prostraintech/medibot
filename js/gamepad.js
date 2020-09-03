@@ -39,7 +39,7 @@ function getGamepadState() {
     var fast = 0;
     var val_joystick = 0;
     var count = 0;
-    var cmd = 0;
+    var cmd = 8;
     
     
 		//if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.1 && yAxis>-0.5)  //straight slow
@@ -153,14 +153,14 @@ function getGamepadState() {
       //socket.emit('navi', 9)
       //}
       //pressed++;
-      count++;
       if (cmd != val_joystick)
       {
         cmd = val_joystick;
         socket.emit('navi',cmd);
         count = 0;
       }
-
+      else
+        count++;
       if (count >=1000 ){
          socket.emit('navi',cmd);
          count = 0;

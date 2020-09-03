@@ -8,7 +8,7 @@ var https = require('https').createServer({
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
 }, app);
 var cmd = 8;
-var count = 0;
+//var count = 0;
 
 var SerialPort = require("serialport");
 //const Delimiter = require('@serialport/parser-delimiter')
@@ -57,11 +57,11 @@ var io = require('socket.io')(https);
 io.on('connection', (socket) => {
 	
 	console.log('a user connected');
-  
+}); 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
-	
+
 	socket.on('webrtc', (webrtcdata) => {
     //console.log(webrtcdata);
 		socket.broadcast.emit('webrtc',webrtcdata);
