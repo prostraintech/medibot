@@ -8,7 +8,7 @@ var https = require('https').createServer({
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
 }, app);
 var cmd = 8;
-var count = 0;
+//var count = 0;
 
 var SerialPort = require("serialport");
 //const Delimiter = require('@serialport/parser-delimiter')
@@ -57,11 +57,11 @@ var io = require('socket.io')(https);
 io.on('connection', (socket) => {
 	
 	console.log('a user connected');
-  
+ 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
-	
+
 	socket.on('webrtc', (webrtcdata) => {
     //console.log(webrtcdata);
 		socket.broadcast.emit('webrtc',webrtcdata);
@@ -69,39 +69,28 @@ io.on('connection', (socket) => {
   
 	socket.on('navi', (status) => {
     socket.emit('navi',status);
-    if (cmd != status) {
-      cmd = status;
+    //if (cmd != status) {
+     // cmd = status;
       //console.log(status);
-      sendData();
-    }
-
-    else if(cmd == status) {
-      setInterval(sendData, 2000);
-    }
-
-    // else if (cmd==status) {
-      
-    //   if (count<10000) {
-    //     count++;
-    //   }
-
-    //   // else if (count == 10000) {
-    //   //   count = 0;
-    //   //   res = cmd.toString();
-    //   //   arduinoSerialPort.write(res+'\n');
-    //   //   console.log(res);
-    //   // }
-    // }
-    
-			
-  });
-
-  function sendData() {
-    var res = cmd.toString();
+      var res = cmd.toString();
+   // var count_string = count.toString();
     arduinoSerialPort.write(res+'\n');
     console.log(res);
-  }
+   // console.log(count_string);
+      //count = 0;
+  //  }
 
+    //count++;
+
+    // else if(cmd == status) {
+    //   setInterval(sendData, 2000);
+    // }
+    //if (count == 1000) {
+      //sendData()
+      //count = 0;
+    //}
+  });
+  
 socket.on('button', (status) => {
   socket.emit('button',status);
   //console.log(status);

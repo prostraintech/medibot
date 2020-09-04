@@ -37,6 +37,9 @@ function getGamepadState() {
     var sendstop = 0;
     var slow = 0;
     var fast = 0;
+    var val_joystick = 0;
+    var count = 0;
+    var cmd = 8;
     
     
 		//if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.1 && yAxis>-0.5)  //straight slow
@@ -50,7 +53,8 @@ function getGamepadState() {
 		{
       //console.log("straight slow");
       //if (slow<1) {
-      socket.emit('navi', 1);
+      //socket.emit('navi', 1);
+      val_joystick=1;
      // }
       //slow++;
       //fast = 0;
@@ -61,7 +65,8 @@ function getGamepadState() {
 		{
       //console.log("straight slow");
       //if (slow<1) {
-      socket.emit('navi', 7);
+      //socket.emit('navi', 7);
+      val_joystick=7;
      // }
       //slow++;
       //fast = 0;
@@ -79,7 +84,8 @@ function getGamepadState() {
 		{
       //console.log("straight fast");
       //if (fast<1) {
-      socket.emit('navi', 2);
+      //socket.emit('navi', 2);
+      val_joystick=2;
       //}
       //fast++;
       //slow = 0;
@@ -89,7 +95,8 @@ function getGamepadState() {
     else if (pointTurnAxis>0.5)       //rotate right
 		{
       //console.log("rotate right");
-      socket.emit('navi', 3);
+      //socket.emit('navi', 3);
+      val_joystick=3;
       //fast = 0;
       //slow = 0;
       //sendstop = 0;
@@ -98,7 +105,8 @@ function getGamepadState() {
     else if (pointTurnAxis<-0.5)       //rotate left
 		{
       //console.log("rotate left");
-      socket.emit('navi', 4);
+      //socket.emit('navi', 4);
+      val_joystick=4;
       //fast = 0;
       //slow = 0;
       //sendstop = 0;
@@ -134,7 +142,8 @@ function getGamepadState() {
       //sendstop++;
       //if (sendstop==1)
       //{
-        socket.emit('navi', 8);
+        //socket.emit('navi', 8);
+        val_joystick = 8;
       //}
     }
     
@@ -144,6 +153,17 @@ function getGamepadState() {
       //socket.emit('navi', 9)
       //}
       //pressed++;
+      if (cmd != val_joystick)
+      {
+        cmd = val_joystick;
+        socket.emit('navi',cmd);
+        count = 0;
+      }
+      else
+        count++;
+      if (count >=1000 ){
+         socket.emit('navi',cmd);
+         count = 0;
     }
 
     // else
@@ -152,7 +172,7 @@ function getGamepadState() {
     // }
 
     // }
-
+  }
     function buttonPressed(b) {
       if (typeof(b) == "object") {
         return b.pressed;
@@ -162,6 +182,6 @@ function getGamepadState() {
 	
 
 	
-		socket.on('navi', function(msg){
-			console.log(msg);
-		});
+		 socket.on('navi', function(msg){
+		 console.log(msg);
+		 });
