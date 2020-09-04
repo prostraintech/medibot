@@ -57,7 +57,7 @@ var berry_data = {
 }
 
 setInterval(function() {
-    spawn('python', ['bleaktest.py']);
+    spawn('python', ['medikit.py']);
     }, 7000);
 
 app.get('/api/berry', function (req, res) {
