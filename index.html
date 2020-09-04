@@ -160,6 +160,8 @@
 					response.json().then(function (data) {
 						// Update app state with the new data, no error 
 						//update(null, data);
+						document.getElementById("pulse-v").textContent=data.heart_rate;
+						document.getElementById("spo2-v").textContent=data_spo2;
 						console.log(data);
 					}).catch(function (err) {
 						// Update app state with the error, no data 

@@ -48,9 +48,11 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+var rnd = Math.floor(Math.random() * 100);
+
 var berry_data = {
-  heart_rate : 70,
-  spo2 : 79
+  heart_rate : rnd,
+  spo2 : rnd
 }
 
 app.get('/api/berry', function (req, res) {
