@@ -56,13 +56,9 @@ var berry_data = {
   spo2 : '-'
 }
 
-(function() {
-  var timeout = setInterval(function() {
+setInterval(function() {
     spawn('python', ['bleaktest.py']);
-    
-
-  }, 10000);
-})();
+    }, 5000);
 
 app.get('/api/berry', function (req, res) {
   
