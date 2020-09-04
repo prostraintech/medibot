@@ -15,11 +15,11 @@
 	<style>
 		body {
 
-			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 		}
-		
-		
+
+
 		.video-overlay {
 			position: fixed;
 			bottom: 0;
@@ -47,44 +47,53 @@
 			position: fixed;
 			right: 0;
 		}
-		
+
+		.container {
+			width: 100px;
+			height: 150px;
+		}
+
 		.container-pulse {
 
-			position : absolute;
-			left: 10%;
+			position: absolute;
+			left: 5%;
 			top: 10%;
 			color: white;
 			border: #337ab7 inset 1px;
 			background-color: #337ab7;
-			vertical-align:middle;
-			display: table-cell;
-			text-align:center;
-			width: 100px;
-			font-size:40px;
-			
+			text-align: center;
+			height: 110px;
+			font-size: 40px;
+
 
 
 		}
 
 		.container-spo2 {
 
-			position : absolute;
-			left: 30%;
+			position: absolute;
+			left: 12%;
 			top: 10%;
 			color: white;
 			border: #5cb85c inset 1px;
 			background-color: #5cb85c;
-			vertical-align:middle;
-			display: table-cell;
-			text-align:center;
+			text-align: center;
 			width: 100px;
-			font-size:40px;
-			
+			font-size: 40px;
+
 		}
 
+		.desc-pulse {
 
-
-
+			position: absolute;
+			left: 5%;
+			top: 15%;
+			color: white;
+			border: #5cb85c inset 1px;
+			background-color: #5cb85c;
+			text-align: center;
+			height:30px;
+			font-size: 10px;
 
 		}
 	</style>
@@ -99,12 +108,11 @@
 		<video class="video-inside" id="localvideo" autoplay muted></video>
 
 	</div>
-	<div class = container-pulse>
-		<h3>0</h3>
+	<div class="container">
+		<div class="container-pulse">30</div>
+			<div class="desc-pulse">spo2</div>
 	</div>
-	<div class = container-spo2>
-		<h3>0</h3>
-	</div>
+
 
 	<div class="buttony">
 		<button type="button" onclick="connect();">Connect</button>
