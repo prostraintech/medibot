@@ -51,17 +51,17 @@ app.get('/', (req, res) => {
 
 
 var berry_data = {
-  heart_rate : 30,
-  spo2 : 50
+  heart_rate : '-',
+  spo2 : '-'
 }
 
 app.get('/api/berry', function (req, res) {
-  // Simply respond with the temperature record
-  var rnd = Math.floor(Math.random() * 21) + 80;
-  var rnd2 = Math.floor(Math.random() * 51) + 100;
+  
+  //var rnd = Math.floor(Math.random() * 21) + 80;
+  //var rnd2 = Math.floor(Math.random() * 51) + 100;
 
-  berry_data.heart_rate = rnd;
-  berry_data.spo2 = rnd2;
+  //berry_data.heart_rate = rnd;
+  //berry_data.spo2 = rnd2;
 
   res.send(berry_data);
 });
@@ -125,6 +125,8 @@ socket.on('button', (status) => {
 socket.on('resp', (status) => {
   socket.emit('resp',status);
   
+  berry_data.heart_rate = status.heart_rate;
+  berry_data.spo2 = status.spo2;
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
   //arduinoSerialPort.write(res+'\n');
