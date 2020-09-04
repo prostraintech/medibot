@@ -58,7 +58,7 @@ var berry_data = {
 
 setInterval(function() {
     spawn('python', ['bleaktest.py']);
-    }, 5000);
+    }, 10000);
 
 app.get('/api/berry', function (req, res) {
   
