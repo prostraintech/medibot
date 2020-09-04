@@ -56,12 +56,12 @@
 			height: 150px;
 		}
 
-		.container-pulse {
+		.container-item {
 
 			position: relative;
 			color: white;
 			border:white solid 1px;
-			background-color: #337ab7;
+
 			text-align: center;
 			height: 110px;
 			width:100px;
@@ -73,34 +73,44 @@
 
 		}
 
-		.desc-pulse {
+		.desc-item {
 
 			position: relative;
 			top: 3%;
 			color: white;
-			border: white solid 1px;
-			background-color: #285290;
-			text-align: center;
+			border: white solid 1px;			text-align: center;
 			height: 30px;
 			width:98px;
 			font-size: 20px;
+			padding-top: 6px;
 
 
 		}
 
-		.container-spo2 {
+		.container-item .spo2 {
 
-			position: absolute;
-			left: 12%;
-			top: 10%;
-			color: white;
-			border: #5cb85c inset 1px;
 			background-color: #5cb85c;
-			text-align: center;
-			width: 100px;
-			font-size: 40px;
 
 		}
+
+		.container-item .pulse {
+
+			background-color: #337ab7;
+
+		}	
+
+		.desc-item .spo2 {
+
+			background-color: #285290;
+
+		}
+
+		.desc-item .pulse {
+
+			background-color: #00843b;
+
+		}
+
 	</style>
 
 </head>
@@ -114,8 +124,8 @@
 
 	</div>
 	<div class="container">
-		<div class="container-pulse">30</div>
-		<div class="desc-pulse">SpO<sub>2</sub> (%)</div>
+		<div class="container-item spo2">30</div>
+		<div class="desc-item spo2">SpO<sub>2</sub> (%)</div>
 	</div>
 
 
