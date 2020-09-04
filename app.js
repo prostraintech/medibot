@@ -58,7 +58,7 @@ var berry_data = {
 app.get('/api/berry', function (req, res) {
   // Simply respond with the temperature record
   var rnd = Math.floor(Math.random() * 21) + 80;
-  var rnd2 = Math.floor(Math.random() * 51) + 50;
+  var rnd2 = Math.floor(Math.random() * 51) + 100;
 
   berry_data.heart_rate = rnd;
   berry_data.spo2 = rnd2;
