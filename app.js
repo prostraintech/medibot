@@ -48,6 +48,16 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+var berry_data = {
+  heart_rate : 70,
+  spo2 : 79
+}
+
+app.get('/api/berry', function (req, res) {
+  // Simply respond with the temperature record
+  res.send(berry_data);
+});
+
 https.listen(443, () => {
   console.log((new Date()) + " Node server started on port 443");
 });
