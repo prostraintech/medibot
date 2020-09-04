@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+const spawn = require("child_process").spawn;
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
@@ -55,15 +56,17 @@ var berry_data = {
   spo2 : '-'
 }
 
+(function() {
+  var timeout = setInterval(function() {
+    spawn('python', ['bleaktest.py']);
+    
+
+  }, 10000);
+})();
+
 app.get('/api/berry', function (req, res) {
   
-  //var rnd = Math.floor(Math.random() * 21) + 80;
-  //var rnd2 = Math.floor(Math.random() * 51) + 100;
-
-  //berry_data.heart_rate = rnd;
-  //berry_data.spo2 = rnd2;
-
-  res.send(berry_data);
+res.send(berry_data);
 });
 
 https.listen(443, () => {
@@ -130,7 +133,7 @@ socket.on('resp', (status) => {
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
   //arduinoSerialPort.write(res+'\n');
-  console.log(status);
+  //console.log(status);
     
 });
 
