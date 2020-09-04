@@ -49,23 +49,40 @@
 		}
 
 		.container {
+			position: absolute;
+			left: 5%;
+			top: 10%;
 			width: 100px;
 			height: 150px;
 		}
 
 		.container-pulse {
 
-			position: absolute;
-			left: 5%;
-			top: 10%;
+			position: relative;
 			color: white;
 			border: #337ab7 inset 1px;
 			background-color: #337ab7;
 			text-align: center;
 			height: 110px;
+			width:100%;
 			font-size: 40px;
 
 
+
+		}
+
+		.desc-pulse {
+
+			position: relative;
+			left: 5%;
+			top: 15%;
+			color: white;
+			border: #5cb85c inset 1px;
+			background-color: #5cb85c;
+			text-align: center;
+			height: 30px;
+			width:100%;
+			font-size: 20px;
 
 		}
 
@@ -82,20 +99,6 @@
 			font-size: 40px;
 
 		}
-
-		.desc-pulse {
-
-			position: absolute;
-			left: 5%;
-			top: 15%;
-			color: white;
-			border: #5cb85c inset 1px;
-			background-color: #5cb85c;
-			text-align: center;
-			height:30px;
-			font-size: 10px;
-
-		}
 	</style>
 
 </head>
@@ -110,7 +113,7 @@
 	</div>
 	<div class="container">
 		<div class="container-pulse">30</div>
-			<div class="desc-pulse">spo2</div>
+		<div class="desc-pulse">spo2</div>
 	</div>
 
 
