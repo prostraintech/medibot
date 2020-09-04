@@ -129,7 +129,7 @@ socket.on('resp', (status) => {
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
   //arduinoSerialPort.write(res+'\n');
-  //console.log(status);
+  console.log("berrymed data rcecived");
     
 });
 
