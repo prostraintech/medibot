@@ -125,7 +125,7 @@ socket.on('button', (status) => {
 socket.on('resp', (status) => {
   socket.emit('resp',status);
   
-  berry_data.heart_rate = status.heart_rate;
+  berry_data.heart_rate = status.pulse_rate;
   berry_data.spo2 = status.spo2;
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
