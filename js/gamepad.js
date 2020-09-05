@@ -1,7 +1,6 @@
 const refreshRate = 50;
 var pressed = 0;
 
-
 window.addEventListener("gamepadconnected", (event) => {
   console.log("A gamepad connected:");
   console.log(event.gamepad);
@@ -35,7 +34,7 @@ function getGamepadState() {
     var yAxis= gamepad.axes[1];
     var pointTurnAxis= gamepad.axes[5];
       
-    if (buttonPressed(gamepad.buttons[0])) {
+    if (buttonPressed(gamepad.buttons[1])) {
 
         //if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.1 && yAxis>-0.5)  //straight slow
 		    //{
@@ -47,11 +46,6 @@ function getGamepadState() {
           socket.emit('navi', 1);
         }
 
-        else if (yAxis>0.1 && pointTurnAxis<0.8 && pointTurnAxis>-0.8)  //reverse slow
-		    {
-          socket.emit('navi', 7);
-        }
-    
 		    //else if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.5)       //straight fast
 		    //{
           //socket.emit('navi', 2);
@@ -92,16 +86,25 @@ function getGamepadState() {
           //socket.emit('navi', 6);
        //}
 
+       else if (yAxis>0.1 && pointTurnAxis<0.8 && pointTurnAxis>-0.8)  //reverse slow
+       {
+         socket.emit('navi', 7);
+       }
+
         else 
         {
           socket.emit('navi', 8);
         }
     }
 
+    else if (buttonPressed(gamepad.buttons[0])) 
+    {
+      socket.emit('navi', 9);
+    }
+    
     else
     {
       socket.emit('navi', 8);
-      pressed = 0;
     }
 
 }
