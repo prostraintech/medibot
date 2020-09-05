@@ -72,34 +72,24 @@ io.on('connection', (socket) => {
 
     if (cmd != status) {
       cmd = status;
-      //console.log(status);
       var res = cmd.toString();
-      //var count_string = count.toString();
       arduinoSerialPort.write(res+'\n');
       console.log(res);
-      //console.log(count_string);
-      //count = 0;
       }
 
-    //else if (cmd == status) {
-    //setInterval(sendData, 2000);
     count++;
 
     if (count > 50) {
-    //sendData()
     arduinoSerialPort.write(res+'\n');
     console.log(res);
     count = 0;
     }
-      //}
   
   });
 
 socket.on('button', (status) => {
   socket.emit('button',status);
-  //console.log(status);
-  //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
-  //arduinoSerialPort.write(res+'\n');
+  arduinoSerialPort.write(res+'\n');
   console.log(status.toString());
     
 });
