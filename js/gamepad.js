@@ -42,12 +42,12 @@ function getGamepadState() {
           //socket.emit('navi', 1);
         //}
 
-        if (yAxis<-0.1 && yAxis>-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //straight slow
+        if (yAxis<-0.1 && yAxis>-0.6 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //straight slow
 		    {
           socket.emit('navi', 1);
         }
 
-        else if (yAxis>0.1 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //reverse slow
+        else if (yAxis>0.1 && pointTurnAxis<0.8 && pointTurnAxis>-0.8)  //reverse slow
 		    {
           socket.emit('navi', 7);
         }
@@ -57,17 +57,17 @@ function getGamepadState() {
           //socket.emit('navi', 2);
         //}
     
-        else if (yAxis<-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)       //straight fast
+        else if (yAxis<-0.5 && pointTurnAxis<0.8 && pointTurnAxis>-0.8)       //straight fast
 		    {
           socket.emit('navi', 2);
         }
     
-        else if (pointTurnAxis>0.5)       //rotate right
+        else if (pointTurnAxis>0.8 )       //rotate right
 		    {
           socket.emit('navi', 3);
         }
     
-        else if (pointTurnAxis<-0.5)       //rotate left
+        else if (pointTurnAxis<-0.8)       //rotate left
 		    {
           socket.emit('navi', 4);
 	    	}
