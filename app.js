@@ -85,7 +85,7 @@ io.on('connection', (socket) => {
     //setInterval(sendData, 2000);
     count++;
 
-    if (count > 500) {
+    if (count > 50) {
     //sendData()
     arduinoSerialPort.write(res+'\n');
     console.log(res);
