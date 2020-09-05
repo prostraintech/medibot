@@ -7,8 +7,8 @@ var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
 }, app);
-var cmd = 8;
-//var count = 0;
+var cmd = 0;
+var count = 0;
 
 var SerialPort = require("serialport");
 //const Delimiter = require('@serialport/parser-delimiter')
@@ -69,28 +69,32 @@ io.on('connection', (socket) => {
   
 	socket.on('navi', (status) => {
     socket.emit('navi',status);
-    //if (cmd != status) {
-     // cmd = status;
+
+    if (cmd != status) {
+      cmd = status;
       //console.log(status);
       var res = cmd.toString();
-   // var count_string = count.toString();
+      //var count_string = count.toString();
+      arduinoSerialPort.write(res+'\n');
+      console.log(res);
+      //console.log(count_string);
+      //count = 0;
+      }
+
+    //else if (cmd == status) {
+    //setInterval(sendData, 2000);
+    count++;
+
+    if (count > 100) {
+    //sendData()
     arduinoSerialPort.write(res+'\n');
     console.log(res);
-   // console.log(count_string);
-      //count = 0;
-  //  }
-
-    //count++;
-
-    // else if(cmd == status) {
-    //   setInterval(sendData, 2000);
-    // }
-    //if (count == 1000) {
-      //sendData()
-      //count = 0;
-    //}
-  });
+    count = 0;
+    }
+      //}
   
+  });
+
 socket.on('button', (status) => {
   socket.emit('button',status);
   //console.log(status);
