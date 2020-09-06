@@ -118,5 +118,5 @@ function buttonPressed(b) {
 }
 	
 socket.on('navi', function(msg){
-	console.log(msg);
+	//console.log(msg);
 });
