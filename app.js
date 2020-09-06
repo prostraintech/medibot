@@ -81,7 +81,7 @@ io.on('connection', (socket) => {
 
     if (count > 50) {
     arduinoSerialPort.write(res+'\n');
-    console.log(res);
+    //console.log(res);
     count = 0;
     }
   
