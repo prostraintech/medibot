@@ -9,7 +9,8 @@ spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\medikit.vbs'], {
   detached: true,
   stdio: 'ignore',
   windowsHide: true
-}).unref()
+}).unref();
+
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
@@ -26,7 +27,7 @@ const Readline = require('@serialport/parser-readline');
 var arduinoCOMPort = "COM5";
 //"/dev/ttyACM0";
 
-/*new by NR*/
+/*new by NR
 var readData = '';
 var sp = new SerialPort(arduinoCOMPort,{} );
 
@@ -52,7 +53,7 @@ sp.open(arduinoCOMPort, {
 /*end by NR*/
 
 /**disable original code temporarily*********************************/
-/*var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
+var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
  baudRate: 9600
 });
 
@@ -65,7 +66,7 @@ arduinoSerialPort.on('error',function() {
 
 arduinoSerialPort.on('open',function() {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
-});*/
+});
 
 /*************************************************/
 //const parser = new Readline();
