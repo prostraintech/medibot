@@ -12,7 +12,7 @@ var count = 0;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
-
+var arduinoCOMPort = "/dev/ttyACM0";
 
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
   baudRate: 9600
