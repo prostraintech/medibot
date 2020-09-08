@@ -118,7 +118,7 @@
 			
 			.catch(onCreateOfferFailed);
 		} else {
-        alert("Local stream not running yet or media still flowing");
+        console.log("Please wait, syncing matrix presence..");
       }
     }
 
