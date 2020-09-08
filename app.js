@@ -158,7 +158,7 @@ socket.on('resp', (status) => {
 });
 
   socket.on('connect', (status) => {
-  //socket.emit('connect',status);
+  socket.emit('connect',status);
   //console.log(status);
   console.log("im here");
   if (status == 1)
