@@ -103,7 +103,7 @@ https.listen(443, () => {
   console.log((new Date()) + " Node server started on port 443");
 });
 
-dupvar io = require('socket.io')(https);
+var io = require('socket.io')(https);
 
 io.on('connection', (socket) => {
 	
