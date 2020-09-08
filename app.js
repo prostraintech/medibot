@@ -171,7 +171,7 @@ socket.on('resp', (response) => {
 });
 
 socket.on('shutdown', (shut) => {
-  socket.emit('shutdown',shut);
+  //socket.emit('shutdown',shut);
   
  
     var spawn = require('child_process').spawn;
