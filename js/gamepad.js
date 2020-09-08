@@ -43,60 +43,33 @@ function getGamepadState() {
     if (buttonPressed(gamepad.buttons[1])) {
 
         if (yAxis<-0.1 && yAxis>-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //straight slow
-		{
-      val_joystick=1;
-    }
+		  {
+        val_joystick=1;
+      }
 
-    else if (yAxis>0.1 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //reverse slow
-		{
-      val_joystick=7;
-     // }
-      //slow++;
-      //fast = 0;
-     // sendstop = 0;
-    }
+      else if (yAxis>0.1 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //reverse slow
+		  {
+        val_joystick=7;
+      }
     
-    else if (yAxis<-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)       //straight fast
-		{
-      //console.log("straight fast");
-      //if (fast<1) {
-      //socket.emit('navi', 2);
-      val_joystick=2;
-      //}
-      //fast++;
-      //slow = 0;
-      //sendstop = 0;
-    }
+      else if (yAxis<-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)       //straight fast
+		  {
+        val_joystick=2;
+      }
     
-    else if (pointTurnAxis>0.5)       //rotate right
-		{
-      //console.log("rotate right");
-      //socket.emit('navi', 3);
-      val_joystick=3;
-      //fast = 0;
-      //slow = 0;
-      //sendstop = 0;
-    }
+      else if (pointTurnAxis>0.5)       //rotate right
+		  {
+        val_joystick=3;
+      }
     
-    else if (pointTurnAxis<-0.5)       //rotate left
-		{
-      //console.log("rotate left");
-      //socket.emit('navi', 4);
-      val_joystick=4;
-      //fast = 0;
-      //slow = 0;
-      //sendstop = 0;
-		}
-		
+      else if (pointTurnAxis<-0.5)       //rotate left
+		  {
+        val_joystick=4;
+		  }
 
-    else {
-      //sendstop++;
-      //if (sendstop==1)
-      //{
-        //socket.emit('navi', 8);
+      else {
         val_joystick = 8;
-      //}
-    }
+      }
     
   
       if (cmd != val_joystick)
@@ -105,12 +78,15 @@ function getGamepadState() {
         socket.emit('navi',cmd);
         count = 0;
       }
+
       else
         count++;
+
       if (count >=50 ){
-         socket.emit('navi',cmd);
-         count = 0;
-    }
+        socket.emit('navi',cmd);
+        count = 0;
+      }
+
     }
 
     else if (buttonPressed(gamepad.buttons[0])) 

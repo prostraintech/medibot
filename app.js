@@ -26,7 +26,33 @@ const Readline = require('@serialport/parser-readline');
 var arduinoCOMPort = "COM5";
 //"/dev/ttyACM0";
 
-var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
+/*new by NR*/
+var readData = '';
+var sp = new SerialPort(arduinoCOMPort,{} );
+
+sp.on('close', function (err) {
+  console.log('port closed');
+});
+
+sp.on('error', function (err) {
+  console.error("error", err);
+});
+
+sp.on('open', function () {
+  console.log('port opened... Press reset on the Arduino.');
+});
+
+sp.open(arduinoCOMPort, {
+  baudRate: 9600,
+  dataBits: 8,
+  parity: 'none',
+  stopBits: 1,
+  flowControl: false
+});
+/*end by NR*/
+
+/**disable original code temporarily*********************************/
+/*var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
  baudRate: 9600
 });
 
@@ -39,8 +65,9 @@ arduinoSerialPort.on('error',function() {
 
 arduinoSerialPort.on('open',function() {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
-});
+});*/
 
+/*************************************************/
 //const parser = new Readline();
 //arduinoSerialPort.pipe(parser);
 
@@ -93,34 +120,17 @@ io.on('connection', (socket) => {
   
 	socket.on('navi', (status) => {
     socket.emit('navi',status);
-    //if (cmd != status) {
-     // cmd = status;
-      //console.log(status);
-      var res = cmd.toString();
-   // var count_string = count.toString();
+    var res = cmd.toString();
     arduinoSerialPort.write(res+'\n');
     console.log(res);
-   // console.log(count_string);
-      //count = 0;
-  //  }
-
-    //count++;
-
-    // else if(cmd == status) {
-    //   setInterval(sendData, 2000);
-    // }
-    //if (count == 1000) {
-      //sendData()
-      //count = 0;
-    //}
   });
 
-socket.on('button', (status) => {
-  socket.emit('button',status);
-  arduinoSerialPort.write(res+'\n');
-  console.log(status.toString());
+  socket.on('button', (status) => {
+    socket.emit('button',status);
+    arduinoSerialPort.write(res+'\n');
+    console.log(status.toString());
     
-});
+  });
 
 socket.on('resp', (status) => {
   socket.emit('resp',status);
