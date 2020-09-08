@@ -139,3 +139,7 @@ function buttonPressed(b) {
 socket.on('navi', function(msg){
 	console.log(msg);
 });
+
+socket.on('connect', function(msg){
+	console.log(msg);
+});
