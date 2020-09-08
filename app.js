@@ -158,16 +158,16 @@ socket.on('resp', (status) => {
 });
 
   socket.on('connect', (status) => {
-  socket.emit('connect',status);
+  //socket.emit('connect',status);
   //console.log(status);
   console.log("i'm here");
-  if (r == 'c')
+  if (r === 'c')
   {
     //connect();
     console.log("[starting teleconference]");
   }
 
-  if (r == 'd')
+  if (r === 'd')
   {
     //disconnect();
     console.log("[stopping teleconference]");
