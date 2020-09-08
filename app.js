@@ -150,13 +150,13 @@ socket.on('connect', (status) => {
   
   if (status == 1)
   {
-    connect();
+    //connect();
     console.log("[starting teleconference]");
   }
 
   if (status == 0)
   {
-    disconnect();
+    //disconnect();
     console.log("[stopping teleconference]");
   }
     
