@@ -3,13 +3,13 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-spawn('cmd.exe', ['/c', 'medikit.vbs'], {
+const spawn = require("child_process").spawn;
+spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\medikit.vbs'], {
   shell: false,
   detached: true,
   stdio: 'ignore',
   windowsHide: true
 }).unref()
-
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
@@ -140,7 +140,7 @@ socket.on('resp', (status) => {
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
   //arduinoSerialPort.write(res+'\n');
-  console.log("berrymed data rcecived");
+  console.log("berrymed data received - pulse: " + status.pulse_rate + " spo2 = " + status.spo2);
     
 });
 
