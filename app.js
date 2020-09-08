@@ -1,12 +1,6 @@
-// This is the node.js server application
-
 var express = require('express');
 var app = express();
 var fs = require('fs');
-
-
-
-
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
@@ -21,57 +15,20 @@ var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
 
 
-var arduinoCOMPort = "/dev/ttyACM0";
-//"/dev/ttyACM0";
-
-/*new by NR
-var readData = '';
-var sp = new SerialPort(arduinoCOMPort,{} );
-
-sp.on('close', function (err) {
-  console.log('port closed');
+var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
+  baudRate: 9600
 });
 
-sp.on('error', function (err) {
-  console.error("error", err);
-});
-
-sp.on('open', function () {
-  console.log('port opened... Press reset on the Arduino.');
-});
-
-sp.open(arduinoCOMPort, {
-  baudRate: 9600,
-  dataBits: 8,
-  parity: 'none',
-  stopBits: 1,
-  flowControl: false
-});
-/*end by NR*/
-
-/**disable original code temporarily*********************************/
-var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
- baudRate: 9600
-});
-
-arduinoSerialPort.on('error',function() {
+arduinoSerialPort.on('error', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is not available');
 });
 
 //const parser = arduinoSerialPort.pipe(new Delimiter({ delimiter: '\n' }))
 //const parser = arduinoSerialPort.pipe(new InterByteTimeout({interval: 30}));
 
-arduinoSerialPort.on('open',function() {
+arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
-
-/*************************************************/
-//const parser = new Readline();
-//arduinoSerialPort.pipe(parser);
-
-//parser.on('data',function(line) {
-//  console.log('Data: ' + line);
-//});
 
 
 app.use(express.static(__dirname + '/js'));
@@ -84,8 +41,8 @@ app.get('/', (req, res) => {
 
 
 var berry_data = {
-  heart_rate : '-',
-  spo2 : '-'
+  heart_rate: '-',
+  spo2: '-'
 }
 
 /*setInterval(function() {
@@ -95,8 +52,8 @@ var berry_data = {
     }, 5000);*/
 
 app.get('/api/berry', function (req, res) {
-  
-res.send(berry_data);
+
+  res.send(berry_data);
 });
 
 https.listen(443, () => {
@@ -106,65 +63,62 @@ https.listen(443, () => {
 var io = require('socket.io')(https);
 
 io.on('connection', (socket) => {
-	
-	console.log('a user connected');
- 
-	socket.on('disconnect', () => {
-		console.log('user disconnected');
-	});
 
-	socket.on('webrtc', (webrtcdata) => {
+  console.log('a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('webrtc', (webrtcdata) => {
     //console.log(webrtcdata);
-		socket.broadcast.emit('webrtc',webrtcdata);
-	});
-  
-	socket.on('navi', (status) => {
-    socket.emit('navi',status);
+    socket.broadcast.emit('webrtc', webrtcdata);
+  });
+
+  socket.on('navi', (status) => {
+    socket.emit('navi', status);
     //console.log("ni'm here at navi");
     if (cmd != status) {
       cmd = status;
       var res = cmd.toString();
-      arduinoSerialPort.write(res+'\n');
+      arduinoSerialPort.write(res + '\n');
       console.log(res);
-      }
+    }
 
     count++;
 
     if (count > 50) {
-    arduinoSerialPort.write(res+'\n');
-    //console.log(res);
-    count = 0;
+      arduinoSerialPort.write(res + '\n');
+      //console.log(res);
+      count = 0;
     }
-    
+
   });
 
 
 
-socket.on('resp', (response) => {
-  socket.emit('resp',response);
-  
-  berry_data.heart_rate = response.pulse_rate;
-  berry_data.spo2 = response.spo2;
-  //console.log(status);
-  //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
-  //arduinoSerialPort.write(res+'\n');
-  console.log("berrymed data received - pulse: " + response.pulse_rate + " spo2 = " + response.spo2);
-    
-});
+  socket.on('resp', (response) => {
+    socket.emit('resp', response);
+
+    berry_data.heart_rate = response.pulse_rate;
+    berry_data.spo2 = response.spo2;
+    console.log("berrymed data received - pulse: " + response.pulse_rate + " spo2 = " + response.spo2);
+
+  });
 
   socket.on('connect', (conn) => {
-  //socket.emit('connect',status);
-  //console.log(status);
-  console.log("im here in connect");
-  
-    
-});
+    //socket.emit('connect',status);
+    //console.log(status);
+    console.log("im here in connect");
 
-socket.on('shutdown', (shut) => {
-  //socket.emit('shutdown',shut);
-  
-  console.log("im here in shutdown");
-    
-});
+
+  });
+
+  socket.on('shutdown', (shut) => {
+    //socket.emit('shutdown',shut);
+
+    console.log("im here in shutdown");
+
+  });
 
 });
