@@ -143,7 +143,7 @@ async def run(address, loop, debug=False):
         sio.connect('https://localhost:443')
             #sio.wait()
         await client.start_notify(CHARACTERISTIC_UUID, notification_handler)
-        await asyncio.sleep(5.0, loop=loop)
+        await asyncio.sleep(3.0, loop=loop)
         await client.stop_notify(CHARACTERISTIC_UUID)
         sio.disconnect()
 

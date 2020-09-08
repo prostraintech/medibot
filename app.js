@@ -65,7 +65,7 @@ var berry_data = {
 
 setInterval(function() {
     spawn('python', ['medikit.py']);
-    }, 7000);
+    }, 5000);
 
 app.get('/api/berry', function (req, res) {
   
@@ -127,6 +127,23 @@ socket.on('resp', (status) => {
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
   //arduinoSerialPort.write(res+'\n');
   console.log("berrymed data received - pulse: " + status.pulse_rate + " spo2 = " + status.spo2);
+    
+});
+
+socket.on('connect', (status) => {
+  socket.emit('connect',status);
+  
+  if (status == 1)
+  {
+    connect();
+    console.log("[starting teleconference]");
+  }
+
+  if (status == 0)
+  {
+    disconnect();
+    console.log("[stopping teleconference]");
+  }
     
 });
 
