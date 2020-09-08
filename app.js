@@ -3,13 +3,13 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-spawn('cmd.exe', ['/c', 'medikit.vbs'], {
+const spawn = require("child_process").spawn;
+spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\medikit.vbs'], {
   shell: false,
   detached: true,
   stdio: 'ignore',
   windowsHide: true
 }).unref()
-
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
