@@ -3,8 +3,8 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-const spawn = require("child_process").spawn;
-const sd = require("child_process").spawn;
+const { spawn } = require('child_process');
+
 
 
 
@@ -21,7 +21,7 @@ var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
 
 
-var arduinoCOMPort = "COM5";
+var arduinoCOMPort = "COM7";
 //"/dev/ttyACM0";
 
 /*new by NR
@@ -89,7 +89,7 @@ var berry_data = {
 }
 
 setInterval(function() {
-  spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\medikit.vbs'], {
+  spawn('cmd.exe', ['/c', '"C:\Users\medibot\medibot\medikit.vbs"'], {
     shell: false,
     detached: true,
     stdio: 'ignore',
