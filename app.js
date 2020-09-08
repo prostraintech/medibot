@@ -76,7 +76,7 @@ https.listen(443, () => {
   console.log((new Date()) + " Node server started on port 443");
 });
 
-var io = require('socket.io')(https);
+dupvar io = require('socket.io')(https);
 
 io.on('connection', (socket) => {
 	
@@ -93,22 +93,26 @@ io.on('connection', (socket) => {
   
 	socket.on('navi', (status) => {
     socket.emit('navi',status);
-
-    if (cmd != status) {
-      cmd = status;
+    //if (cmd != status) {
+     // cmd = status;
+      //console.log(status);
       var res = cmd.toString();
-      arduinoSerialPort.write(res+'\n');
-      console.log(res);
-      }
-
-    count++;
-
-    if (count > 50) {
+   // var count_string = count.toString();
     arduinoSerialPort.write(res+'\n');
-    //console.log(res);
-    count = 0;
-    }
-  
+    console.log(res);
+   // console.log(count_string);
+      //count = 0;
+  //  }
+
+    //count++;
+
+    // else if(cmd == status) {
+    //   setInterval(sendData, 2000);
+    // }
+    //if (count == 1000) {
+      //sendData()
+      //count = 0;
+    //}
   });
 
 socket.on('button', (status) => {
