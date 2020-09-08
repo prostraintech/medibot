@@ -6,12 +6,7 @@ var fs = require('fs');
 const spawn = require("child_process").spawn;
 const sd = require("child_process").spawn;
 
-spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\medikit.vbs'], {
-  shell: false,
-  detached: true,
-  stdio: 'ignore',
-  windowsHide: true
-}).unref();
+
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
@@ -94,7 +89,12 @@ var berry_data = {
 }
 
 setInterval(function() {
-    spawn('python', ['medikit.py']);
+  spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\medikit.vbs'], {
+    shell: false,
+    detached: true,
+    stdio: 'ignore',
+    windowsHide: true
+  }).unref();
     }, 5000);
 
 app.get('/api/berry', function (req, res) {
