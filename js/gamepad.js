@@ -1,5 +1,6 @@
 const refreshRate = 50;
 var pressed = 0;
+var cmd = 8;
 
 window.addEventListener("gamepadconnected", (event) => {
   console.log("A gamepad connected:");
@@ -33,68 +34,59 @@ function getGamepadState() {
 		var xAxis= gamepad.axes[0];
     var yAxis= gamepad.axes[1];
     var pointTurnAxis= gamepad.axes[5];
+    var sendstop = 0;
+    var slow = 0;
+    var fast = 0;
+    var val_joystick = 0;
+    var count = 0;
       
     if (buttonPressed(gamepad.buttons[1])) {
 
-        //if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.1 && yAxis>-0.5)  //straight slow
-		    //{
-          //socket.emit('navi', 1);
-        //}
+        if (yAxis<-0.1 && yAxis>-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //straight slow
+		  {
+        val_joystick=1;
+      }
 
-        if (yAxis<-0.1 && yAxis>-0.6 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //straight slow
-		    {
-          socket.emit('navi', 1);
-        }
+      else if (yAxis>0.1 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)  //reverse slow
+		  {
+        val_joystick=7;
+      }
+    
+      else if (yAxis<-0.5 && pointTurnAxis<0.5 && pointTurnAxis>-0.5)       //straight fast
+		  {
+        val_joystick=2;
+      }
+    
+      else if (pointTurnAxis>0.5)       //rotate right
+		  {
+        val_joystick=3;
+      }
+    
+      else if (pointTurnAxis<-0.5)       //rotate left
+		  {
+        val_joystick=4;
+		  }
 
-		    //else if (xAxis>-0.5 && xAxis<0.5 && yAxis<-0.5)       //straight fast
-		    //{
-          //socket.emit('navi', 2);
-        //}
+      else {
+        val_joystick = 8;
+      }
     
-        else if (yAxis<-0.5 && pointTurnAxis<0.8 && pointTurnAxis>-0.8)       //straight fast
-		    {
-          socket.emit('navi', 2);
-        }
-    
-        else if (pointTurnAxis>0.8 )       //rotate right
-		    {
-          socket.emit('navi', 3);
-        }
-    
-        else if (pointTurnAxis<-0.8)       //rotate left
-		    {
-          socket.emit('navi', 4);
-	    	}
-		
-		    //else if (xAxis>0.5 && yAxis<-0.25)                //turn right
-		    //{
-          //socket.emit('navi', 3);
-        //}
-    
-        //else if (xAxis<-0.5 && yAxis<-0.25)                //turn left
-		    //{
-          //socket.emit('navi', 4);
-        //}
-    
-		    //else if (xAxis>0.5 && yAxis>-0.25)            //rotate right
-		    //{
-          //socket.emit('navi', 5);
-        //}
+  
+      if (cmd != val_joystick)
+      {
+        cmd = val_joystick;
+        socket.emit('navi',cmd);
+        count = 0;
+      }
 
-        //else if (xAxis<-0.5 && yAxis>-0.25)            //rotate left
-		    //{
-          //socket.emit('navi', 6);
-       //}
+      else
+        count++;
 
-       else if (yAxis>0.1 && pointTurnAxis<0.8 && pointTurnAxis>-0.8)  //reverse slow
-       {
-         socket.emit('navi', 7);
-       }
+      if (count >=50 ){
+        socket.emit('navi',cmd);
+        count = 0;
+      }
 
-        else 
-        {
-          socket.emit('navi', 8);
-        }
     }
 
     else if (buttonPressed(gamepad.buttons[0])) 
