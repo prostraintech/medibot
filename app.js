@@ -88,11 +88,11 @@ var berry_data = {
   spo2 : '-'
 }
 
-setInterval(function() {
+/*setInterval(function() {
 
   var spawn = require('child_process').spawn;
   var cp = spawn(process.env.comspec, ['/c', 'python','medikit.py']);
-    }, 5000);
+    }, 5000);*/
 
 app.get('/api/berry', function (req, res) {
   
@@ -174,9 +174,6 @@ socket.on('shutdown', (shut) => {
   //socket.emit('shutdown',shut);
   
  
-    var spawn = require('child_process').spawn;
-    var cp = spawn(process.env.comspec, ['/c', 'shutdown',]);
-
     
 });
 
