@@ -177,11 +177,10 @@ socket.on('connect', (status) => {
 socket.on('shutdown', (status) => {
   socket.emit('shutdown',status);
   
-  if (status == 0)
-  {
+ 
     var spawn = require('child_process').spawn;
     var cp = spawn(process.env.comspec, ['/c', 'shutdown',]);
-  }
+
     
 });
 
