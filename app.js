@@ -21,7 +21,7 @@ var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
 
 
-var arduinoCOMPort = "COM7";
+var arduinoCOMPort = "/dev/ttyACM0";
 //"/dev/ttyACM0";
 
 /*new by NR
