@@ -98,12 +98,7 @@ function getGamepadState() {
       //}
     }
     
-    //if (buttonPressed(gamepad.buttons[0])) {
-      //if (pressed<1)
-      //{
-      //socket.emit('navi', 9)
-      //}
-      //pressed++;
+  
       if (cmd != val_joystick)
       {
         cmd = val_joystick;
