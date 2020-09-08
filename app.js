@@ -159,14 +159,14 @@ socket.on('resp', (status) => {
 
 socket.on('connect', (status) => {
   socket.emit('connect',status);
-  
-  if (status == 'c')
+  var r = status.toString();
+  if (r == 'c')
   {
     //connect();
     console.log("[starting teleconference]");
   }
 
-  if (status == 'd')
+  if (r == 'd')
   {
     //disconnect();
     console.log("[stopping teleconference]");
