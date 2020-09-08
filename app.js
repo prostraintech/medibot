@@ -4,6 +4,8 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 const spawn = require("child_process").spawn;
+const sd = require("child_process").spawn;
+
 spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\medikit.vbs'], {
   shell: false,
   detached: true,
@@ -171,6 +173,21 @@ socket.on('connect', (status) => {
   {
     //disconnect();
     console.log("[stopping teleconference]");
+  }
+    
+});
+
+socket.on('connect', (status) => {
+  socket.emit('connect',status);
+  
+  if (status == 0)
+  {
+    spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\shutdown.vbs'], {
+      shell: false,
+      detached: true,
+      stdio: 'ignore',
+      windowsHide: true
+    }).unref();
   }
     
 });
