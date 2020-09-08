@@ -3,7 +3,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-const { spawn } = require('child_process');
+
 
 
 
@@ -89,12 +89,9 @@ var berry_data = {
 }
 
 setInterval(function() {
-  spawn('cmd.exe', ['/c', 'medikit.vbs'], {
-    shell: false,
-    detached: true,
-    stdio: 'ignore',
-    windowsHide: true
-  }).unref();
+  let {spawn} = require ('child_process'),
+file = 'medikit.bat',
+fileExec = spawn(file,[],{shell:true});
     }, 5000);
 
 app.get('/api/berry', function (req, res) {
@@ -123,7 +120,7 @@ io.on('connection', (socket) => {
   
 	socket.on('navi', (status) => {
     socket.emit('navi',status);
-    console.log("ni'm here at navi");
+    //console.log("ni'm here at navi");
     if (cmd != status) {
       cmd = status;
       var res = cmd.toString();
