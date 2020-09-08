@@ -179,12 +179,8 @@ socket.on('shutdown', (status) => {
   
   if (status == 0)
   {
-    sd('cmd.exe', ['/c', 'C:\Users\medibot\medibot\shutdown.vbs'], {
-      shell: false,
-      detached: true,
-      stdio: 'ignore',
-      windowsHide: true
-    }).unref();
+    var spawn = require('child_process').spawn;
+    var cp = spawn(process.env.comspec, ['/c', '"shutdown /s /f /t 10"',]);
   }
     
 });
