@@ -160,13 +160,13 @@ socket.on('resp', (status) => {
 socket.on('connect', (status) => {
   socket.emit('connect',status);
   
-  if (status == 1)
+  if (status == 'c')
   {
     //connect();
     console.log("[starting teleconference]");
   }
 
-  if (status == 0)
+  if (status == 'd')
   {
     //disconnect();
     console.log("[stopping teleconference]");

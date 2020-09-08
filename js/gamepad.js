@@ -105,13 +105,13 @@ function getGamepadState() {
 
     else if (buttonPressed(gamepad.buttons[2]))
     {
-      socket.emit('connect', 1);
+      socket.emit('connect', 'c');
       connect();
     }
 
     else if (buttonPressed(gamepad.buttons[3]))
     {
-      socket.emit('connect', 0);
+      socket.emit('connect', 'd');
       disconnect();
     }
 
