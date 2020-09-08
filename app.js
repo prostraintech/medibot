@@ -89,7 +89,7 @@ var berry_data = {
 }
 
 setInterval(function() {
-  spawn('cmd.exe', ['/c', '"C:\Users\medibot\medibot\medikit.vbs"'], {
+  spawn('cmd.exe', ['/c', 'medikit.vbs'], {
     shell: false,
     detached: true,
     stdio: 'ignore',
