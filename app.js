@@ -159,7 +159,8 @@ socket.on('resp', (status) => {
 
 socket.on('connect', (status) => {
   socket.emit('connect',status);
-  var r = status.toString();
+  console.log(status);
+  console.log("i'm here");
   if (r == 'c')
   {
     //connect();
