@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+const spawn = require("child_process").spawn;
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
@@ -49,6 +50,22 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+
+
+var berry_data = {
+  heart_rate : '-',
+  spo2 : '-'
+}
+
+setInterval(function() {
+    spawn('python', ['medikit.py']);
+    }, 7000);
+
+app.get('/api/berry', function (req, res) {
+  
+res.send(berry_data);
+});
+
 https.listen(443, () => {
   console.log((new Date()) + " Node server started on port 443");
 });
@@ -92,6 +109,18 @@ socket.on('button', (status) => {
   socket.emit('button',status);
   arduinoSerialPort.write(res+'\n');
   console.log(status.toString());
+    
+});
+
+socket.on('resp', (status) => {
+  socket.emit('resp',status);
+  
+  berry_data.heart_rate = status.pulse_rate;
+  berry_data.spo2 = status.spo2;
+  //console.log(status);
+  //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
+  //arduinoSerialPort.write(res+'\n');
+  console.log("berrymed data rcecived");
     
 });
 
