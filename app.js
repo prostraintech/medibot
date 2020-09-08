@@ -123,7 +123,7 @@ io.on('connection', (socket) => {
   
 	socket.on('navi', (status) => {
     socket.emit('navi',status);
-
+    console.log("i'm here at navi");
     if (cmd != status) {
       cmd = status;
       var res = cmd.toString();
