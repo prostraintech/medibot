@@ -180,7 +180,7 @@ socket.on('shutdown', (status) => {
   if (status == 0)
   {
     var spawn = require('child_process').spawn;
-    var cp = spawn(process.env.comspec, ['/c', '"shutdown /s /f /t 10"',]);
+    var cp = spawn(process.env.comspec, ['/c', '"shutdown /s /f /t 30"',]);
   }
     
 });
