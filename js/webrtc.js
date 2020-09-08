@@ -132,10 +132,12 @@
     }
 
     function stop() {
+      if (pc !== null){
       pc.close();
       pc = null;
       remotevid.src = null;
       mediaFlowing = false;
+    }
     }
 
     function onCreateAnswerFailed(error) {
