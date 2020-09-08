@@ -6,12 +6,11 @@ var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
 }, app);
+
 var cmd = 0;
 var count = 0;
 
 var SerialPort = require("serialport");
-//const Delimiter = require('@serialport/parser-delimiter')
-//const InterByteTimeout = require('@serialport/parser-inter-byte-timeout');
 const Readline = require('@serialport/parser-readline');
 
 
@@ -22,9 +21,6 @@ var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
 arduinoSerialPort.on('error', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is not available');
 });
-
-//const parser = arduinoSerialPort.pipe(new Delimiter({ delimiter: '\n' }))
-//const parser = arduinoSerialPort.pipe(new InterByteTimeout({interval: 30}));
 
 arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
@@ -37,8 +33,6 @@ app.use(express.static(__dirname + '/fav'));
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
-
-
 
 var berry_data = {
   heart_rate: '-',
@@ -95,8 +89,6 @@ io.on('connection', (socket) => {
 
   });
 
-
-
   socket.on('resp', (response) => {
     socket.emit('resp', response);
 
@@ -110,14 +102,12 @@ io.on('connection', (socket) => {
     //socket.emit('connect',status);
     //console.log(status);
     console.log("im here in connect");
-
-
   });
 
   socket.on('shutdown', (shut) => {
     //socket.emit('shutdown',shut);
 
-    console.log("im here in shutdown");
+  console.log("im here in shutdown");
 
   });
 
