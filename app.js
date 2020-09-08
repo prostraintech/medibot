@@ -138,36 +138,31 @@ io.on('connection', (socket) => {
     
   });
 
-  socket.on('button', (status) => {
-    socket.emit('button',status);
-    arduinoSerialPort.write(res+'\n');
-    console.log(status.toString());
-    
-  });
 
-socket.on('resp', (status) => {
-  socket.emit('resp',status);
+
+socket.on('resp', (response) => {
+  socket.emit('resp',response);
   
-  berry_data.heart_rate = status.pulse_rate;
-  berry_data.spo2 = status.spo2;
+  berry_data.heart_rate = response.pulse_rate;
+  berry_data.spo2 = response.spo2;
   //console.log(status);
   //var res = 1100-(Math.trunc((Math.sqrt(Math.pow(status*1000,2))))).toString();
   //arduinoSerialPort.write(res+'\n');
-  console.log("berrymed data received - pulse: " + status.pulse_rate + " spo2 = " + status.spo2);
+  console.log("berrymed data received - pulse: " + response.pulse_rate + " spo2 = " + response.spo2);
     
 });
 
-  socket.on('connect', (status) => {
-  socket.emit('connect',status);
+  socket.on('connect', (conn) => {
+  //socket.emit('connect',status);
   //console.log(status);
   console.log("im here");
-  if (status == 1)
+  if (conn == 1)
   {
     //connect();
     console.log("[starting teleconference]");
   }
 
-  if (status == 2)
+  else if (conn == 2)
   {
     //disconnect();
     console.log("[stopping teleconference]");
@@ -175,8 +170,8 @@ socket.on('resp', (status) => {
     
 });
 
-socket.on('shutdown', (status) => {
-  socket.emit('shutdown',status);
+socket.on('shutdown', (shut) => {
+  socket.emit('shutdown',shut);
   
  
     var spawn = require('child_process').spawn;

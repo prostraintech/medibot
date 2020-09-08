@@ -135,11 +135,3 @@ function buttonPressed(b) {
   }
   return b == 1.0;
 }
-	
-socket.on('navi', function(msg){
-	console.log(msg);
-});
-
-socket.on('connect', function(msg){
-	console.log(msg);
-});
