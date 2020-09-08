@@ -155,25 +155,15 @@ socket.on('resp', (response) => {
   socket.on('connect', (conn) => {
   //socket.emit('connect',status);
   //console.log(status);
-  console.log("im here");
-  if (conn == 1)
-  {
-    //connect();
-    console.log("[starting teleconference]");
-  }
-
-  else if (conn == 2)
-  {
-    //disconnect();
-    console.log("[stopping teleconference]");
-  }
+  console.log("im here in connect");
+  
     
 });
 
 socket.on('shutdown', (shut) => {
   //socket.emit('shutdown',shut);
   
- 
+  console.log("im here in shutdown");
     
 });
 
