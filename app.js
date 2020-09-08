@@ -182,7 +182,7 @@ socket.on('shutdown', (status) => {
   
   if (status == 0)
   {
-    spawn('cmd.exe', ['/c', 'C:\Users\medibot\medibot\shutdown.vbs'], {
+    sd('cmd.exe', ['/c', 'C:\Users\medibot\medibot\shutdown.vbs'], {
       shell: false,
       detached: true,
       stdio: 'ignore',
