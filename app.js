@@ -12,12 +12,14 @@ var count = 0;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
-const parser = port.pipe(new Readline({ delimiter: '\n' }));
+
 var arduinoCOMPort = "/dev/ttyACM0";
 
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
   baudRate: 9600
 });
+
+const parser = arduinoSerialPort.pipe(new Readline({ delimiter: '\n' }));
 
 arduinoSerialPort.on('error', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is not available');
