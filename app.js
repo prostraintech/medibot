@@ -12,6 +12,7 @@ var count = 0;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
+const parser = port.pipe(new Readline({ delimiter: '\n' }));
 var arduinoCOMPort = "/dev/ttyACM0";
 
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
@@ -24,6 +25,10 @@ arduinoSerialPort.on('error', function () {
 
 arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
+});
+
+parser.on('data', data =>{
+  console.log('got word from arduino:', data);
 });
 
 
