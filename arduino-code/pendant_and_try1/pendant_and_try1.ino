@@ -240,7 +240,7 @@ void loop() {
       cmd= 8;
     }
     
-    if(p_connect) {
+    if(p_connect == 1) {
       if(p_fwd == 0 && p_rev == 1 && p_right == 1 && p_left == 1) {           //slow forward
         if(cmd != 1 && cmd != 2) {
           startMillis = millis();
@@ -262,11 +262,13 @@ void loop() {
       
       else if(p_fwd == 1 && p_rev == 1 && p_right == 0 && p_left == 1) {
         cmd = 3;             //rotate clockwise
+        num = 0;
         move_motor(cmd);
       }
 
       else if(p_fwd == 1 && p_rev == 1 && p_right == 1 && p_left == 0) {
         cmd = 4;             //rotate counter clockwise
+        num = 0;
         move_motor(cmd);
       }
 
@@ -274,6 +276,7 @@ void loop() {
         if(cmd != 7) {
           startMillis = millis();
           cmd = 7;           //reverse
+          num = 0;
         }
         else{
           currentMillis = millis();
@@ -286,7 +289,6 @@ void loop() {
       else {
         cmd = 8;
         move_motor(cmd);
-        num = 0;
       }
     }
     
@@ -328,8 +330,8 @@ void move_motor(int cmd) {
   }
 
   else if(cmd == 3) {                     // Rotate clockwise
-    analogWrite(RH_D1,50);
-    analogWrite(LH_D1,50);
+    analogWrite(RH_D1,70);
+    analogWrite(LH_D1,70);
     digitalWrite(RH_D2,LOW);
     digitalWrite(LH_D2,LOW);
     digitalWrite(RH_D3,LOW);
@@ -338,8 +340,8 @@ void move_motor(int cmd) {
   }
 
   else if(cmd == 4) {                     // Rotate counter clockwise
-    analogWrite(RH_D1,50);
-    analogWrite(LH_D1,50);
+    analogWrite(RH_D1,70);
+    analogWrite(LH_D1,70);
     digitalWrite(RH_D2,LOW);
     digitalWrite(LH_D2,LOW);
     digitalWrite(RH_D3,HIGH);
@@ -348,8 +350,8 @@ void move_motor(int cmd) {
   }
 
   else if(cmd == 7) {                     // Reverse
-    analogWrite(RH_D1,100);
-    analogWrite(LH_D1,100);
+    analogWrite(RH_D1,150);
+    analogWrite(LH_D1,150);
     digitalWrite(RH_D2,LOW);
     digitalWrite(LH_D2,LOW);
     digitalWrite(RH_D3,LOW);

@@ -248,7 +248,7 @@ void loop() {
     
     if(p_connect) {
       if(p_fwd == 0 && p_rev == 1 && p_right == 1 && p_left == 1) {           //slow forward
-        cmd = 1;
+        cmd = 2;
         move_motor(cmd);
       }
       
@@ -312,8 +312,8 @@ void move_motor(int cmd) {
   }
 
   else if(cmd == 3) {                     // Rotate clockwise
-    analogWrite(RH_D1,80);
-    analogWrite(LH_D1,80);
+    analogWrite(RH_D1,70);
+    analogWrite(LH_D1,70);
     digitalWrite(RH_D2,LOW);
     digitalWrite(LH_D2,LOW);
     digitalWrite(RH_D3,LOW);
@@ -322,8 +322,8 @@ void move_motor(int cmd) {
   }
 
   else if(cmd == 4) {                     // Rotate counter clockwise
-    analogWrite(RH_D1,80);
-    analogWrite(LH_D1,80);
+    analogWrite(RH_D1,70);
+    analogWrite(LH_D1,70);
     digitalWrite(RH_D2,LOW);
     digitalWrite(LH_D2,LOW);
     digitalWrite(RH_D3,HIGH);
