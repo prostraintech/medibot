@@ -39,7 +39,7 @@ const int SW_RES = 31;        // Selector RESCUE
 #define LH_ENA 3
 #define LH_ENB A9
 
-// Variable declaration
+//// Variable declaration
 
 int cmd = 0;                  // Command to move motor
 int heartbeat = 0;            // to manage internet disconnectivity
@@ -242,7 +242,6 @@ void loop() {
     
     if(p_connect) {
       if(p_fwd == 0 && p_rev == 1 && p_right == 1 && p_left == 1) {           //slow forward
-//        Serial.print("hi");
         if(cmd != 1 && cmd != 2) {
           startMillis = millis();
           cmd = 1;
