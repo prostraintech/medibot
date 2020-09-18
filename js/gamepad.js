@@ -72,7 +72,24 @@ function getGamepadState() {
     else if (buttonPressed(gamepad.buttons[0])) {
       socket.emit('navi', 9);
     }
-    
+
+    else if (buttonPressed(gamepad.buttons[2])) {
+      socket.emit('connect', 1);
+      connect();
+    }
+  
+    else if (buttonPressed(gamepad.buttons[3])) {
+      socket.emit('connect', 0);
+      disconnect();
+    }
+  
+    else if (buttonPressed(gamepad.buttons[6])) {
+      socket.emit('shutdown', 0);
+    }
+
+    else {
+      socket.emit('navi', 8);
+    }
   }
 
   else if (mode > 0.9)  {
@@ -93,10 +110,25 @@ function getGamepadState() {
         socket.emit('navi', 8);
       }      
     }
-  }
 
-
+    else if (buttonPressed(gamepad.buttons[2])) {
+      socket.emit('connect', 1);
+      connect();
+    }
   
+    else if (buttonPressed(gamepad.buttons[3])) {
+      socket.emit('connect', 0);
+      disconnect();
+    }
+  
+    else if (buttonPressed(gamepad.buttons[6])) {
+      socket.emit('shutdown', 0);
+    }
+  
+    else {
+      socket.emit('navi', 8);
+    }
+  }
 
   else if (buttonPressed(gamepad.buttons[2])) {
     socket.emit('connect', 1);
@@ -110,7 +142,6 @@ function getGamepadState() {
 
   else if (buttonPressed(gamepad.buttons[6])) {
     socket.emit('shutdown', 0);
-
   }
 
   else {
