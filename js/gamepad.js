@@ -68,6 +68,10 @@ function getGamepadState() {
         socket.emit('navi', 8);
       }
     }
+
+    else if (buttonPressed(gamepad.buttons[0])) {
+      socket.emit('navi', 9);
+    }
     
   }
 
@@ -92,9 +96,7 @@ function getGamepadState() {
   }
 
 
-  else if (buttonPressed(gamepad.buttons[0])) {
-    socket.emit('navi', 9);
-  }
+  
 
   else if (buttonPressed(gamepad.buttons[2])) {
     socket.emit('connect', 1);
