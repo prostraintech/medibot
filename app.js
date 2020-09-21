@@ -29,9 +29,13 @@ arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
-parser.on('data', data =>{
-  console.log('got word from arduino:', data);
-});
+arduinoSerialPort.on('data',function(fromArduino) {
+  console.log('Data:', fromArduino)
+}) 
+
+// parser.on('data', data =>{
+//   console.log('got word from arduino:', data);
+// });
 
 
 app.use(express.static(__dirname + '/js'));
@@ -87,10 +91,10 @@ io.on('connection', (socket) => {
     }
 
     count++;
+    console.log(count);
 
     if (count > 50) {
       arduinoSerialPort.write(res + '\n');
-      //console.log(res);
       count = 0;
     }
 
