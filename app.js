@@ -9,7 +9,6 @@ var https = require('https').createServer({
 
 var cmd = 0;
 var count = 0;
-var res;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
@@ -30,13 +29,9 @@ arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
-// arduinoSerialPort.on('data',function(fromArduino) {
-//   console.log('Data:', fromArduino)
-// }) 
-
-// parser.on('data', data =>{
-//   console.log('got word from arduino:', data);
-// });
+parser.on('data', data =>{
+  console.log('got word from arduino:', data);
+});
 
 
 app.use(express.static(__dirname + '/js'));
@@ -52,7 +47,6 @@ var berry_data = {
 }
 
 /*setInterval(function() {
-
   var spawn = require('child_process').spawn;
   var cp = spawn(process.env.comspec, ['/c', 'python','medikit.py']);
     }, 5000);*/
@@ -86,17 +80,16 @@ io.on('connection', (socket) => {
     //console.log("i'm here at navi");
     if (cmd != status) {
       cmd = status;
-      res = cmd.toString();
+      var res = cmd.toString();
       arduinoSerialPort.write(res + '\n');
       console.log(res);
     }
 
     count++;
-    // console.log(count);
 
     if (count > 50) {
       arduinoSerialPort.write(res + '\n');
-      console.log(res);
+      //console.log(res);
       count = 0;
     }
 
