@@ -29,9 +29,9 @@ arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
-arduinoSerialPort.on('data',function(fromArduino) {
-  console.log('Data:', fromArduino)
-}) 
+// arduinoSerialPort.on('data',function(fromArduino) {
+//   console.log('Data:', fromArduino)
+// }) 
 
 // parser.on('data', data =>{
 //   console.log('got word from arduino:', data);
