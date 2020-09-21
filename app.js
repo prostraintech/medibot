@@ -90,7 +90,7 @@ io.on('connection', (socket) => {
       
       count++;
   
-      if (count > 50) {
+      if (count > 10) {
         res = cmd.toString();
         arduinoSerialPort.write(res + '\n');
         console.log(res);
