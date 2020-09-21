@@ -33,9 +33,9 @@ arduinoSerialPort.on('open', function () {
 //   console.log('Data:', fromArduino)
 // }) 
 
-// parser.on('data', data =>{
-//   console.log('got word from arduino:', data);
-// });
+parser.on('data', data =>{
+  console.log('got word from arduino:', data);
+});
 
 
 app.use(express.static(__dirname + '/js'));
