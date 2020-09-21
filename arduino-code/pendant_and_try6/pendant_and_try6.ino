@@ -269,13 +269,13 @@ void loop() {
 
       else {
         cmd = 8;
-        Serial.println("hijk");
+//        Serial.println("hijk");
         move_motor(cmd);
       }
     }
     
     mode_rescue = digitalRead(SW_RES);
-    Serial.println(cmd);
+//    Serial.println(cmd);
   }
  
 
@@ -301,7 +301,7 @@ void move_motor(int cmd) {
   }
 
   else if(cmd == 2) {                     // Forward fast
-    Serial.println("hi");
+//    Serial.println("hi");
     analogWrite(RH_D1,200);
     analogWrite(LH_D1,200);
     digitalWrite(RH_D2,LOW);

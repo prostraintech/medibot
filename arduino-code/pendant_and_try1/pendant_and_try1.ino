@@ -52,7 +52,7 @@ int Analog_IR3;               // to store IR right value
 int mode_rescue;              // to store selector RESCUE value
 int mode_remote;              // to store selector REMOTE value
 int Value_IR;                 // to override unmovable obstacle
-int Value_CPR;                // to override unmovable obstacle
+int Comp_IR;                // to override unmovable obstacle
 
 volatile unsigned int encoder_RH = 0;     // to store encoder right hand value
 volatile unsigned int encoder_LH = 0;     // to store encoder left hand value 
@@ -161,35 +161,35 @@ void loop() {
 
     if (Analog_IR1 > 200 && Analog_IR1 < 300 && Analog_IR2 > 200 && Analog_IR2 < 300 && Analog_IR3>200 && Analog_IR3<300) {   //permisible
       Value_IR = 1;
-      Value_CPR = 1;
+      Comp_IR = 1;
     }
     
     else if (Analog_IR1 < 200 || Analog_IR1 > 300 || Analog_IR2 < 200 || Analog_IR2 > 300 || Analog_IR3 < 200 || Analog_IR3 > 300) {  //not permisible
       Value_IR = 2;
     
-      if (Value_CPR != Value_IR) {
+      if (Comp_IR != Value_IR) {
         move_motor(8);
 //      Serial.println("Uneven floor detected!");
 
         if (cmd == 9) {
           Value_IR = 1;
-          Value_CPR = 2;
+          Comp_IR = 2;
 //        Serial.println("IR Reset");
         }
       }
 
-      else if (Value_CPR == Value_IR) {
+      else if (Comp_IR == Value_IR) {
         Value_IR = 1;
       }
     }
 
     if(Value_IR == 1) {
     
-      if(lid_2 == 0 && lid_1 == 0 && Value_CPR == 1) {
+      if(lid_2 == 0 && lid_1 == 0 && Comp_IR == 1) {
         move_motor(cmd);
       }
   
-      else if (lid_2 == 1 && lid_1 == 0 && Value_CPR == 1) { 
+      else if (lid_2 == 1 && lid_1 == 0 && Comp_IR == 1) { 
         if (cmd == 2){
           cmd = 1;
         }
@@ -198,7 +198,7 @@ void loop() {
         
       }
   
-      else if (lid_2 == 1 && lid_1 == 0 && Value_CPR == 2) {
+      else if (lid_2 == 1 && lid_1 == 0 && Comp_IR == 2) {
         if (cmd == 2){
           cmd = 1;
         }
