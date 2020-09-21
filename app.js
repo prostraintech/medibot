@@ -9,6 +9,7 @@ var https = require('https').createServer({
 
 var cmd = 0;
 var count = 0;
+var res;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
@@ -85,7 +86,7 @@ io.on('connection', (socket) => {
     //console.log("i'm here at navi");
     if (cmd != status) {
       cmd = status;
-      var res = cmd.toString();
+      res = cmd.toString();
       arduinoSerialPort.write(res + '\n');
       console.log(res);
     }
