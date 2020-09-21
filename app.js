@@ -86,13 +86,18 @@ io.on('connection', (socket) => {
       console.log(res);
     }
 
-    count++;
-
-    if (count > 50) {
-      arduinoSerialPort.write(res + '\n');
-      console.log(res);
-      count = 0;
+    else if (cmd == status){
+      
+      count++;
+  
+      if (count > 50) {
+        res = cmd.toString();
+        arduinoSerialPort.write(res + '\n');
+        console.log(res);
+        count = 0;
+      }
     }
+    
 
   });
 
