@@ -145,7 +145,7 @@ io.on('connection', (socket) => {
     //if (scount == 1) {
 
       const { exec } = require('child_process');
-      exec('arduino-cli compile --fqbn arduino:avr:mega arduino-code/scratchcoding5 && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0  --fqbn arduino:avr:mega arduino-code\/scratchcoding5 ', (err, stdout, stderr) => {
+      exec('arduino-cli compile --fqbn arduino:avr:mega arduino-code/scratchcoding5 && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0  --fqbn arduino:avr:mega "arduino-code/scratchcoding5"', (err, stdout, stderr) => {
         if (err) {
           //some err occurred
           console.error(err)
