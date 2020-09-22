@@ -129,7 +129,7 @@ exec('git pull', (err, stdout, stderr) => {
   }
 });
 
-  console.log("im here in shutdown");
+  console.log("running <<git pull>>");
 
   });
 
