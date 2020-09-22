@@ -140,4 +140,27 @@ io.on('connection', (socket) => {
 
   });
 
+  socket.on('upload_arduino', (shut) => {
+    //scount += 1;
+    //if (scount == 1) {
+
+      const { exec } = require('child_process');
+      exec('arduino-cli compile --fqbn arduino:avr:mega arduino-code/scratchcoding5 && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0  --fqbn arduino:avr:mega arduino-code/scratchcoding5 ', (err, stdout, stderr) => {
+        if (err) {
+          //some err occurred
+          console.error(err)
+          
+        } else {
+          // the *entire* stdout and stderr (buffered)
+          console.log("uploading arduino code..");
+          //console.log(`${stdout}`);
+         // scount = 0;
+          //////console.log(`stderr: ${stderr}`);
+        }
+      });
+
+    //}
+
+  });
+
 });

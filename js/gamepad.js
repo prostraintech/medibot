@@ -90,6 +90,15 @@ function getGamepadState() {
 
   }
 
+  else if (buttonPressed(gamepad.buttons[7])) {
+
+    timer = setTimeout(socket.emit('uupload_arduino', 0), 3000);
+     if(timer) {
+             clearTimeout(timer);
+         }
+
+  }
+
   else {
     socket.emit('navi', 8);
   }
