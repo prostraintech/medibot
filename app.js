@@ -32,6 +32,10 @@ arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
+arduinoSerialPort.on('close', function  {
+  console.log('Serial Port ' + arduinoCOMPort + ' is closed');  
+});
+
 parser.on('data', data => {
   console.log('got word from arduino:', data);
 });
@@ -167,7 +171,11 @@ io.on('connection', (socket) => {
   socket.on('upload_arduino', (shut) => {
     //scount += 1;
     //if (scount == 1) {
-    shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code && pm2 restart 0 && pm2 restart 0', {detached:true}).unref();
+      arduinoSerialPort.close();
+
+    shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code');
+
+    arduinoSerialPort.open();
 
     //}
 
