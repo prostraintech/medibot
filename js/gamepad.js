@@ -83,7 +83,7 @@ function getGamepadState() {
 
   else if (buttonPressed(gamepad.buttons[6])) {
 
-    timer = setTimeout(socket.emit('update_code', 0), 2000);
+    timer = setTimeout(socket.emit('update_code', 0), 3000);
      if(timer) {
              clearTimeout(timer);
          }
