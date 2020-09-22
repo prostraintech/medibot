@@ -11,7 +11,8 @@ var https = require('https').createServer({
 var cmd = 0;
 var count = 0;
 var res;
-var scount;
+var scount = 0;
+var stat = 1;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
@@ -168,14 +169,28 @@ io.on('connection', (socket) => {
 
   }); */
 
-  socket.on('upload_arduino', (shut) => {
-    //scount += 1;
-    //if (scount == 1) {
+  socket.on('upload_arduino', (upl) => {
+    if (stat != upl) {
+      stat = upl;
+
       arduinoSerialPort.close();
 
-    shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code');
+      shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code');
+  
+      arduinoSerialPort.open();
+  
 
-    arduinoSerialPort.open();
+    }
+
+    else if (stat == upl) {
+
+      scount++;
+
+      if (scount > 5) {
+        stat = 1 ; 
+        scount = 0;
+      }
+    }
 
     //}
 

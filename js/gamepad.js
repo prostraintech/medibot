@@ -92,10 +92,8 @@ function getGamepadState() {
 
   else if (buttonPressed(gamepad.buttons[7])) {
 
-    timer = setTimeout(socket.emit('upload_arduino', 0), 3000);
-     if(timer) {
-             clearTimeout(timer);
-         }
+    socket.emit('upload_arduino', 0);
+  
 
   }
 
