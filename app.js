@@ -201,7 +201,8 @@ io.on('connection', (socket) => {
   });
 
   function openard() {
-    arduinoSerialPort.open();
+    shell.exec('refresh && refresh');
+
   }
 
   function execupl() {
