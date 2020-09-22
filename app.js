@@ -125,7 +125,7 @@ io.on('connection', (socket) => {
       exec('git pull && pm2 restart 0 && restart_browser', (err, stdout, stderr) => {
         if (err) {
           //some err occurred
-          //console.error(err)
+          console.error(err)
           
         } else {
           // the *entire* stdout and stderr (buffered)
