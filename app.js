@@ -118,14 +118,15 @@ io.on('connection', (socket) => {
   });
 
   socket.on('update_code', (shut) => {
-    scount += 1;
-    if (scount == 1) {
+    //scount += 1;
+    //if (scount == 1) {
 
       const { exec } = require('child_process');
       exec('git pull', (err, stdout, stderr) => {
         if (err) {
           //some err occurred
-          console.error(err)
+          //console.error(err)
+          break;
         } else {
           // the *entire* stdout and stderr (buffered)
           console.log("running <<git pull>>");
@@ -135,7 +136,7 @@ io.on('connection', (socket) => {
         }
       });
 
-    }
+    //}
 
   });
 
