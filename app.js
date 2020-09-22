@@ -10,6 +10,7 @@ var https = require('https').createServer({
 var cmd = 0;
 var count = 0;
 var res;
+var scount;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
@@ -30,7 +31,7 @@ arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
-parser.on('data', data =>{
+parser.on('data', data => {
   console.log('got word from arduino:', data);
 });
 
@@ -86,10 +87,10 @@ io.on('connection', (socket) => {
       console.log(res);
     }
 
-    else if (cmd == status){
-      
+    else if (cmd == status) {
+
       count++;
-  
+
       if (count > 10) {
         res = cmd.toString();
         arduinoSerialPort.write(res + '\n');
@@ -97,7 +98,7 @@ io.on('connection', (socket) => {
         count = 0;
       }
     }
-    
+
 
   });
 
@@ -117,19 +118,24 @@ io.on('connection', (socket) => {
   });
 
   socket.on('update_code', (shut) => {
-    const { exec } = require('child_process');
-exec('git pull', (err, stdout, stderr) => {
-  if (err) {
-    //some err occurred
-    console.error(err)
-  } else {
-   // the *entire* stdout and stderr (buffered)
-   console.log(`${stdout}`);
-   ////console.log(`stderr: ${stderr}`);
-  }
-});
+    scount += 1;
+    if (scount == 1) {
 
-  console.log("running <<git pull>>");
+      const { exec } = require('child_process');
+      exec('git pull', (err, stdout, stderr) => {
+        if (err) {
+          //some err occurred
+          console.error(err)
+        } else {
+          // the *entire* stdout and stderr (buffered)
+          console.log("running <<git pull>>");
+          console.log(`${stdout}`);
+          scount = 0;
+          ////console.log(`stderr: ${stderr}`);
+        }
+      });
+
+    }
 
   });
 
