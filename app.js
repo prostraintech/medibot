@@ -177,7 +177,7 @@ io.on('connection', (socket) => {
 
       shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code');
       
-        setTimeout(openard(), 3000);
+        setTimeout(openard, 3000);
 
       
   
