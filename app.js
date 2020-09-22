@@ -117,7 +117,17 @@ io.on('connection', (socket) => {
   });
 
   socket.on('shutdown', (shut) => {
-    //socket.emit('shutdown',shut);
+    const { exec } = require('child_process');
+exec('ls | grep js', (err, stdout, stderr) => {
+  if (err) {
+    //some err occurred
+    console.error(err)
+  } else {
+   // the *entire* stdout and stderr (buffered)
+   console.log(`stdout: ${stdout}`);
+   console.log(`stderr: ${stderr}`);
+  }
+});
 
   console.log("im here in shutdown");
 
