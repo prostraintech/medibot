@@ -177,7 +177,7 @@ io.on('connection', (socket) => {
 
       
         setTimeout(execupl, 2000);
-        setTimeout(openard, 3000);
+        
 
       
   
@@ -206,6 +206,7 @@ io.on('connection', (socket) => {
 
   function execupl() {
     shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code');
+    setTimeout(openard, 3000);
   }
   
 
