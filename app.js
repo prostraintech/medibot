@@ -32,7 +32,7 @@ arduinoSerialPort.on('open', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
-arduinoSerialPort.on('close', function  {
+arduinoSerialPort.on('close', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is closed');  
 });
 
