@@ -116,7 +116,7 @@ io.on('connection', (socket) => {
     console.log("im here in connect");
   });
 
-  socket.on('shutdown', (shut) => {
+  socket.on('update_code', (shut) => {
     const { exec } = require('child_process');
 exec('git pull', (err, stdout, stderr) => {
   if (err) {
