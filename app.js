@@ -201,7 +201,7 @@ io.on('connection', (socket) => {
   });
 
   function openard() {
-    shell.exec('pm2 restart 0 && pm2 restart 0 && pm2 restart 0');
+    shell.exec('pm2 restart 0 && pm2 restart 0 && pm2 restart 0',{detach:true}).unref();
 
   }
 
