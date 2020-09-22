@@ -167,7 +167,7 @@ io.on('connection', (socket) => {
   socket.on('upload_arduino', (shut) => {
     //scount += 1;
     //if (scount == 1) {
-    shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code && pm2 restart 0 && pm2 restart 0');
+    shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code && pm2 restart 0 && pm2 restart 0', {detached:true});
 
     //}
 
