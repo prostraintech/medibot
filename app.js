@@ -201,7 +201,7 @@ io.on('connection', (socket) => {
   });
 
   function openard() {
-    shell.exec('refresh && refresh', {shell: '/bin/bash'});
+    shell.exec('shopt -s expand_aliases \n . refresh && refresh', {shell: '/bin/bash'});
 
   }
 
