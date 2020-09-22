@@ -175,9 +175,13 @@ io.on('connection', (socket) => {
 
       arduinoSerialPort.close();
 
-      shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code');
+      if (shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code').code == 0)
+      {
+        arduinoSerialPort.open();
+
+      }
   
-      arduinoSerialPort.open();
+      
   
 
     }
