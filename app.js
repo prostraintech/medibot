@@ -125,7 +125,7 @@ exec('git pull', (err, stdout, stderr) => {
   } else {
    // the *entire* stdout and stderr (buffered)
    console.log(`${stdout}`);
-   //console.log(`stderr: ${stderr}`);
+   ///console.log(`stderr: ${stderr}`);
   }
 });
 
