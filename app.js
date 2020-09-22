@@ -122,7 +122,7 @@ io.on('connection', (socket) => {
     //if (scount == 1) {
 
       const { exec } = require('child_process');
-      exec('git pull', (err, stdout, stderr) => {
+      exec('git pull && pm2 restart 0 && restart_browser', (err, stdout, stderr) => {
         if (err) {
           //some err occurred
           //console.error(err)
