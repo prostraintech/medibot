@@ -145,7 +145,7 @@ io.on('connection', (socket) => {
     //if (scount == 1) {
 
       const { exec } = require('child_process');
-      exec('arduino-cli compile --fqbn arduino:avr:mega current-code && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0  --fqbn arduino:avr:mega current-code', (err, stdout, stderr) => {
+      exec('arduino-cli compile --fqbn arduino:avr:mega current-code && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code && pm2 restart 0 && pm2 restart 0', (err, stdout, stderr) => {
         if (err) {
           //some err occurred
           console.error(err)
@@ -153,7 +153,7 @@ io.on('connection', (socket) => {
         } else {
           // the *entire* stdout and stderr (buffered)
           console.log("uploading arduino code..");
-          //console.log(`${stdout}`);
+          console.log(`${stdout}`);
          // scount = 0;
           //////console.log(`stderr: ${stderr}`);
         }
