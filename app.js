@@ -132,7 +132,7 @@ io.on('connection', (socket) => {
           console.log("running <<git pull>>");
           console.log(`${stdout}`);
          // scount = 0;
-          /////console.log(`stderr: ${stderr}`);
+          //////console.log(`stderr: ${stderr}`);
         }
       });
 
