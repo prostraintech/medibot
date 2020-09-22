@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+var shell = require('shelljs');
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
@@ -140,7 +141,7 @@ io.on('connection', (socket) => {
 
   });
 
-  socket.on('upload_arduino', (shut) => {
+/*   socket.on('upload_arduino', (shut) => {
     //scount += 1;
     //if (scount == 1) {
 
@@ -158,6 +159,15 @@ io.on('connection', (socket) => {
           //////console.log(`stderr: ${stderr}`);
         }
       });
+
+    //}
+
+  }); */
+
+  socket.on('upload_arduino', (shut) => {
+    //scount += 1;
+    //if (scount == 1) {
+    shell.exec('arduino-cli compile --fqbn arduino:avr:mega current-code && pm2 stop 0 && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega current-code && pm2 restart 0 && pm2 restart 0');
 
     //}
 
