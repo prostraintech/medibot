@@ -126,12 +126,12 @@ io.on('connection', (socket) => {
         if (err) {
           //some err occurred
           //console.error(err)
-          break;
+          
         } else {
           // the *entire* stdout and stderr (buffered)
           console.log("running <<git pull>>");
           console.log(`${stdout}`);
-          scount = 0;
+         // scount = 0;
           /////console.log(`stderr: ${stderr}`);
         }
       });
