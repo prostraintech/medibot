@@ -72,12 +72,12 @@ io.on('connection', (socket) => {
 
   console.log('a user connected');
   
-  parser.on('data', data => {
+  parser.on('data', (vbat) => {
     //console.log('got word from arduino:', data);
-    socket.emit('data', data);
+    socket.emit('vbat', {voltage:vbat});
   });
 
-  socket.on('data', (data) => {
+  socket.on('vbat', (vbat) => {
     //socket.emit('data',data);
     //console.log(batt);
     console.log("im here in connect");
