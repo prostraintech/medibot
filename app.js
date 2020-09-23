@@ -72,8 +72,8 @@ parser.on('data', (vbat) => {
 
   if (pcount%1000 == 0)
 {
-  //console.log('got word from arduino:', vbat);
-  socket.emit('vbat', vbat);
+  console.log('got word from arduino:', vbat);
+  //socket.emit('vbat', vbat);
 }
 });
 
