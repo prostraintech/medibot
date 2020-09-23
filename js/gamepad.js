@@ -5,13 +5,13 @@ var timer;
 
 window.addEventListener("gamepadconnected", (event) => {
   console.log("A gamepad connected:");
-  console.log(event.gamepad);
+  //console.log(event.gamepad);
   repGP = window.setInterval(getGamepadState, refreshRate);
 });
 
 window.addEventListener("gamepaddisconnected", (event) => {
   console.log("A gamepad disconnected:");
-  console.log(event.gamepad);
+  //console.log(event.gamepad);
   window.clearInterval(repGP);
 });
 

@@ -23,7 +23,7 @@ var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
   baudRate: 9600
 });
 
-const parser = arduinoSerialPort.pipe(new Readline({ delimiter: '\r\n' }));
+const parser = arduinoSerialPort.pipe(new Readline());
 
 arduinoSerialPort.on('error', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is not available');
@@ -127,7 +127,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('bat_voltage', (batt) => {
-    //socket.emit('connect',status);
+    socket.emit('bat_voltage',batt);
     console.log(batt);
     console.log("im here in connect");
   });
