@@ -13,6 +13,7 @@ var count = 0;
 var res;
 var scount = 0;
 var stat = 1;
+var pcount = 1;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
