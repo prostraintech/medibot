@@ -39,7 +39,7 @@ arduinoSerialPort.on('close', function () {
 
 parser.on('data', data => {
   console.log('got word from arduino:', data);
-  //socket.emit('bat_voltage', data);
+  socket.emit('bat_voltage', data);
 });
 
 
