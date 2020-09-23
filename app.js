@@ -79,7 +79,7 @@ io.on('connection', (socket) => {
     if (pcount%1000 == 0)
 {
     console.log('got word from arduino:', vbat);
-    //socket.emit('vbat', vbat);
+    socket.emit('vbat', vbat);
 }
   });
 
