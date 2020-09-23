@@ -70,7 +70,7 @@ https.listen(443, () => {
 parser.on('data', (vbat) => {
   pcount++;
 
-  if (pcount%1000 == 0)
+  if (pcount%100 == 0)
 {
   console.log('got word from arduino:', vbat);
   //socket.emit('vbat', vbat);
