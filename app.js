@@ -78,8 +78,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('data', (data) => {
-    socket.emit('data',data);
-    console.log(batt);
+    //socket.emit('data',data);
+    //console.log(batt);
     console.log("im here in connect");
   });
 
