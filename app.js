@@ -37,10 +37,7 @@ arduinoSerialPort.on('close', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is closed');  
 });
 
-parser.on('data', function (data) {
-  //console.log('got word from arduino:', data);
-  io.emit('bat_voltage', data);
-});
+
 
 
 app.use(express.static(__dirname + '/js'));
@@ -74,6 +71,11 @@ var io = require('socket.io')(https);
 io.on('connection', (socket) => {
 
   console.log('a user connected');
+  
+  parser.on('data', data => {
+    //console.log('got word from arduino:', data);
+    socket.emit('bat_voltage', data);
+  });
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
