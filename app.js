@@ -129,7 +129,7 @@ io.on('connection', (socket) => {
   socket.on('bat_voltage', (batt) => {
     //socket.emit('connect',status);
     console.log(batt);
-    // console.log("im here in connect");
+    console.log("im here in connect");
   });
 
   socket.on('update_code', (shut) => {
@@ -186,13 +186,6 @@ io.on('connection', (socket) => {
 
       
         setTimeout(execupl, 2000);
-        
-
-      
-  
-      
-  
-
     }
 
     else if (stat == upl) {
