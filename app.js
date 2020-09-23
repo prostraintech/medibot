@@ -73,8 +73,8 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   
   parser.on('data', (vbat) => {
-    //console.log('got word from arduino:', data);
-    socket.emit('vbat', vbat);
+    console.log('got word from arduino:', vbat);
+    //socket.emit('vbat', vbat);
   });
 
   socket.on('vbat', (vbat) => {
