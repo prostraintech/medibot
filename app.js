@@ -73,8 +73,13 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   
   parser.on('data', (vbat) => {
+    pcount++;
+
+    if (pcount%1000 == 0)
+{
     console.log('got word from arduino:', vbat);
     //socket.emit('vbat', vbat);
+}
   });
 
   socket.on('vbat', (vbat) => {
