@@ -37,9 +37,9 @@ arduinoSerialPort.on('close', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is closed');  
 });
 
-parser.on('data', data => {
+parser.on('data', function (data) {
   //console.log('got word from arduino:', data);
-  socket.emit('bat_voltage', data);
+  io.emit('bat_voltage', data);
 });
 
 
