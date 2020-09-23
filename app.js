@@ -67,15 +67,7 @@ https.listen(443, () => {
   console.log((new Date()) + " Node server started on port 443");
 });
 
-parser.on('data', (vbat) => {
-  pcount++;
 
-  if (pcount%10 == 0)
-{
-  console.log('got word from arduino:', vbat);
-  socket.emit('vbat', 4);
-}
-});
 
 var io = require('socket.io')(https);
 
@@ -83,7 +75,15 @@ io.on('connection', (socket) => {
 
   console.log('a user connected');
   
-
+  parser.on('data', (vbat) => {
+    pcount++;
+  
+    if (pcount%10 == 0)
+  {
+    console.log('got word from arduino:', vbat);
+    socket.emit('vbat', 4);
+  }
+  });
 
   socket.on('vbat', (vbat) => {
     //socket.emit('data',data);
