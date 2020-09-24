@@ -24,7 +24,7 @@ var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
   baudRate: 38400
 });
 
-const parser = arduinoSerialPort.pipe(new Readline({delimiter:'\r\n'}));
+const parser = arduinoSerialPort.pipe(new Readline());
 
 arduinoSerialPort.on('error', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is not available');
@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
   parser.on('data', (vbat) => {
     pcount++;
   
-    if (pcount%10 == 0)
+    if (pcount%50 == 0)
   {
     console.log('got word from arduino:', vbat);
     socket.emit('vbat', 4);
