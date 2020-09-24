@@ -95,7 +95,7 @@ function getGamepadState() {
   }
 
   else {
-    socket.emit('navi', 8);
+    //socket.emit('navi', 8);
   }
 
 }
