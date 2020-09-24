@@ -44,6 +44,11 @@
 			max-width: 100%;
 		}
 
+		.statusbar {
+
+			height: 100px;
+		}
+
 		.buttony {
 			position: fixed;
 			right: 0;
@@ -122,7 +127,9 @@
 </head>
 
 <body>
-
+<div id="statusbar"> 
+	battery
+</div>
 	<video class="video-outside" id="remotevideo" autoplay></video>
 
 	<div class="video-overlay">
@@ -150,7 +157,6 @@
 	<script src="/adapter.js"></script>
 	<script src="/webrtc.js"></script>
 	<script src="/gamepad.js"></script>
-	<script src="/monitoring.js"></script>
 
 
 
