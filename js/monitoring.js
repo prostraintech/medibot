@@ -12,7 +12,7 @@ socket.on('vbat', (vbat) => {
     document.getElementById("top_battery").innerHTML = monitoring[0] + "V";
     //console.log("im here in connect");
     
-    else if (volt == 23)  {
+    if (volt == 23)  {
       document.getElementById("top_battery").className = "fas fa-battery-three-quarters";
     }
 
