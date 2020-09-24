@@ -6,7 +6,7 @@ socket.on('vbat', (vbat) => {
     var monitoring = vbat.split(" ");
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
-    document.getElementById("top_battery").innerHTML = monitoring[0].toString() + "V";
+    document.getElementById("top_battery").innerHTML = monitoring[0] + "V";
     //console.log("im here in connect");
     if (debugc == 1)
     {
