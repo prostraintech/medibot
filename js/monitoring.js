@@ -3,7 +3,7 @@ var debugc = 0;
 socket.on('vbat', (vbat) => {
 
   
-    var monitoring = vbat.toString().split(" ");
+    var monitoring = vbat.split(" ");
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
     document.getElementById("top_battery").innerHTML = monitoring[0] + "V";
