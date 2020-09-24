@@ -2,11 +2,6 @@ const refreshRate = 50;
 var pressed = 0;
 var timer;
 
-socket.on('vbat', (vbat) => {
-  //socket.emit('data',data);
-  console.log("battery -> " + vbat +"V");
-  //console.log("im here in connect");
-});
 
 window.addEventListener("gamepadconnected", (event) => {
   console.log("A gamepad connected:");

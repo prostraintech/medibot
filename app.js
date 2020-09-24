@@ -80,7 +80,7 @@ io.on('connection', (socket) => {
   
     if (pcount%50 == 0)
   {
-    console.log('got word from arduino:', vbat);
+    //console.log('got word from arduino:', vbat);
     socket.emit('vbat', vbat);
   }
   });
