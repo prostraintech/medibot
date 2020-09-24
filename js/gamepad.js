@@ -1,5 +1,7 @@
 const refreshRate = 50;
 var pressed = 0;
+var cnow = 0;
+var clast = 1;
 
 
 
@@ -35,7 +37,7 @@ function getGamepadState() {
   var pointTurnAxis = gamepad.axes[5];
 
   if (buttonPressed(gamepad.buttons[1])) {
-
+    cnow = 0;
     if (yAxis < -0.1 && yAxis > -0.6 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)  //straight slow
     {
       socket.emit('navi', 1);
@@ -95,7 +97,11 @@ function getGamepadState() {
   }
 
   else {
-    //socket.emit('navi', 8);
+    cnow != clast
+    {
+    socket.emit('navi', 8);
+    cnow == clast;
+    }
   }
 
 }
