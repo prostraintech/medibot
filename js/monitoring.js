@@ -4,6 +4,9 @@ socket.on('vbat', (vbat) => {
 
   
     var monitoring = vbat.split(" ");
+
+    var volt = parseInt(monitoring[0]);
+    console.log(volt);
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
     document.getElementById("top_battery").innerHTML = monitoring[0] + "V";
