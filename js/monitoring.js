@@ -34,5 +34,8 @@ socket.on('vbat', (vbat) => {
     var temp = parseInt(monitoring[1]);
     document.getElementById("battery_temp").innerHTML = monitoring[1] + "\u00B0" + "C";
 
+    if (temp > 30)  {
+      document.getElementById("battery_temp").className = "fas fa-thermometer-three-quarters";
+    }
 
   });
