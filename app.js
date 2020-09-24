@@ -85,11 +85,7 @@ io.on('connection', (socket) => {
   }
   });
 
-  socket.on('vbat', (vbat) => {
-    //socket.emit('data',data);
-    //console.log(batt);
-    console.log("im here in connect");
-  });
+
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
