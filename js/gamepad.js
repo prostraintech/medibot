@@ -99,9 +99,10 @@ function getGamepadState() {
   else {
     if (cnow != clast)
     {
+      cnow == clast;
       console.log("i'm here")
     socket.emit('navi', 8);
-    cnow == clast;
+    
     }
   }
 
