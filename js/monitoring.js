@@ -2,7 +2,8 @@ var debugc = 0;
 
 socket.on('vbat', (vbat) => {
 
-    var table = vbat.split(" ");
+  console.log(vbat);
+    // var  = vbat.split(" ");
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
     document.getElementById("top_battery").innerHTML = table[0].toString() + "V";
