@@ -11,11 +11,14 @@ socket.on('vbat', (vbat) => {
     //console.log("battery -> " + vbat +"V");
     document.getElementById("top_battery").innerHTML = monitoring[0] + "V";
     //console.log("im here in connect");
-    if (volt == 24)
+    if (volt == 20)
     {
     document.getElementById("top_battery").className = "fas fa-battery-empty";
     }
 
+    var temp = parseInt(monitoring[1]);
+    document.getElementById("battery_temp").innerHTML = monitoring[1] + "\u00B0" + "C";
+    console.log("\u00B0");
 
 
   });
