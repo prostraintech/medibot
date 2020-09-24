@@ -9,7 +9,7 @@ socket.on('vbat', (vbat) => {
     // console.log(volt);
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
-    document.getElementById("top_battery").innerHTML = monitoring[0] + "V";
+    document.getElementById("top_battery").innerHTML = " " + monitoring[0] + "V";
     //console.log("im here in connect");
     
     if (volt == 23)  {
