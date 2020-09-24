@@ -2,7 +2,7 @@ var debugc = 0;
 
 socket.on('vbat', (vbat) => {
 
-  console.log(vbat);
+  
     // var  = vbat.split(" ");
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");

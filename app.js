@@ -80,10 +80,11 @@ io.on('connection', (socket) => {
   
   parser.on('data', (vbat) => {
     pcount++;
+    
   
     if (pcount%10 == 0)
   {
-    //console.log('got word from arduino:', vbat);
+    console.log('got word from arduino:', vbat);
     socket.emit('vbat', vbat);
   }
   });
