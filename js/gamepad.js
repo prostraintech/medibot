@@ -1,6 +1,6 @@
 const refreshRate = 50;
 var pressed = 0;
-var cnow = 0;
+var cnow;
 var clast = 1;
 
 
