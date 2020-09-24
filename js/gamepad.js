@@ -4,8 +4,8 @@ var timer;
 
 socket.on('vbat', (vbat) => {
   //socket.emit('data',data);
-  //console.log(batt);
-  console.log("im here in connect");
+  console.log("battery -> " + vbat +"V");
+  //console.log("im here in connect");
 });
 
 window.addEventListener("gamepadconnected", (event) => {
