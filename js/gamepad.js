@@ -1,6 +1,6 @@
-const refreshRate = 50;
+const refreshRate = 100;
 var pressed = 0;
-var timer;
+
 
 
 window.addEventListener("gamepadconnected", (event) => {
@@ -83,10 +83,7 @@ function getGamepadState() {
 
   else if (buttonPressed(gamepad.buttons[6])) {
 
-    timer = setTimeout(socket.emit('update_code', 0), 3000);
-     if(timer) {
-             clearTimeout(timer);
-         }
+    socket.emit('update_code', 0);
 
   }
 
