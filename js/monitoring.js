@@ -3,10 +3,10 @@ var debugc = 0;
 socket.on('vbat', (vbat) => {
 
   
-    // var  = vbat.split(" ");
+    var monitoring = vbat.split(" ");
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
-    document.getElementById("top_battery").innerHTML = table[0].toString() + "V";
+    document.getElementById("top_battery").innerHTML = monitoring[0].toString() + "V";
     //console.log("im here in connect");
     if (debugc == 1)
     {
