@@ -1,4 +1,4 @@
-const refreshRate = 100;
+const refreshRate = 50;
 var pressed = 0;
 
 
