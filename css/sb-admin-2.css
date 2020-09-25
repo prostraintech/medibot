@@ -84,7 +84,7 @@ body {
   
   position: fixed;
   left: 0;
-  object-fit: cover;
+  bottom:20px;
   width: 100%;
   height: 100%;
   max-height: 100%;
@@ -10604,6 +10604,7 @@ a:focus {
   .sidebar.toggled {
     overflow: visible;
     width: 6.5rem !important;
+    z-index: 99;
   }
   .sidebar.toggled .nav-item .collapse {
     position: absolute;
