@@ -49,6 +49,10 @@ socket.on('vbat', (vbat) => {
       document.getElementById("emergency_stop").innerHTML = " Emergency STOP button is pressed!";
     }
 
+    else if (STOP == 1){
+      
+    }
+
     
 
   });
