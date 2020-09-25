@@ -146,7 +146,7 @@
 		.fa-battery-quarter	{
 			position: fixed;
 			right: 20px;
-			color: yellow;
+			color: rgb(231, 189, 49);
 			animation: blinker 1s linear infinite;
 		}
 
@@ -169,6 +169,13 @@
 			animation: blinker 1s linear infinite;
 		}
 
+		.fa-exclamation-circle	{
+			position: fixed;
+			right: 200px;
+			color:rgb(206, 112, 36);
+			animation: blinker 1s linear infinite;
+		}
+
 		@keyframes blinker {
 			50% {
 				opacity: 0;
@@ -181,8 +188,10 @@
 
 <body>
 	<div class="statusbar">
-	<i id="battery_temp" class="fas fa-thermometer-half">...</i>
 	<i id="top_battery" class="fas fa-battery-full">...</i>
+	<i id="battery_temp" class="fas fa-thermometer-half">...</i>
+	<i id="emergency_stop" class="fas fa-exclamation-circle">...</i>
+	
 
    </div>
 

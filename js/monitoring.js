@@ -43,4 +43,12 @@ socket.on('vbat', (vbat) => {
       document.getElementById("battery_temp").className = "fas fa-thermometer-three-quarters";
     }
 
+    var STOP = parseInt(monitoring[2]);
+
+    if (STOP == 0){
+      document.getElementById("emergency_stop").innerHTML = " Emergency STOP button is pressed!";
+    }
+
+    
+
   });
