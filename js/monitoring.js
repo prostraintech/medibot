@@ -50,7 +50,7 @@ socket.on('vbat', (vbat) => {
     }
 
     else if (STOP == 1){
-      
+      document.getElementById("emergency_stop").className = "b";
     }
 
     
