@@ -1,5 +1,3 @@
-var debugc = 0;
-
 socket.on('vbat', (vbat) => {
 
   
@@ -9,7 +7,7 @@ socket.on('vbat', (vbat) => {
     // console.log(volt);
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
-    document.getElementById("top_battery").innerHTML = " " + monitoring[0] + "V";
+    document.getElementById("top_battery").innerHTML = " " + volt.toString() + "V";
 
     if (volt == 24) {
       document.getElementById("top_battery").className = "fas fa-battery-full";
