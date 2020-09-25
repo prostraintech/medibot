@@ -13,7 +13,6 @@ var count = 0;
 var res;
 var scount = 0;
 var stat = 1;
-var pcount = 1;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
@@ -79,14 +78,8 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   
   parser.on('data', (vbat) => {
-    pcount++;
-    
-  
-    if (pcount%100 == 0)
-  {
-    // console.log('got word from arduino:', vbat);
+    console.log('got word from arduino:', vbat);
     socket.emit('vbat', vbat);
-  }
   });
 
     socket.on('disconnect', () => {
