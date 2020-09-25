@@ -1,237 +1,240 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#da532c">
-	<meta name="theme-color" content="#ffffff">
-	<link href="/css/all.css" rel="stylesheet">
 
-	<title>Medibot Telepresence</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-	<style>
-		body {
+  <title>MediBOT - IIUMC</title>
 
-			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="css/nunito.css" rel="stylesheet">
+  
+  <!-- Favicon-->
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  	
 
-		}
-
-		
-
-
-		.video-overlay {
-			position: fixed;
-			bottom: 0;
-
-		}
-
-		.video-inside {
-			width: 80%;
-			height: 40%;
-		}
-
-		.video-outside {
-			background: transparent url('/medibot-bg.png') no-repeat 0;
-			background-position-y: bottom;
-			position: fixed;
-			left: 0;
-			object-fit: cover;
-			width: 100%;
-			height: 100%;
-			max-height: 100%;
-			max-width: 100%;
-		}
-
-		.statusbar {
-
-			height: 20px;
-		}
-
-		.buttony {
-			position: fixed;
-			right: 0;
-		}
-
-		.container {
-			position: absolute;
-			left: 1%;
-			top: 4%;
-			width: 110px;
-			height: 150px;
-		}
-		.c-pulse {
-
-			left: 11%
-		}
-
-		.container-item {
-
-			position: relative;
-			color: white;
-			border:white solid 1px;
-
-			text-align: center;
-			height: 110px;
-			width:110px;
-			font-size: 60px;
-			vertical-align: middle;
-			display:table-cell;
-
-
-
-		}
-
-		.desc-item {
-
-			position: relative;
-			top: 3%;
-			color: white;
-			border: white solid 1px;			
-			text-align: center;
-			height: 30px;
-			width:108px;
-			font-size: 20px;
-			padding-top: 6px;
-
-
-		}
-
-		.spo2 {
-
-			background-color: #5cb85c;
-
-		}
-
-		.pulse {
-
-			background-color: #337ab7;
-
-		}	
-
-		.pulse-title {
-
-			background-color: #285290;
-
-		}
-
-		.spo2-title {
-
-			background-color: #00843b;
-
-		}
-
-		.fa-battery-full {
-			position: fixed;
-			right: 20px;
-			color: green;
-			
-		}
-		
-		.fa-battery-three-quarters	{
-			position: fixed;
-			right: 20px;
-			color: green;
-		}
-
-		.fa-battery-half	{
-			position: fixed;
-			right: 20px;
-			color: green;
-		}
-
-		.fa-battery-quarter	{
-			position: fixed;
-			right: 20px;
-			color: rgb(231, 189, 49);
-			animation: blinker 1s linear infinite;
-		}
-
-		.fa-battery-empty {
-			position: fixed;
-			right: 20px;
-			color: red;
-			animation: blinker 1s linear infinite;
-		}
-
-
-		.fa-thermometer-half	{
-			position: fixed;
-			right: 90px;
-			color: lightseagreen;
-		}
-
-		.fa-thermometer-three-quarters	{
-			color: red;
-			animation: blinker 1s linear infinite;
-		}
-
-		.fa-exclamation-circle	{
-			position: fixed;
-			right: 200px;
-			color:rgb(206, 112, 36);
-			animation: blinker 1s linear infinite;
-			visibility: visible;
-		}
-
-		.b	{
-			position: fixed;
-			right: 200px;
-			visibility: hidden;
-		}
-
-		@keyframes blinker {
-			50% {
-				opacity: 0;
-			}
-		}
-
-	</style>
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
-<body>
-	<div class="statusbar">
-	<i id="top_battery" class="fas fa-battery-full">...</i>
-	<i id="battery_temp" class="fas fa-thermometer-half">...</i>
-	<i id="emergency_stop" class="fas fa-exclamation-circle">...</i>
-	
+<body id="page-top">
 
-   </div>
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-	<video class="video-outside" id="remotevideo" autoplay></video>
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-	<div class="video-overlay">
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-stethoscope"></i>
+        </div>
+        
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Interface
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Components</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item" href="buttons.html">Buttons</a>
+            <a class="collapse-item" href="cards.html">Cards</a>
+			<div class="collapse-divider"></div>
+			<h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+          </div>
+        </div>
+      </li>
+
+ 
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Addons
+      </div>
+
+     
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+
+          <!-- mediBOT Monitoring Icons -->
+          <ul class="navbar-nav ml-auto">
+		  
+		    <li class="nav-item dropdown no-arrow mx-1">
+	        <a class="nav-link dropdown-toggle">
+			<i class="fas fa-exclamation-circle"><span id="emergency_stop" class="indent"></span></i>
+			</a>
+			</li>
+				
+		    <li class="nav-item dropdown no-arrow mx-1">
+			<a class="nav-link dropdown-toggle"><i class="fas fa-battery-full"><span id="top_battery" class="indent"></span></i>
+			</a>
+			</li>
+				
+			<li class="nav-item dropdown no-arrow mx-1">
+			<a class="nav-link dropdown-toggle"><i class="fas fa-thermometer-half"><span id="battery_temp" class="indent"></span></i>
+			</a>
+			</li>
+			<li class="nav-item dropdown no-arrow mx-1">
+				
+			
+
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                
+              </div>
+            </li>
+
+                      
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-medi">
+			  
+			  
+			  
+
+            <div class="embed-responsive embed-responsive-16by9">
+  <video class="video-outside" id="remotevideo" autoplay></video>
+</div>
+<div class="video-overlay" >
 		<video class="video-inside" id="localvideo" autoplay muted></video>
 
 	</div>
-	<div class="container">
-		<div id="spo2-v" class="container-item spo2">-</div>
-		<div class="desc-item spo2-title">SpO<sub>2</sub>(%)</div>
-	</div>
-
-	<div class="container c-pulse">
-		<div id="pulse-v" class="container-item pulse">-</div>
-		<div class="desc-item pulse-title">bpm</div>
-	</div>
+			
 
 
-	<div class="buttony">
-		<button type="button" onclick="connect();">Connect</button>
-		<button type="button" onclick="disconnect();">Disconnect</button>
 
-	</div>
+            </div>
+          </div>
 
-	<script src="/socket.io.js"></script>
-	<script src="/adapter.js"></script>
-	<script src="/webrtc.js"></script>
-	<script src="/gamepad.js"></script>
-	<script src="/monitoring.js"></script>
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>---</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
 
 
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.js"></script>
+  <script src="js/socket.io.js"></script>
+  <script src="js/adapter.js"></script>
+  <script src="js/webrtc.js"></script>
+  <script src="js/gamepad.js"></script>
+  <script src="js/monitoring.js"></script>
 
 </body>
 
