@@ -47,6 +47,7 @@ socket.on('vbat', (vbat) => {
 
     if (STOP == 0){
       document.getElementById("emergency_stop").innerHTML = " Emergency STOP button is pressed!";
+      document.getElementById("emergency_stop").className = "fas fa-exclamation-circle";
     }
 
     else if (STOP == 1){
