@@ -4209,6 +4209,7 @@ input[type="button"].btn-block {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  z-index: 98;
 }
 
 .navbar .container,
