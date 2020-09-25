@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
     pcount++;
     
   
-    if (pcount%10 == 0)
+    if (pcount%100 == 0)
   {
     // console.log('got word from arduino:', vbat);
     socket.emit('vbat', vbat);
