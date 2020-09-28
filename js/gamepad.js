@@ -37,6 +37,24 @@ function getGamepadState() {
   var pointTurnAxis = gamepad.axes[5];
   var mode = gamepad.axes[6];
 
+  if (buttonPressed(gamepad.buttons[2])) {
+    socket.emit('connect', 1);
+    connect();
+  }
+
+  else if (buttonPressed(gamepad.buttons[3])) {
+    socket.emit('connect', 0);
+    disconnect();
+  }
+
+  else if (buttonPressed(gamepad.buttons[6])) {
+    socket.emit('update_code', 0);
+  }
+
+  else if (buttonPressed(gamepad.buttons[7])) {
+    socket.emit('upload_arduino', 0);
+  }
+  
   if (mode < -0.9)  {
 
   if (buttonPressed(gamepad.buttons[1])) {
@@ -76,29 +94,6 @@ function getGamepadState() {
     socket.emit('navi', 9);
   }
 
-  else if (buttonPressed(gamepad.buttons[2])) {
-    socket.emit('connect', 1);
-    connect();
-  }
-
-  else if (buttonPressed(gamepad.buttons[3])) {
-    socket.emit('connect', 0);
-    disconnect();
-  }
-
-  else if (buttonPressed(gamepad.buttons[6])) {
-
-    socket.emit('update_code', 0);
-
-  }
-
-  else if (buttonPressed(gamepad.buttons[7])) {
-
-    socket.emit('upload_arduino', 0);
-  
-
-  }
-
   else {
     //console.log("i'm here: " + cnow);
     if (cnow != clast)
@@ -134,16 +129,6 @@ else if (mode > 0.9)  {
     }      
   }
 
-  else if (buttonPressed(gamepad.buttons[2])) {
-    socket.emit('connect', 1);
-    connect();
-  }
-
-  else if (buttonPressed(gamepad.buttons[3])) {
-    socket.emit('connect', 0);
-    disconnect();
-  }
-
   else {
     //console.log("i'm here: " + cnow);
     if (cnow != clast)
@@ -154,19 +139,6 @@ else if (mode > 0.9)  {
     socket.emit('navi', 8);
     
     }
-  }
-}
-
-else {
-
-  if (buttonPressed(gamepad.buttons[2])) {
-    socket.emit('connect', 1);
-    connect();
-  }
-
-  else if (buttonPressed(gamepad.buttons[3])) {
-    socket.emit('connect', 0);
-    disconnect();
   }
 }
 
