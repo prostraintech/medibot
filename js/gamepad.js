@@ -118,6 +118,8 @@ else if (mode > 0.9)  {
 
   if (buttonPressed(gamepad.buttons[1])){
 
+    cnow = 0;
+    
     if (yAxis < -0.1 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)  //straight slow
     {
       socket.emit('navi', 5);
