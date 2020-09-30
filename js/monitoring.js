@@ -4,10 +4,11 @@ socket.on('vbat', (vbat) => {
     var monitoring = vbat.split(" ");
 
     var volt = parseInt(monitoring[0]);
+    document.getElementById("top_battery").innerHTML = " " + volt.toString() + "V";
+
     // console.log(volt);
     //socket.emit('data',data);
     //console.log("battery -> " + vbat +"V");
-    document.getElementById("top_battery").innerHTML = " " + volt.toString() + "V";
 
     if (volt == 24) {
       document.getElementById("top_battery").className = "fas fa-battery-full";
@@ -44,9 +45,9 @@ socket.on('vbat', (vbat) => {
     }
 
     var STOP = parseInt(monitoring[2]);
+    document.getElementById("emergency_stop").innerHTML = " Emergency STOP button is pressed!";
 
     if (STOP == 0){
-      document.getElementById("emergency_stop").innerHTML = " Emergency STOP button is pressed!";
       document.getElementById("emergency_stop").className = "fas fa-exclamation-circle";
     }
 
@@ -54,6 +55,16 @@ socket.on('vbat', (vbat) => {
       document.getElementById("emergency_stop").className = "b";
     }
 
-    
+    var obstacle = parseInt(monitoring[3]);
+    document.getElementById("allowable").innerHTML = "Reset move!";
+
+    if (obstacle == 2){
+      document.getElementById("emergency_stop").className = "fas fa-exclamation-circle"
+    }
+
+    else if (obstacle == 1){
+      document.getElementById("emergency_stop").className = "b";
+    }
+
 
   });
