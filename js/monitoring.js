@@ -56,14 +56,14 @@ socket.on('vbat', (vbat) => {
     }
 
     var obstacle = parseInt(monitoring[3]);
-    document.getElementById("allowable").innerHTML = "Reset move!";
+    document.getElementById("allowable").innerHTML = "Obstacle detected!";
 
     if (obstacle == 2){
-      document.getElementById("emergency_stop").className = "fas fa-exclamation-circle"
+      document.getElementById("allowable").className = "fas fa-exclamation-circle"
     }
 
     else if (obstacle == 1){
-      document.getElementById("emergency_stop").className = "b";
+      document.getElementById("allowable").className = "b";
     }
 
 
