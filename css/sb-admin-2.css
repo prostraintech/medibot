@@ -78,12 +78,12 @@ body {
 .video-inside {
   width: 80%;
   height: 40%;
+  border: 2px solid #2950C3;
 }
 
 .video-outside {
   
   position: fixed;
-  left: 0;
   top: 0;
   bottom:0;
   width: 100%;
@@ -10388,7 +10388,7 @@ a:focus {
 
 .sidebar {
   width: 6.5rem;
-  min-height: 95vh;
+  min-height: 100vh;
 }
 
 .sidebar .nav-item {
