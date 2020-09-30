@@ -129,6 +129,10 @@ else if (mode > 0.9)  {
     }      
   }
 
+  else if (buttonPressed(gamepad.buttons[0])) {
+    socket.emit('navi', 9);
+  }
+
   else {
     //console.log("i'm here: " + cnow);
     if (cnow != clast)
