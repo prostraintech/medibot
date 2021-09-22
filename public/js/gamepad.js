@@ -49,7 +49,7 @@ function getGamepadState() {
   
   else if (buttonPressed(gamepad.buttons[0])) {
     cnow = 0;
-    console.log('DMS pressed');
+    
     if (yAxis < -0.1 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)  //straight slow
     {
       socket.emit('navi', 1);
@@ -78,7 +78,7 @@ function getGamepadState() {
       socket.emit('navi', 5);
       console.log('stop - 5');
     }
-
+    console.log('DMS pressed');
 
   }
 
