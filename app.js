@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-var shell = require('shelljs');
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
@@ -11,8 +10,6 @@ var https = require('https').createServer({
 var cmd = 0;
 var count = 0;
 var res;
-var scount = 0;
-var stat = 1;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
@@ -37,9 +34,6 @@ arduinoSerialPort.on('close', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is closed');  
 });
 
-
-
-
 app.use('/js',express.static(__dirname + '/js'));
 app.use(express.static(__dirname + '/fav'));
 app.use('/css',express.static(__dirname + '/css'));
@@ -55,9 +49,6 @@ app.get('/', (req, res) => {
 https.listen(443, () => {
   console.log((new Date()) + " Node server started on port 443");
 });
-
-
-
 
 var io = require('socket.io')(https);
 
