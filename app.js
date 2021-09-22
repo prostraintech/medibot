@@ -34,12 +34,12 @@ arduinoSerialPort.on('close', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is closed');  
 });
 
-app.use('/js',express.static(__dirname + '/js'));
-app.use(express.static(__dirname + '/fav'));
-app.use('/css',express.static(__dirname + '/css'));
-//app.use('/webfonts',express.static(__dirname + '/webfonts'));
-app.use('/vendor',express.static(__dirname + '/vendor'));
-app.use('/scss',express.static(__dirname + '/scss'));
+app.use(express.static('public'));
+// app.use(express.static(__dirname + '/fav'));
+// app.use('/css',express.static(__dirname + '/css'));
+// app.use('/webfonts',express.static(__dirname + '/webfonts'));
+// app.use('/vendor',express.static(__dirname + '/vendor'));
+// app.use('/scss',express.static(__dirname + '/scss'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -101,3 +101,5 @@ io.on('connection', (socket) => {
 
 
 });
+
+setInterval(() => io.emit('time', new Date().toTimeString().slice(0,5)), 1000);
