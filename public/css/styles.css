@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+html, body {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+body {
+  background-color: black;
+  font-family: 'Kameron', serif;
+  font-size: 15px;
+}
+
+#top-bar {
+  width: 100vw;
+  height: 7vh;
+}
+
+#video {
+  flex: 0 0 auto;
+  width: 100vw;
+  height: 93vh;
+  background-color: gray;
+}
+
+#side-bar {
+  flex: 0 0 auto;
+  width: 0;
+  height: 93vh;
+  background-color: yellow;
+}
+
+.main-body, .cont-top {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Topbar */
+.cont-top {
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  background-color: white;
+  border-bottom-left-radius: 5px;
+}
+
+.cont-div {
+  margin: auto;
+  height: auto;
+  line-height: 100%;
+  display: flex;
+  flex: wrap;
+}
+
+.border-line {
+  height: 24px;
+  width: 1px;
+  background-color: gray;
+  display: inline-block;
+  margin: auto 10px;
+}
+
+.cont-div p {
+  margin: auto;
+  cursor: default;
+}
+
+.local-video {
+  background-color: gray;
+  width: 71px;
+  height: 40px;
+
+}
+
+.sidebar-toggle {
+  position: relative;
+  right: 0;
+  display: inline-block;
+  margin: auto;
+}
+
+/* -------Video------- */
+.vid-body {
+  padding: 0.5%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.v-cntr, .v-cntr-a {
+  position: relative;
+}
+
+.clr-fix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.v-cntr {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.vid-ratio {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%;
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* -------Sidebar------- */
+#img-home {
+  width: 40px;
+  height: 40px;
+}
+
+.closebtn {
+  display: block;
+}
+
+.closebtn {
+  position: relative;
+  width: 0;
+  top: 5px;
+  left: 10px;
+  font-size: 30px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+}
+
+.open-nav {
+  width: 250px;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+/* SideBar-Content */
+@font-face {
+  font-family: 'digital-7';
+  src: url('../fonts/digital-7.ttf');
+}
+
+.cont {
+  background-color: gray;
+  margin: 10px auto;
+  width: 80%;
+  height: 150px;
+  text-align: center;
+  padding: 10px;
+}
+
+.cont p {
+  cursor: default;
+}
+
+.data {
+  height: 80%;
+}
+
+.data p {
+  display: inline-block;
+  vertical-align: text-top;
+  font-family: 'digital-7', sans-serif;
+  font-size: 100px;
+  transform: translateY(-15%);
+}
+
+.label p {
+  font-size: 20px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.patient-form {
+  padding: 5px;
+  background-color: lightgray;
+  margin: 20px 0;
+}
+
+.patient-form button {
+  margin: 5px;
+}
+
+/* Bottom-Side */
+.vid-button {
+  margin: auto;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.vid-button span {
+  border-radius: 10rem;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .vid-body {
+    width: 160vmin;
+    height: 100vmin;
+  }
+
+  #top-bar {
+    width: 100vw;
+    height: 8vh;
+  }
+
+  #video {
+    flex: 0 0 auto;
+    width: 80vw;
+    height: 92vh;
+    background-color: gray;
+  }
+
+  #side-bar {
+    flex: 0 0 auto;
+    width: 20vw;
+    height: 92vh;
+    background-color: yellow;
+  }
+
+  .sidebar-toggle, .closebtn {
+    display: none;
+  }
+
+  .sidenav {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-aspect-ratio: 16/9) and (min-width: 990px) {
+  .v-cntr-a {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
