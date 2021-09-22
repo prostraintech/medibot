@@ -89,7 +89,6 @@ function getGamepadState() {
 
 }
 
-}
 
 
 function buttonPressed(b) {
