@@ -1,4 +1,4 @@
-const refreshRate = 250;
+const refreshRate = 50;
 var pressed = 0;
 var cnow = 0;
 var clast = 1;
@@ -41,13 +41,13 @@ function getGamepadState() {
     connect();
   }
 
-  else if (buttonPressed(gamepad.buttons[3])) {
+  if (buttonPressed(gamepad.buttons[3])) {
     socket.emit('connect', 0);
     disconnect();
   }
 
   
-  else if (buttonPressed(gamepad.buttons[1])) {
+  if (buttonPressed(gamepad.buttons[1])) {
     cnow = 0;
     console.log('DMS pressed');
     if (yAxis < -0.1 && yAxis > -0.6 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)  //straight slow
@@ -81,17 +81,17 @@ function getGamepadState() {
   }
 
 
-  else {
-    //console.log("i'm here: " + cnow);
-    if (cnow != clast)
-    {
+  // else {
+  //   //console.log("i'm here: " + cnow);
+  //   if (cnow != clast)
+  //   {
       
-      cnow = clast;
+  //     cnow = clast;
       
-    socket.emit('navi', 8);
+  //   socket.emit('navi', 8);
     
-    }
-  }
+  //   }
+  // }
 
 }
 
