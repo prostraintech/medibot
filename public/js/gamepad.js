@@ -41,13 +41,13 @@ function getGamepadState() {
     connect();
   }
 
-  if (buttonPressed(gamepad.buttons[3])) {
+  else if (buttonPressed(gamepad.buttons[3])) {
     socket.emit('connect', 0);
     disconnect();
   }
 
   
-  if (buttonPressed(gamepad.buttons[0])) {
+  else if (buttonPressed(gamepad.buttons[0])) {
     cnow = 0;
     console.log('DMS pressed');
     if (yAxis < -0.1 && yAxis > -0.6 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)  //straight slow
@@ -82,7 +82,10 @@ function getGamepadState() {
 
   }
 
+  else {
+
     socket.emit('navi', 5);
+  }
 
 
 }
