@@ -47,30 +47,36 @@ function getGamepadState() {
   }
 
   
-  if (buttonPressed(gamepad.buttons[1])) {
+  else if (buttonPressed(gamepad.buttons[1])) {
     cnow = 0;
+    console.log('DMS pressed');
     if (yAxis < -0.1 && yAxis > -0.6 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)  //straight slow
     {
       socket.emit('navi', 1);
+      console.log('forward - 1');
     }
 
     else if (yAxis > 0.1 && pointTurnAxis < 0.8 && pointTurnAxis > -0.8)  //reverse slow
     {
       socket.emit('navi', 2);
+      console.log('reverse - 1');
     }
 
     else if (pointTurnAxis > 0.8)       //rotate right
     {
       socket.emit('navi', 3);
+      console.log('right - 3');
     }
 
     else if (pointTurnAxis < -0.8)       //rotate left
     {
       socket.emit('navi', 4);
+      console.log('left - 4');
     }
 
     else {
       socket.emit('navi', 5);
+      console.log('stop - 5');
     }
   }
 
