@@ -70,13 +70,10 @@ function getGamepadState() {
     }
 
     else {
-      socket.emit('navi', 8);
+      socket.emit('navi', 5);
     }
   }
 
-  else if (buttonPressed(gamepad.buttons[0])) {
-    socket.emit('navi', 9);
-  }
 
   else {
     //console.log("i'm here: " + cnow);
