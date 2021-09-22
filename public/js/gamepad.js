@@ -81,17 +81,17 @@ function getGamepadState() {
   }
 
 
-  // else {
-  //   //console.log("i'm here: " + cnow);
-  //   if (cnow != clast)
-  //   {
+  else {
+    //console.log("i'm here: " + cnow);
+    if (cnow != clast)
+    {
       
-  //     cnow = clast;
+      cnow = clast;
       
-  //   socket.emit('navi', 8);
+    socket.emit('navi', 5);
     
-  //   }
-  // }
+    }
+  }
 
 }
 
