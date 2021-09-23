@@ -1,14 +1,15 @@
 {
   "name": "medibot",
   "version": "1.0.0",
-  "description": "",
+  "description": "v4-base",
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
     "pm2": "^4.4.1",
-    "serialport": "^9.0.1",
+    "serialport": "^9.2.1",
     "shelljs": "^0.8.4",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "socketio": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
