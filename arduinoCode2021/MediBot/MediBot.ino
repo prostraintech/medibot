@@ -1,6 +1,9 @@
+#include <Esplora.h>
+
 int joystick, movement;
 
-int CS_STT = 42, CS_STP = 41, CS_FWD = 40, CS_RVR = 32, CS_RGT = 31, CS_LFT = 30;           // Digital Input Console
+int CS_STT = 42, CS_STP = 41, CS_FWD = 40, CS_RVR = 32, CS_RGT = 31, CS_LFT = 30; // Digital Input Console
+int PAN_D1 = 24 ; int PAN_D2 = 23; int TILT_D1 = 22; int TILT_D2 = 2;
 
 int LH_D2 = 28, LH_D3 = 27, RH_D2 = 26, RH_D3 = 25, LH_D1 = 3, RH_D1 = 4;
 int ESTOP = 39, BRAKE = 29, SW_SEL = 38;
@@ -30,6 +33,8 @@ void setup() {
   pinMode(CS_RVR, INPUT);pinMode(CS_RGT, INPUT);pinMode(CS_LFT, INPUT);
   digitalWrite(CS_STT, HIGH); digitalWrite(CS_STP, HIGH); digitalWrite(CS_FWD, HIGH);
   digitalWrite(CS_RVR, HIGH); digitalWrite(CS_RGT, HIGH); digitalWrite(CS_LFT, HIGH); 
+
+  pinMode(PAN_D1,OUTPUT);pinMode(PAN_D2,OUTPUT);pinMode(TILT_D1,OUTPUT);pinMode(TILT_D2,OUTPUT);
   
   pinMode(LH_D2,OUTPUT);pinMode(LH_D3,OUTPUT);
   pinMode(RH_D2,OUTPUT);pinMode(RH_D3,OUTPUT);
@@ -47,6 +52,8 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(43), Lidar_out1, CHANGE);
   attachInterrupt(digitalPinToInterrupt(42), Lidar_out2, CHANGE);
   attachInterrupt(digitalPinToInterrupt(41), Lidar_out3, CHANGE);
+
+  attachInterrupt(digitalPinToInterrupt(ESTOP),EMG_STOP, CHANGE);
   
 }
 
@@ -61,7 +68,7 @@ void loop() {
        motor(movement);
     }
 
-    motor(5); // stop motor
+    motor(10); // stop motor
   }
 
   while (digitalRead(SW_SEL) == 1)  // rescue mode
@@ -93,11 +100,39 @@ void loop() {
       movement = 5;
       motor(movement);
     }
+    
+    else if(digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move pan to the left
+      movement = 6;
+      motor(movement);
+    }
+
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move pan to the right
+      movement = 7;
+      motor(movement);
+    }
+
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move Tilt Up
+      movement = 8;
+      motor(movement);
+    }
+    
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move Tilt down
+      movement = 9;
+      motor(movement);
+    }
   
     else
     {
       //Stop all motors
-      movement = 6;
+      movement = 10;
       motor(movement);
     }
   }
@@ -142,4 +177,15 @@ void Lidar_out3() {
   { 
     lid_3 = 0;  // if object not detected
   }
+}
+
+void EMG_STOP(){
+
+    digitalWrite(LED_R_LH,254);digitalWrite(LED_R_RH,254);
+    digitalWrite(LED_G_LH,0);digitalWrite(LED_G_RH,0);
+    digitalWrite(LED_B_LH,0);digitalWrite(LED_B_RH,0);
+    
+    digitalWrite(LH_D2,LOW);
+    digitalWrite(RH_D2,LOW);
+
 }

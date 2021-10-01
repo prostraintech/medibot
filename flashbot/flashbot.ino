@@ -1,11 +1,22 @@
-int joystick;
+#include <Esplora.h>
 
-int LH_D2 = 28 ; int LH_D3 = 27 ; int RH_D2 = 26 ; int RH_D3 = 25; 
-int LH_D1 = 3; int RH_D1 = 4;
-//int ESTOP =39; int BRAKE = 29;
+int joystick, movement;
 
-int LED_R_LH = 7 ; int LED_G_LH = 8 ; int LED_B_LH = 9 ;
-int LED_R_RH = 10 ; int LED_G_RH = 11 ; int LED_B_RH = 12 ; //Digital Output (PWM)
+int CS_STT = 42, CS_STP = 41, CS_FWD = 40, CS_RVR = 32, CS_RGT = 31, CS_LFT = 30; // Digital Input Console
+int PAN_D1 = 24 ; int PAN_D2 = 23; int TILT_D1 = 22; int TILT_D2 = 2;
+
+int LH_D2 = 28, LH_D3 = 27, RH_D2 = 26, RH_D3 = 25, LH_D1 = 3, RH_D1 = 4;
+int ESTOP = 39, BRAKE = 29, SW_SEL = 38;
+
+int LED_R_LH = 7, LED_G_LH = 8, LED_B_LH = 9 ;
+int LED_R_RH = 10, LED_G_RH = 11, LED_B_RH = 12 ; //Digital Output (PWM)
+
+const int LSR_out1 = 49;                  // Lidar STOP zone
+const int LSR_out2 = 48;                  // Lidar SLOW zone
+const int LSR_out3 = 47;                  // Lidar FREE zone
+volatile unsigned int lid_1 = 0;          // to store lidar 1 value
+volatile unsigned int lid_2 = 0;          // to store lidar 2 value
+volatile unsigned int lid_3 = 0;          // to store lidar 3 value
 
 
 #define ESTOP 39 
@@ -15,8 +26,15 @@ void setup() {
   // put your setup code here, to run once:
 
   Serial.begin(9600);
-//  pinMode(BRAKE,OUTPUT);
-//  attachInterrupt(digitalPinToInterrupt(ESTOP),EMG_STOP, HIGH);
+  pinMode(BRAKE,OUTPUT);pinMode(SW_SEL, INPUT);
+  digitalWrite(SW_SEL, HIGH);
+
+  pinMode(CS_STT, INPUT);pinMode(CS_STP, INPUT);pinMode(CS_FWD, INPUT);
+  pinMode(CS_RVR, INPUT);pinMode(CS_RGT, INPUT);pinMode(CS_LFT, INPUT);
+  digitalWrite(CS_STT, HIGH); digitalWrite(CS_STP, HIGH); digitalWrite(CS_FWD, HIGH);
+  digitalWrite(CS_RVR, HIGH); digitalWrite(CS_RGT, HIGH); digitalWrite(CS_LFT, HIGH); 
+
+  pinMode(PAN_D1,OUTPUT);pinMode(PAN_D2,OUTPUT);pinMode(TILT_D1,OUTPUT);pinMode(TILT_D2,OUTPUT);
   
   pinMode(LH_D2,OUTPUT);pinMode(LH_D3,OUTPUT);
   pinMode(RH_D2,OUTPUT);pinMode(RH_D3,OUTPUT);
@@ -28,129 +46,146 @@ void setup() {
 
   pinMode(LED_R_LH,OUTPUT);pinMode(LED_G_LH,OUTPUT);pinMode(LED_B_LH,OUTPUT);
   pinMode(LED_R_RH,OUTPUT);pinMode(LED_G_RH,OUTPUT);pinMode(LED_B_RH,OUTPUT);
+
+  pinMode(LSR_out1, INPUT);pinMode(LSR_out2, INPUT);pinMode(LSR_out3, INPUT);
+  digitalWrite(LSR_out1, HIGH);digitalWrite(LSR_out2, HIGH);digitalWrite(LSR_out3, HIGH);
+  attachInterrupt(digitalPinToInterrupt(43), Lidar_out1, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(42), Lidar_out2, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(41), Lidar_out3, CHANGE);
+
+  attachInterrupt(digitalPinToInterrupt(ESTOP),EMG_STOP, CHANGE);
   
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-  while (Serial.available()>0)
+  while (digitalRead(SW_SEL) == 0)  // remote mode
   {
-    joystick = Serial.parseInt();
-
-
-    if (joystick == 1)  // forward
+    while (Serial.available()>0)
     {
-      digitalWrite(RH_D2,HIGH);
-      digitalWrite(LH_D2,HIGH);
-      digitalWrite(RH_D3,LOW);
-      digitalWrite(LH_D3,LOW);
-      analogWrite(RH_D1,125);
-      analogWrite(LH_D1,125);
-      Serial.println("forward");
-
-      digitalWrite(LED_R_LH,0);
-      digitalWrite(LED_G_LH,0);
-      digitalWrite(LED_B_LH,254);
-      digitalWrite(LED_R_RH,0);
-      digitalWrite(LED_G_RH,0);
-      digitalWrite(LED_B_RH,254);
+       movement = Serial.parseInt();
+       motor(movement);
     }
 
-    else if(joystick == 2)  // reverse
-    {
-      digitalWrite(RH_D2,HIGH);
-      digitalWrite(LH_D2,HIGH);
-      digitalWrite(RH_D3,HIGH);
-      digitalWrite(LH_D3,HIGH);
-      analogWrite(RH_D1,90);
-      analogWrite(LH_D1,90);
-      Serial.println("reverse");
-
-      digitalWrite(LED_R_LH,0);
-      digitalWrite(LED_G_LH,0);
-      digitalWrite(LED_B_LH,254);
-      digitalWrite(LED_R_RH,0);
-      digitalWrite(LED_G_RH,0);
-      digitalWrite(LED_B_RH,254);
-    }
-
-    else if(joystick == 3)  // right
-    {
-      digitalWrite(RH_D2,HIGH);
-      digitalWrite(LH_D2,HIGH);
-      digitalWrite(RH_D3,HIGH);
-      digitalWrite(LH_D3,LOW);
-      analogWrite(RH_D1,90);
-      analogWrite(LH_D1,90);
-      Serial.println("right");
-
-      digitalWrite(LED_R_LH,0);
-      digitalWrite(LED_G_LH,0);
-      digitalWrite(LED_B_LH,254);
-      digitalWrite(LED_R_RH,0);
-      digitalWrite(LED_G_RH,0);
-      digitalWrite(LED_B_RH,254);
-    }
-
-    else if(joystick == 4)  // left
-    {
-      digitalWrite(RH_D2,HIGH);
-      digitalWrite(LH_D2,HIGH);
-      digitalWrite(RH_D3,LOW);
-      digitalWrite(LH_D3,HIGH);
-      analogWrite(RH_D1,90);
-      analogWrite(LH_D1,90);
-      Serial.println("left");
-
-      digitalWrite(LED_R_LH,0);
-      digitalWrite(LED_G_LH,0);
-      digitalWrite(LED_B_LH,254);
-      digitalWrite(LED_R_RH,0);
-      digitalWrite(LED_G_RH,0);
-      digitalWrite(LED_B_RH,254);
-    } 
-    
-    else 
-    {
-    //Stop all motors
-    digitalWrite(LH_D2,LOW);
-    digitalWrite(RH_D2,LOW);
-    analogWrite(RH_D1,25);
-    analogWrite(LH_D1,25);
-    Serial.println("stop");
-
-    digitalWrite(LED_R_LH,254);
-    digitalWrite(LED_G_LH,254);
-    digitalWrite(LED_B_LH,254);
-    digitalWrite(LED_R_RH,254);
-    digitalWrite(LED_G_RH,254);
-    digitalWrite(LED_B_RH,254);
-    }
-
+    motor(10); // stop motor
   }
 
-  // default stop without instruction from joystick
-  analogWrite(RH_D1,25);analogWrite(LH_D1,25);
-  digitalWrite(RH_D2,LOW);
-  digitalWrite(LH_D2,LOW);
-  Serial.println("stop");
+  while (digitalRead(SW_SEL) == 1)  // rescue mode
+  {
+    if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1 ) 
+    {
+      //Move forward
+      movement = 1;
+      motor(movement);
+    }
+
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
+    {
+      //move reverse
+      movement = 3;
+      motor(movement);    
+    }
+    
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
+    {
+      //Move differential to the right
+      movement = 4;
+      motor(movement);  
+    }
+    
+    else if(digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
+    {
+      //Move differential to the left
+      movement = 5;
+      motor(movement);
+    }
+    
+    else if(digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move pan to the left
+      movement = 6;
+      motor(movement);
+    }
+
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move pan to the right
+      movement = 7;
+      motor(movement);
+    }
+
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move Tilt Up
+      movement = 8;
+      motor(movement);
+    }
+    
+    else if(digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
+    {
+      //Move Tilt down
+      movement = 9;
+      motor(movement);
+    }
+  
+    else
+    {
+      //Stop all motors
+      movement = 10;
+      motor(movement);
+    }
+  }
 
   delay(1);
 }
 
-//void EMG_STOP()
-//{
-//
-//    digitalWrite(LED_R_LH,254);
-//    digitalWrite(LED_G_LH,0);
-//    digitalWrite(LED_B_LH,0);
-//    digitalWrite(LED_R_RH,254);
-//    digitalWrite(LED_G_RH,0);
-//    digitalWrite(LED_B_RH,0);
-//
-//    digitalWrite(LH_D2,LOW);
-//    digitalWrite(RH_D2,LOW);
-//
-//
-//}
+void Lidar_out1() {
+  if (digitalRead(LSR_out1))
+  { 
+    lid_1 = 1;  // if object detected
+    lidar(lid_1);
+  }
+
+  else
+  { 
+    lid_1 = 0;  // if object not detected
+  }
+}
+
+void Lidar_out2() {
+  if (digitalRead(LSR_out1))
+  { 
+    lid_2 = 1;  // if object detected
+    lidar(lid_2);
+  }
+
+  else
+  { 
+    lid_2 = 0;  // if object not detected
+  }
+}
+
+void Lidar_out3() {
+  if (digitalRead(LSR_out1))
+  { 
+    lid_3 = 1;  // if object detected
+    lidar(lid_3);
+  }
+
+  else
+  { 
+    lid_3 = 0;  // if object not detected
+  }
+}
+
+void EMG_STOP(){
+
+    digitalWrite(LED_R_LH,254);digitalWrite(LED_R_RH,254);
+    digitalWrite(LED_G_LH,0);digitalWrite(LED_G_RH,0);
+    digitalWrite(LED_B_LH,0);digitalWrite(LED_B_RH,0);
+    
+    digitalWrite(LH_D2,LOW);
+    digitalWrite(RH_D2,LOW);
+
+}
