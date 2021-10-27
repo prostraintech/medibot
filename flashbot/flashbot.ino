@@ -46,7 +46,7 @@ void setup() {
 void loop() {
 
   
-    digitalWrite(LED_R_LH,254);
+    digitalWrite(LED_R_LH,255);
     digitalWrite(LED_G_LH,0);
     digitalWrite(LED_B_LH,0);
     digitalWrite(LED_R_RH,254);
