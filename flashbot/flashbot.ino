@@ -1,17 +1,17 @@
-int IR1 = 4;  int IR2 = 5; int IR3 = 6;  int LH_A1 = 2;  int LH_A2 = 3;  int RH_A1 = 0;   int RH_A2 = 1;         //Analog Input
-int LH_ENA = 46; int LH_ENB = 45;int RH_ENA = 44;int RH_ENB = 43;                                                //Digital input Encoder
-int CS_STT = 42; int CS_STP = 41; int CS_FWD = 40; int CS_RVR = 32;  int CS_RGT = 31; int CS_LFT = 30;           // Digital Input Console
-int LSR_Out1 = 49; int LSR_Out2 = 48; int LSR_Out3 = 47;                                                         // Digital Input Lidar
-int ESTOP =39; int SW_Mode = 38; int PAN_EN= 37; int TILT_EN = 36;                                               // Digital Input General
+int IR1 = A0;  int IR2 = A1; int IR3 = A2;  int SON1 = A3;  int PAN_EN = A4;  int TILT_EN = A5;   int CSENS = A6;         //Analog Input
+int LH_ENA = 44; int LH_ENB = 43;int RH_ENA = 46;int RH_ENB = 45;                                                //Digital input Encoder
+int CS_STT = 66; int CS_STP = 67; int CS_FWD = 68; int CS_RVR = 69;  int CS_RGT = 49; int CS_LFT = 48;           // Digital Input Console
+int LSR_Out1 = 42; int LSR_Out2 = 41; int LSR_Out3 = 40;                                                         // Digital Input Lidar
+int ESTOP =39; int SW_Mode = 38;                                                                                 // Digital Input General
 
-int BRAKE = 29; int LH_D2 = 28 ; int LH_D3 = 27 ; int RH_D2 = 26 ; int RH_D3 = 25; int PAN_D1 = 24 ; int PAN_D2 = 23; int TILT_D1 = 22; int TILT_D2 = 2;   // Digital Output
-int LH_D1 = 3; int RH_D1 = 4;  int LED_R_LH = 7 ; int LED_G_LH = 8 ; int LED_B_LH = 9 ;int LED_R_RH = 10 ; int LED_G_RH = 11 ; int LED_B_RH = 12 ; //Digital Output (PWM)
+int BRAKE = 29; int LH_D2 = 26 ; int LH_D3 = 25 ; int RH_D2 = 28 ; int RH_D3 = 27; int PAN_D1 = 24 ; int PAN_D2 = 23; int TILT_D1 = 2; int TILT_D2 = 3;   // Digital Output
+int LH_D1 = 5; int RH_D1 = 4;  int LED_R_LH = 10 ; int LED_G_LH = 11 ; int LED_B_LH = 12 ;int LED_R_RH = 7 ; int LED_G_RH = 8 ; int LED_B_RH = 9 ; //Digital Output (PWM)
 
 
-#define LH_ENA 66
-#define LH_ENB 67
-#define RH_ENA 68
-#define RH_ENB 69
+#define LH_ENA 44
+#define LH_ENB 43
+#define RH_ENA 46
+#define RH_ENB 45
 #define ESTOP 39    
 
 int count = 0;
@@ -21,59 +21,61 @@ volatile unsigned int encoder_LH = 0;
 
 void setup() {
   
-  pinMode(LH_ENA, INPUT);  pinMode(LH_ENA, INPUT);pinMode(RH_ENA, INPUT);pinMode(RH_ENB, INPUT);
-  digitalWrite(LH_ENA, HIGH); digitalWrite(LH_ENB, HIGH); digitalWrite(RH_ENA, HIGH);digitalWrite(RH_ENB, HIGH); 
+  pinMode(LH_ENA, INPUT);  pinMode(LH_ENB, INPUT);pinMode(RH_ENA, INPUT);pinMode(RH_ENB, INPUT);pinMode(SW_Mode,INPUT);pinMode(ESTOP,INPUT);
+  digitalWrite(LH_ENA, HIGH); digitalWrite(LH_ENB, HIGH); digitalWrite(RH_ENA, HIGH);digitalWrite(RH_ENB, HIGH); digitalWrite(SW_Mode,HIGH);digitalWrite(ESTOP,HIGH);
 
   pinMode(CS_STT, INPUT);  pinMode(CS_STP, INPUT);pinMode(CS_FWD, INPUT);pinMode(CS_RVR, INPUT);pinMode(CS_RGT, INPUT);pinMode(CS_LFT, INPUT);
   digitalWrite(CS_STT, HIGH); digitalWrite(CS_STP, HIGH); digitalWrite(CS_FWD, HIGH);digitalWrite(CS_RVR, HIGH); digitalWrite(CS_RGT, HIGH); digitalWrite(CS_LFT, HIGH); 
 
   
-  attachInterrupt(0, Encoder_RH_ENA, CHANGE);  //Pin 2
-  attachInterrupt(5, Encoder_LH_ENA, CHANGE);  //Pin 18
+  attachInterrupt(digitalPinToInterrupt(RH_ENA), Encoder_RH_ENA, CHANGE);  //Pin 2
+  attachInterrupt(digitalPinToInterrupt(LH_ENA), Encoder_LH_ENA, CHANGE);  //Pin 18
   attachInterrupt(digitalPinToInterrupt(ESTOP),EMG_STOP, HIGH);
   
   pinMode(BRAKE,OUTPUT);pinMode(LH_D2,OUTPUT);pinMode(LH_D3,OUTPUT);pinMode(RH_D2,OUTPUT);pinMode(RH_D3,OUTPUT);pinMode(PAN_D1,OUTPUT);pinMode(PAN_D2,OUTPUT);pinMode(TILT_D1,OUTPUT);pinMode(TILT_D2,OUTPUT);
   pinMode(LH_D1, OUTPUT);pinMode(RH_D1, OUTPUT);pinMode(LED_R_LH,OUTPUT);pinMode(LED_G_LH,OUTPUT);pinMode(LED_B_LH,OUTPUT);pinMode(LED_R_RH,OUTPUT);pinMode(LED_G_RH,OUTPUT);pinMode(LED_B_RH,OUTPUT);
 
-  analogWrite(RH_D1,25);analogWrite(LH_D1,25);digitalWrite(BRAKE,HIGH);
+  analogWrite(RH_D1,229);analogWrite(LH_D1,229);digitalWrite(BRAKE,HIGH);
  
   Serial.begin(9600);
-  digitalWrite(RH_D2,HIGH);digitalWrite(RH_D3,HIGH);
-  digitalWrite(LH_D2,HIGH);digitalWrite(LH_D3,HIGH);
+  digitalWrite(RH_D2,LOW);digitalWrite(RH_D3,LOW);
+  digitalWrite(LH_D2,LOW);digitalWrite(LH_D3,LOW);
 }
 
 
 void loop() {
 
   
-    digitalWrite(LED_R_LH,0);
-    digitalWrite(LED_G_LH,0);
-    digitalWrite(LED_B_LH,254);
-    digitalWrite(LED_R_RH,0);
-    digitalWrite(LED_G_RH,0);
-    digitalWrite(LED_B_RH,254);
+    digitalWrite(LED_R_LH,254);
+    digitalWrite(LED_G_LH,254);
+    digitalWrite(LED_B_LH,0);
+    digitalWrite(LED_R_RH,254);
+    digitalWrite(LED_G_RH,254);
+    digitalWrite(LED_B_RH,0);
   
+ 
 
-  
+//
+ Serial.print("Mode  = " ); Serial.print(digitalRead(SW_Mode)); Serial.print("\n ");
+ Serial.print("Estop  = " ); Serial.print(digitalRead(ESTOP)); Serial.print("\n ");
+//  
+ Serial.print("CS Start,STOP,LH,RH,FWD,REV = " );Serial.print(digitalRead(CS_STT));Serial.print(digitalRead(CS_STP));Serial.print(digitalRead(CS_LFT));
+ Serial.print(digitalRead(CS_RGT));Serial.print(digitalRead(CS_FWD));Serial.print(digitalRead(CS_RVR));Serial.print("\n");
+
+ int Analog_IR1 = analogRead(IR1); int Analog_IR2 = analogRead(IR2); int Analog_IR3 = analogRead(IR3);
+ Serial.print("IR(FWD) = "); Serial.print(Analog_IR1);  Serial.print("\n "); Serial.print("IR (RH) = "); Serial.print(Analog_IR2);  Serial.print("\n ");
+ Serial.print("IR (LH) = "); Serial.print(Analog_IR3);  Serial.print("\n "); Serial.print("SON = "); Serial.print(analogRead(SON1));  Serial.print("\n ");
+ Serial.print("CSense = "); Serial.print(analogRead(CSENS));Serial.print("\n");
+ Serial.print("Pan Angle = "); Serial.print(analogRead(PAN_EN));Serial.print("\n");
+ Serial.print("Tilt Angle = "); Serial.print(analogRead(TILT_EN));Serial.print("\n");
+
+ Serial.print("Encoder_LH = "); Serial.print(encoder_LH);  Serial.print("\n ");
+ Serial.print("Encoder_RH = "); Serial.print(encoder_RH);  Serial.print("\n ");
+ Serial.print("Count "); Serial.print(count);  Serial.print("\n ");
 
  
-//  int Analog_IR1 = analogRead(IR1); int Analog_IR2 = analogRead(IR2); int Analog_IR3 = analogRead(IR3);
-//
-//  Serial.print("Mode  = " ); Serial.print(digitalRead(SW_Mode)); Serial.print("\n ");
-//  Serial.print("Estop  = " ); Serial.print(digitalRead(ESTOP)); Serial.print("\n ");
-//  
-//  Serial.print("CS Start,STOP,LH,RH,FWD,REV = " );Serial.print(digitalRead(CS_STT));Serial.print(digitalRead(CS_STP));Serial.print(digitalRead(CS_LFT));
-//  Serial.print(digitalRead(CS_RGT));Serial.print(digitalRead(CS_FWD));Serial.print(digitalRead(CS_RVR));Serial.print("\n");
-//   
-//  Serial.print("IR1 = "); Serial.print(Analog_IR1);  Serial.print("\t ");
-//  Serial.print("IR2 = "); Serial.print(Analog_IR2);  Serial.print("\n ");
-//  Serial.print("IR3 = "); Serial.print(Analog_IR3);  Serial.print("\n ");
-//  Serial.print("IR3 = "); Serial.print(Analog_IR3);  Serial.print("\n ");
-//  Serial.print("Encoder_LH = "); Serial.print(encoder_LH);  Serial.print("\n ");
-//  Serial.print("Encoder_RH = "); Serial.print(encoder_RH);  Serial.print("\n ");
-//  Serial.print("Count "); Serial.print(count);  Serial.print("\n ");
 
- if(digitalRead(SW_Mode) == 1){    // 0 = Rescue
+ if(digitalRead(SW_Mode) == 0){    // 0 = Rescue
 
  // Serial.print("Rescue Mode");Serial.print("\n");
 
@@ -82,9 +84,9 @@ void loop() {
    digitalWrite(RH_D2,HIGH);
    digitalWrite(LH_D2,HIGH);
    digitalWrite(RH_D3,LOW);
-   digitalWrite(LH_D3,LOW);
-   analogWrite(RH_D1,125);
-   analogWrite(LH_D1,125);
+   digitalWrite(LH_D3,HIGH);
+   analogWrite(RH_D1,200);
+   analogWrite(LH_D1,200);
  //  Serial.print("Move Forward");Serial.print("\n");
   // analogWrite(LED_FRT,100);
   }
@@ -93,9 +95,9 @@ void loop() {
    digitalWrite(RH_D2,HIGH);
    digitalWrite(LH_D2,HIGH);
    digitalWrite(RH_D3,HIGH);
-   digitalWrite(LH_D3,HIGH);
-   analogWrite(RH_D1,90);
-   analogWrite(LH_D1,90);
+   digitalWrite(LH_D3,LOW);
+   analogWrite(RH_D1,200);
+   analogWrite(LH_D1,200);
   // analogWrite(LED_FRT,100);
 //  Serial.print("Move Reverse");Serial.print("\n");
     
@@ -105,9 +107,9 @@ void loop() {
    digitalWrite(RH_D2,HIGH);
    digitalWrite(LH_D2,HIGH);
    digitalWrite(RH_D3,HIGH);
-   digitalWrite(LH_D3,LOW);
-   analogWrite(RH_D1,90);
-   analogWrite(LH_D1,90);
+   digitalWrite(LH_D3,HIGH);
+   analogWrite(RH_D1,200);
+   analogWrite(LH_D1,200);
  //  analogWrite(LED_FRT,100);
 // Serial.print("Move Left");Serial.print("\n");
     
@@ -117,9 +119,9 @@ void loop() {
    digitalWrite(RH_D2,HIGH);
    digitalWrite(LH_D2,HIGH);
    digitalWrite(RH_D3,LOW);
-   digitalWrite(LH_D3,HIGH);
-   analogWrite(RH_D1,90);
-   analogWrite(LH_D1,90);
+   digitalWrite(LH_D3,LOW);
+   analogWrite(RH_D1,200);
+   analogWrite(LH_D1,200);
  //  analogWrite(LED_FRT,100);
 // Serial.print("Move Right");Serial.print("\n");
     
@@ -127,7 +129,7 @@ void loop() {
   else if(digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1){
     //Move pan to the left
     digitalWrite(PAN_D1,HIGH);
-    digitalWrite(PAN_D2,HIGH);
+    digitalWrite(PAN_D2,HIGH);  
     digitalWrite(TILT_D1, LOW);
   //  Serial.print("Pan Left");Serial.print("\n");
     
@@ -161,20 +163,22 @@ void loop() {
     digitalWrite(PAN_D1,LOW);
     digitalWrite(LH_D2,LOW);
     digitalWrite(RH_D2,LOW);
-    analogWrite(RH_D1,25);
-    analogWrite(LH_D1,25);
+    analogWrite(RH_D1,229);
+    analogWrite(LH_D1,229);
     
   }
   
   
  }
 
-//  Serial.println("");
- // Serial.println("");
+ 
+
+ Serial.println("");
+ Serial.println("");
       
 
   
-  delay(1);        // delay in between reads for stability
+  delay(100);        // delay in between reads for stability
   count ++;
 
 }  
@@ -200,11 +204,11 @@ void Encoder_RH_ENA()
 { 
   if(digitalRead(RH_ENB) == digitalRead(RH_ENA) )
   {
-    encoder_RH = encoder_RH + 1; //you may need to redefine positive and negative directions
+    encoder_RH = encoder_RH - 1; //you may need to redefine positive and negative directions
   }
   else
   {
-    encoder_RH = encoder_RH - 1;
+    encoder_RH = encoder_RH + 1;
   }
 }
 
