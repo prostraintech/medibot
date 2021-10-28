@@ -85,7 +85,8 @@ void loop() {
  Serial.print("Encoder_LH = "); Serial.println(encoder_LH);
  Serial.print("Encoder_RH = "); Serial.println(encoder_RH);
  Serial.print("Count "); Serial.println(count);
- 
+ Serial.println("");
+   
    //prevent overflow
    if (debug_speed == 15000)
    debug_speed=0;
@@ -188,11 +189,6 @@ void loop() {
   
   
  }
-
- 
-
- Serial.println("");
- Serial.println("");
       
 
   
