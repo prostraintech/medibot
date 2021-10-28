@@ -134,8 +134,8 @@ void loop()
 +  LED   +
 +--------*/
 
-  set_led_right(0, 255, 0); //RGB
-  set_led_left(0, 255, 0);  //RGB
+  set_led_right(255, 255, 0); //RGB
+  set_led_left(255, 255, 0);  //RGB
 
 /*-------+
 + DEBUG  +
