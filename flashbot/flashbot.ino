@@ -130,10 +130,16 @@ void set_led_left(int r, int g, int b)
 void loop()
 {
 
+/*-------+
++  LED   +
++--------*/
+
   set_led_right(0, 255, 0); //RGB
   set_led_left(0, 255, 0);  //RGB
 
-  //Debugging Info
+/*-------+
++ DEBUG  +
++--------*/
 
   debug_speed++;
   if (debug_speed % 20 == 0)
@@ -196,7 +202,7 @@ void loop()
 
 /*-------+
 + RESCUE +
-+-------*/
++--------*/
 
   if (digitalRead(SW_Mode) == 0)
   { // 0 = Rescue
@@ -244,7 +250,7 @@ void loop()
 
 /*-------+
 + REMOTE +
-+-------*/
++--------*/
 
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
@@ -262,6 +268,10 @@ void loop()
   count++;
 }
 
+/*-------+
++ E_STOP +
++-------*/
+
 void EMG_STOP()
 {
 
@@ -273,6 +283,10 @@ void EMG_STOP()
   digitalWrite(LH_D2, LOW);
   digitalWrite(RH_D2, LOW);
 }
+
+/*--------+
++ ENCODER +
++---------*/
 
 void Encoder_RH_ENA()
 {
@@ -297,6 +311,10 @@ void Encoder_LH_ENA()
     encoder_LH = encoder_LH + 1;
   }
 }
+
+/*-----------------+
++ MOTOR, PAN, TILT +
++------------------*/
 
 void move(int order)
 {
