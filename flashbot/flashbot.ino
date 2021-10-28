@@ -1,8 +1,8 @@
 int IR1 = A0;  int IR2 = A1; int IR3 = A2;  int SON1 = A3;  int PAN_EN = A4;  int TILT_EN = A5;   int CSENS = A6;         //Analog Input
-int LH_ENA = 44; int LH_ENB = 43;int RH_ENA = 46;int RH_ENB = 45;                                                //Digital input Encoder
-int CS_STT = 66; int CS_STP = 67; int CS_FWD = 68; int CS_RVR = 69;  int CS_RGT = 49; int CS_LFT = 48;           // Digital Input Console
-int LSR_Out1 = 42; int LSR_Out2 = 41; int LSR_Out3 = 40;                                                         // Digital Input Lidar
-int ESTOP =39; int SW_Mode = 38;                                                                                 // Digital Input General
+int LH_ENA = 44; int LH_ENB = 43;int RH_ENA = 46;int RH_ENB = 45;                                                         //Digital input Encoder
+int CS_STT = 66; int CS_STP = 67; int CS_FWD = 68; int CS_RVR = 69;  int CS_RGT = 49; int CS_LFT = 48;                    // Digital Input Console
+int LSR_Out1 = 42; int LSR_Out2 = 41; int LSR_Out3 = 40;                                                                  // Digital Input Lidar
+int ESTOP =39; int SW_Mode = 38;                                                                                          // Digital Input General
 
 int BRAKE = 29; int LH_D2 = 26 ; int LH_D3 = 25 ; int RH_D2 = 28 ; int RH_D3 = 27; int PAN_D1 = 24 ; int PAN_D2 = 23; int TILT_D1 = 2; int TILT_D2 = 3;   // Digital Output
 int LH_D1 = 5; int RH_D1 = 4;  int LED_R_LH = 10 ; int LED_G_LH = 11 ; int LED_B_LH = 12 ;int LED_R_RH = 7 ; int LED_G_RH = 8 ; int LED_B_RH = 9 ; //Digital Output (PWM)
@@ -15,6 +15,7 @@ int LH_D1 = 5; int RH_D1 = 4;  int LED_R_LH = 10 ; int LED_G_LH = 11 ; int LED_B
 #define ESTOP 39    
 
 int count = 0;
+int debug_speed = 0;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
@@ -61,24 +62,34 @@ void loop() {
     set_led_right(0, 255, 0); //RGB
     set_led_left(0, 255, 0);  //RGB
   
-    
-//Debugging Info
+ //Debugging Info
+  
+ debug_speed++;
+ if (debug_speed % 10 = 0)
+ {
+
  Serial.print("Mode  = " ); Serial.println(digitalRead(SW_Mode));
  Serial.print("Estop  = " ); Serial.println(digitalRead(ESTOP));
-//  
+  
  Serial.print("CS Start,STOP,LH,RH,FWD,REV = " );Serial.print(digitalRead(CS_STT));Serial.print(digitalRead(CS_STP));Serial.print(digitalRead(CS_LFT));
  Serial.print(digitalRead(CS_RGT));Serial.print(digitalRead(CS_FWD));Serial.println(digitalRead(CS_RVR));
 
  int Analog_IR1 = analogRead(IR1); int Analog_IR2 = analogRead(IR2); int Analog_IR3 = analogRead(IR3);
- /*Serial.print("IR(FWD) = "); Serial.print(Analog_IR1);  Serial.print("\n "); Serial.print("IR (RH) = "); Serial.print(Analog_IR2);  Serial.print("\n ");
- Serial.print("IR (LH) = "); Serial.print(Analog_IR3);  Serial.print("\n "); Serial.print("SON = "); Serial.print(analogRead(SON1));  Serial.print("\n ");
- Serial.print("CSense = "); Serial.print(analogRead(CSENS));Serial.print("\n");
- Serial.print("Pan Angle = "); Serial.print(analogRead(PAN_EN));Serial.print("\n");
- Serial.print("Tilt Angle = "); Serial.print(analogRead(TILT_EN));Serial.print("\n");
-
- Serial.print("Encoder_LH = "); Serial.print(encoder_LH);  Serial.print("\n ");
- Serial.print("Encoder_RH = "); Serial.print(encoder_RH);  Serial.print("\n ");
- Serial.print("Count "); Serial.print(count);  Serial.print("\n ");*/
+ Serial.print("IR(FWD) = "); Serial.println(Analog_IR1);
+ Serial.print("IR (RH) = "); Serial.println(Analog_IR2);
+ Serial.print("IR (LH) = "); Serial.println(Analog_IR3);
+ Serial.print("SON = "); Serial.println(analogRead(SON1));
+ Serial.print("CSense = "); Serial.println(analogRead(CSENS));
+ Serial.print("Pan Angle = "); Serial.println(analogRead(PAN_EN));
+ Serial.print("Tilt Angle = "); Serial.println(analogRead(TILT_EN));
+ Serial.print("Encoder_LH = "); Serial.println(encoder_LH);
+ Serial.print("Encoder_RH = "); Serial.println(encoder_RH);
+ Serial.print("Count "); Serial.println(count);
+ 
+   //prevent overflow
+   if (debug_speed == 15000)
+   debug_speed=0;
+ }
 
  
 
