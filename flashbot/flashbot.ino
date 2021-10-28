@@ -48,7 +48,7 @@ void loop() {
   
     digitalWrite(LED_R_LH,0);
     digitalWrite(LED_G_LH,0);
-    digitalWrite(LED_B_LH,254);
+    digitalWrite(LED_B_LH,255);
     digitalWrite(LED_R_RH,254);
     digitalWrite(LED_G_RH,254);
     digitalWrite(LED_B_RH,0);
