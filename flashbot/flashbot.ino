@@ -62,12 +62,6 @@ void loop() {
     set_led_left(0, 255, 0);  //RGB
   
     
-    digitalWrite(LED_R_RH,254);
-    digitalWrite(LED_G_RH,254);
-    digitalWrite(LED_B_RH,0);
-  
- 
-
 //
  Serial.print("Mode  = " ); Serial.print(digitalRead(SW_Mode)); Serial.print("\n ");
  Serial.print("Estop  = " ); Serial.print(digitalRead(ESTOP)); Serial.print("\n ");
