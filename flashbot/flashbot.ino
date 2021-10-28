@@ -42,13 +42,26 @@ void setup() {
   digitalWrite(LH_D2,LOW);digitalWrite(LH_D3,LOW);
 }
 
+void set_led_right(int r, int g, int b)
+{
+    digitalWrite(LED_R_LH,255-r);
+    digitalWrite(LED_G_LH,255-g);
+    digitalWrite(LED_B_LH,255-b);
+}
+
+void set_led_left(int r, int g, int b)
+{
+    digitalWrite(LED_R_LH,255-r);
+    digitalWrite(LED_G_LH,255-g);
+    digitalWrite(LED_B_LH,255-b);
+}
 
 void loop() {
 
+    set_led_right(0, 255, 0); //RGB
+    set_led_left(0, 255, 0);  //RGB
   
-    digitalWrite(LED_R_LH,0);
-    digitalWrite(LED_G_LH,255);
-    digitalWrite(LED_B_LH,255); //red
+    
     digitalWrite(LED_R_RH,254);
     digitalWrite(LED_G_RH,254);
     digitalWrite(LED_B_RH,0);
