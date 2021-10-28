@@ -84,15 +84,13 @@ void loop() {
  Serial.print("Tilt Angle = "); Serial.println(analogRead(TILT_EN));
  Serial.print("Encoder_LH = "); Serial.println(encoder_LH);
  Serial.print("Encoder_RH = "); Serial.println(encoder_RH);
- Serial.print("Count "); Serial.println(count);
+ //Serial.print("Count "); Serial.println(count);
  Serial.println("");
    
    //prevent overflow
    if (debug_speed == 15000)
    debug_speed=0;
  }
-
- 
 
  if(digitalRead(SW_Mode) == 0){    // 0 = Rescue
 
@@ -186,12 +184,9 @@ void loop() {
     analogWrite(LH_D1,229);
     
   }
-  
-  
- }
-      
 
-  
+ }
+ 
   delay(100);        // delay in between reads for stability
   count ++;
 
