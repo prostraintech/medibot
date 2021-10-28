@@ -65,7 +65,7 @@ void loop() {
  //Debugging Info
   
  debug_speed++;
- if (debug_speed % 10 = 0)
+ if (debug_speed % 20 == 0)
  {
 
  Serial.print("Mode  = " ); Serial.println(digitalRead(SW_Mode));
