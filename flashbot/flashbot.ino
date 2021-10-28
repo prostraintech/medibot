@@ -62,15 +62,15 @@ void loop() {
     set_led_left(0, 255, 0);  //RGB
   
     
-//
- Serial.print("Mode  = " ); Serial.print(digitalRead(SW_Mode)); Serial.print("\n ");
- Serial.print("Estop  = " ); Serial.print(digitalRead(ESTOP)); Serial.print("\n ");
+//Debugging Info
+ Serial.print("Mode  = " ); Serial.println(digitalRead(SW_Mode));
+ Serial.print("Estop  = " ); Serial.println(digitalRead(ESTOP));
 //  
  Serial.print("CS Start,STOP,LH,RH,FWD,REV = " );Serial.print(digitalRead(CS_STT));Serial.print(digitalRead(CS_STP));Serial.print(digitalRead(CS_LFT));
- Serial.print(digitalRead(CS_RGT));Serial.print(digitalRead(CS_FWD));Serial.print(digitalRead(CS_RVR));Serial.print("\n");
+ Serial.print(digitalRead(CS_RGT));Serial.print(digitalRead(CS_FWD));Serial.println(digitalRead(CS_RVR));
 
  int Analog_IR1 = analogRead(IR1); int Analog_IR2 = analogRead(IR2); int Analog_IR3 = analogRead(IR3);
- Serial.print("IR(FWD) = "); Serial.print(Analog_IR1);  Serial.print("\n "); Serial.print("IR (RH) = "); Serial.print(Analog_IR2);  Serial.print("\n ");
+ /*Serial.print("IR(FWD) = "); Serial.print(Analog_IR1);  Serial.print("\n "); Serial.print("IR (RH) = "); Serial.print(Analog_IR2);  Serial.print("\n ");
  Serial.print("IR (LH) = "); Serial.print(Analog_IR3);  Serial.print("\n "); Serial.print("SON = "); Serial.print(analogRead(SON1));  Serial.print("\n ");
  Serial.print("CSense = "); Serial.print(analogRead(CSENS));Serial.print("\n");
  Serial.print("Pan Angle = "); Serial.print(analogRead(PAN_EN));Serial.print("\n");
@@ -78,7 +78,7 @@ void loop() {
 
  Serial.print("Encoder_LH = "); Serial.print(encoder_LH);  Serial.print("\n ");
  Serial.print("Encoder_RH = "); Serial.print(encoder_RH);  Serial.print("\n ");
- Serial.print("Count "); Serial.print(count);  Serial.print("\n ");
+ Serial.print("Count "); Serial.print(count);  Serial.print("\n ");*/
 
  
 
