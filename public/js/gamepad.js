@@ -79,8 +79,8 @@ function getGamepadState() {
     }
 
     else {
-      socket.emit('navi', 5);
-      console.log('stop - 5');
+      socket.emit('navi', 0);
+      console.log('stop - 0');
     }
     console.log('DMS pressed');
 
