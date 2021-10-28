@@ -122,9 +122,9 @@ void set_led_right(int r, int g, int b)
 
 void set_led_left(int r, int g, int b)
 {
-  digitalWrite(LED_R_LH, 255 - r);
-  digitalWrite(LED_G_LH, 255 - g);
-  digitalWrite(LED_B_LH, 255 - b);
+  digitalWrite(LED_R_RH, 255 - r);
+  digitalWrite(LED_G_RH, 255 - g);
+  digitalWrite(LED_B_RH, 255 - b);
 }
 
 void loop()
