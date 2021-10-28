@@ -195,12 +195,8 @@ void loop() {
 
 void EMG_STOP(){
 
-    digitalWrite(LED_R_LH,254);
-    digitalWrite(LED_G_LH,0);
-    digitalWrite(LED_B_LH,0);
-    digitalWrite(LED_R_RH,254);
-    digitalWrite(LED_G_RH,0);
-    digitalWrite(LED_B_RH,0);
+    set_led_right(255, 0, 0); //RGB - Red
+    set_led_left(255, 0, 0);  //RGB - Red
 
     digitalWrite(TILT_D1,LOW);
     digitalWrite(PAN_D1,LOW);
