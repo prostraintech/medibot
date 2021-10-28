@@ -80,7 +80,7 @@ function getGamepadState() {
     }
 
     //pan left
-    else if (pan_tilt > 0.5)
+    else if (pan_tilt > 0.5 && pan_tilt < 1)
     {
     socket.emit('navi', 5);
     console.log('pan left - 5');
@@ -92,7 +92,7 @@ function getGamepadState() {
       socket.emit('navi', 6);
       console.log('pan right - 6');
     }
-    
+
     //tilt up
     if (pan_tilt <  -0.5)
     {
@@ -106,9 +106,6 @@ function getGamepadState() {
       socket.emit('navi', 8);
       console.log('tilt down - 8');
     }
-
-   
-
 
     else {
       socket.emit('navi', 0);
