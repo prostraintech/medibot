@@ -264,6 +264,7 @@ void loop()
        if(digitalRead(LSR_Out3)==1){
          Serial.println("obstacle detected"); 
          }
+         else Serial.println("no obstacle");
        move(order);
     }
   }
