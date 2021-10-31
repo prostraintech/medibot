@@ -264,15 +264,17 @@ void loop()
   
     // Serial.println("Remote Mode");
 
-    while (Serial.available() > 0)
-    {
-       int order = Serial.parseInt();
-
-       if(digitalRead(LSR_Out3)==1 ){   // This consider object detected. Inlcude reset joystick 
+    if(digitalRead(LSR_Out3)==1 ){   // This consider object detected. Inlcude reset joystick 
          Serial.println("obstacle detected"); 
          order =0;
          }
          else Serial.println("no obstacle");
+
+    while (Serial.available() > 0)
+    {
+       int order = Serial.parseInt();
+
+       
 
       //heartbeat =0;
 
