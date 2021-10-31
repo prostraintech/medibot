@@ -254,6 +254,10 @@ void loop()
 
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
+  if(digitalRead(LSR_Out3)==1){
+         Serial.println("obstacle detected"); 
+         }
+         else Serial.println("no obstacle");
 
     // Serial.println("Remote Mode");
 
@@ -261,10 +265,7 @@ void loop()
     {
        int order = Serial.parseInt();
 
-       if(digitalRead(LSR_Out3)==1){
-         Serial.println("obstacle detected"); 
-         }
-         else Serial.println("no obstacle");
+       
        move(order);
     }
   }
