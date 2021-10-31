@@ -260,6 +260,10 @@ void loop()
     while (Serial.available() > 0)
     {
        int order = Serial.parseInt();
+
+       if(digitalRead(LSR_Out3)==1){
+         Serial.println("obstacle detected"); 
+         }
        move(order);
     }
   }
