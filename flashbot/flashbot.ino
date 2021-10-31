@@ -266,7 +266,7 @@ void loop()
 
     if(digitalRead(LSR_Out3)==1 ){   // This consider object detected. Inlcude reset joystick 
          Serial.println("obstacle detected"); 
-         order =0;
+         //order =0;
          }
          else Serial.println("no obstacle");
 
