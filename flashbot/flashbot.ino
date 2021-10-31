@@ -254,7 +254,7 @@ void loop()
 
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
-  if(digitalRead(LSR_Out3)==1 || digitalRead(LSR_Out2)==1 || digitalRead(LSR_Out1)==1){
+  if(digitalRead(LSR_Out3)==1){
          Serial.println("obstacle detected"); 
          }
          else Serial.println("no obstacle");
