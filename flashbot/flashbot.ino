@@ -48,6 +48,7 @@ int LED_B_RH = 9; //Digital Output (PWM)
 int count = 0;
 int debug_speed = 0;
 int heartbeat =0;
+int reset_order =0;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
@@ -263,24 +264,25 @@ void loop()
   { // 1 = Remote
   
     // Serial.println("Remote Mode");
-    if(digitalRead(LSR_Out3)==1 ){   // This consider object detected. Inlcude reset joystick 
-         Serial.println("obstacle3 detected"); 
-        // order =0;
-         }
-         else Serial.println("no obstacle3");
-
-     if(digitalRead(LSR_Out2)==1 ){   // This consider object detected. Inlcude reset joystick 
-         Serial.println("obstacle2 detected"); 
-        // order =0;
-         }
-         else Serial.println("no obstacle2");
+    
     
     while (Serial.available() > 0)
     {
-       int order = Serial.parseInt();
-       
+      int order = Serial.parseInt();
 
-
+      if(digitalRead(LSR_Out2)==1 && order!=9 && reset_order ==0){   // This consider object detected. Inlcude reset joystick 
+         order =0;        
+         }
+      else if (digitalRead(LSR_Out2)==1 && order ==9 && reset_order ==0){
+        reset_order = 1;
+         }
+      else if(digitalRead(LSR_Out3)){
+        order =0;
+      }
+            if (digitalRead(LSR_Out2==0)){
+       reset_order =0;
+      }
+      
       heartbeat =0;
       move(order);
      
