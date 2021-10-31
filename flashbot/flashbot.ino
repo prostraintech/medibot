@@ -47,6 +47,7 @@ int LED_B_RH = 9; //Digital Output (PWM)
 
 int count = 0;
 int debug_speed = 0;
+int heartbeat =0;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
@@ -60,12 +61,18 @@ void setup()
   pinMode(RH_ENB, INPUT);
   pinMode(SW_Mode, INPUT);
   pinMode(ESTOP, INPUT);
+  pinMode(LSR_Out1,INPUT);
+  pinMode(LSR_Out2,INPUT);
+  pinMode(LSR_Out3,INPUT);
   digitalWrite(LH_ENA, HIGH);
   digitalWrite(LH_ENB, HIGH);
   digitalWrite(RH_ENA, HIGH);
   digitalWrite(RH_ENB, HIGH);
   digitalWrite(SW_Mode, HIGH);
   digitalWrite(ESTOP, HIGH);
+  digitalWrite(LSR_Out1,HIGH);
+  digitalWrite(LSR_Out2,HIGH);
+  digitalWrite(LSR_Out3,HIGH);
 
   pinMode(CS_STT, INPUT);
   pinMode(CS_STP, INPUT);
@@ -254,20 +261,29 @@ void loop()
 
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
-  if(digitalRead(LSR_Out3)==1){
-         Serial.println("obstacle detected"); 
-         }
-         else Serial.println("no obstacle");
-
+  
     // Serial.println("Remote Mode");
 
     while (Serial.available() > 0)
     {
        int order = Serial.parseInt();
 
-       
+       if(digitalRead(LSR_Out3)==1 ){   // This consider object detected. Inlcude reset joystick 
+         Serial.println("obstacle detected"); 
+         order =0;
+         }
+         else Serial.println("no obstacle");
+
+      //heartbeat =0;
+
+     // if (heartbeat>300){
+      //  order = 0;
+     // }
+
        move(order);
     }
+
+    heartbeat ++;
   }
 
   delay(100); // delay in between reads for stability
