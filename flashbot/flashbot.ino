@@ -247,7 +247,12 @@ void loop()
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
-      move(8);
+      if(analogRead(TILT_EN) < 550 && analogRead(TILT_EN) > 455)
+      {
+        move(8);
+      }
+
+      
     }
 
     else
@@ -269,6 +274,16 @@ void loop()
     while (Serial.available() > 0)
     {
       int order = Serial.parseInt();
+
+      if (order == 8)
+      {
+         if(analogRead(TILT_EN) > 550 || analogRead(TILT_EN) < 455)
+           order = -1;
+         else{
+           order = 8;
+         }
+
+      }
 
       if(digitalRead(LSR_Out2)==1 && order!=9 && reset_order ==0){   // This consider object detected. Inlcude reset joystick 
          order =0;        
