@@ -245,6 +245,18 @@ void loop()
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
 
+      if(analogRead(TILT_EN) < 455) 
+      {
+        permitup = 0;
+        permitdown = 1;
+      
+      }
+
+      else
+      {
+        permitup = 1;
+      }
+
       if (permitup == 1)
       {
         move(7);
@@ -252,6 +264,18 @@ void loop()
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
+
+       if(analogRead(TILT_EN) > 550) 
+      {
+        permitdown = 0;
+        permitup = 1;
+      
+      }
+
+      else
+      {
+        permitdown = 1;
+      }
 
       if (permitdown == 1)
       {
@@ -266,29 +290,9 @@ void loop()
       move(0);
     }
 
-    if(analogRead(TILT_EN) < 455) 
-      {
-        permitup = 0;
-        permitdown = 1;
+    
+
       
-      }
-
-      else
-      {
-        permitup = 1;
-      }
-
-       if(analogRead(TILT_EN) > 550) 
-      {
-        permitdown = 0;
-        permitup = 1;
-      
-      }
-
-      else
-      {
-        permitdown = 1;
-      }
   }
 
 /*-------+
