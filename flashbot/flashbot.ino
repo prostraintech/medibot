@@ -44,6 +44,7 @@ int LED_B_RH = 9; //Digital Output (PWM)
 #define RH_ENA 46
 #define RH_ENB 45
 #define ESTOP 39
+#define MOTOR_SPEED 148
 
 int count = 0;
 int debug_speed = 0;
@@ -431,8 +432,8 @@ void move(int order)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, LOW);
       digitalWrite(LH_D3, HIGH);
-      analogWrite(RH_D1, 200);
-      analogWrite(LH_D1, 200);
+      analogWrite(RH_D1, MOTOR_SPEED);
+      analogWrite(LH_D1, MOTOR_SPEED);
     //  Serial.print("Move Forward");Serial.print("\n");
     // analogWrite(LED_FRT,100);
   }
@@ -444,8 +445,8 @@ void move(int order)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, HIGH);
       digitalWrite(LH_D3, LOW);
-      analogWrite(RH_D1, 200);
-      analogWrite(LH_D1, 200);
+      analogWrite(RH_D1, MOTOR_SPEED);
+      analogWrite(LH_D1, MOTOR_SPEED);
       // analogWrite(LED_FRT,100);
       //  Serial.print("Move Reverse");Serial.print("\n");
   }
@@ -457,8 +458,8 @@ void move(int order)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, HIGH);
       digitalWrite(LH_D3, HIGH);
-      analogWrite(RH_D1, 200);
-      analogWrite(LH_D1, 200);
+      analogWrite(RH_D1, MOTOR_SPEED);
+      analogWrite(LH_D1, MOTOR_SPEED);
       //  analogWrite(LED_FRT,100);
       // Serial.print("Move Left");Serial.print("\n");
   }
@@ -470,8 +471,8 @@ void move(int order)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, LOW);
       digitalWrite(LH_D3, LOW);
-      analogWrite(RH_D1, 200);
-      analogWrite(LH_D1, 200);
+      analogWrite(RH_D1, MOTOR_SPEED);
+      analogWrite(LH_D1, MOTOR_SPEED);
       //  analogWrite(LED_FRT,100);
       // Serial.print("Move Right");Serial.print("\n");   
   }
