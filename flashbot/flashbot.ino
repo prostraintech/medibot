@@ -306,7 +306,7 @@ void loop()
   { // 1 = Remote
   
     // Serial.println("Remote Mode");
-    if (digitalRead(LSR_Out2==0)){
+    if (digitalRead(LSR_Out2==1)){
        //reset_order =0;
        Serial.println("obstacle detected");
       }
