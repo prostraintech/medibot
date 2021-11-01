@@ -306,7 +306,13 @@ void loop()
   { // 1 = Remote
   
     // Serial.println("Remote Mode");
-    
+    if (digitalRead(LSR_Out2==0)){
+       //reset_order =0;
+       Serial.println("obstacle detected");
+      }
+      else{
+        Serial.println("no obstacle");
+      }
     
     while (Serial.available() > 0)
     {
@@ -351,6 +357,10 @@ void loop()
       }
             if (digitalRead(LSR_Out2==0)){
        reset_order =0;
+       Serial.println("obstacle detected");
+      }
+      else{
+        Serial.println("no obstacle");
       }
       
       heartbeat =0;
