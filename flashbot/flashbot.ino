@@ -244,11 +244,6 @@ void loop()
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
-      if(analogRead(TILT_EN) < 455)
-      {
-        permit = 0;
-      
-      }
 
       if (permit == 1)
       {
@@ -271,7 +266,7 @@ void loop()
       move(0);
     }
 
-    if(analogread(TILT_EN) < 455) 
+    if(analogRead(TILT_EN) < 455) 
       {
         permitup = 0;
         permitdown = 1;
@@ -283,7 +278,7 @@ void loop()
         permitup = 1;
       }
 
-       if(analogread(TILT_EN) > 550) 
+       if(analogRead(TILT_EN) > 550) 
       {
         permitdown = 0;
         permitup = 1;
