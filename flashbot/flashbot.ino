@@ -310,7 +310,8 @@ void loop()
        //reset_order =0;
        Serial.println("obstacle detected");
       }
-      else{
+      else if (digitalRead(LSR_Out2)== 0)
+      {
         Serial.println("no obstacle");
       }
     
@@ -359,9 +360,7 @@ void loop()
        reset_order =0;
        Serial.println("obstacle detected");
       }
-      else{
-        Serial.println("no obstacle");
-      }
+      
       
       heartbeat =0;
       move(order);
