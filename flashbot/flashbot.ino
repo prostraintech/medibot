@@ -245,7 +245,7 @@ void loop()
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
 
-      if (permit == 1)
+      if (permitup == 1)
       {
         move(7);
       }
@@ -253,7 +253,7 @@ void loop()
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
 
-      if (permit == 1)
+      if (permitdown == 1)
       {
         move(8);
       }
