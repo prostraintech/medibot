@@ -306,14 +306,14 @@ void loop()
   { // 1 = Remote
   
     // Serial.println("Remote Mode");
-    if (digitalRead(LSR_Out2) ==1 ){
+    /*if (digitalRead(LSR_Out2) ==1 ){
        //reset_order =0;
        Serial.println("obstacle detected");
       }
       else if (digitalRead(LSR_Out2) == 0)
       {
         Serial.println("no obstacle");
-      }
+      }*/
     
     while (Serial.available() > 0)
     {
@@ -347,21 +347,26 @@ void loop()
 
 
 
-      /*if(digitalRead(LSR_Out2)==1 && order!=9 && reset_order ==0){   // This consider object detected. Inlcude reset joystick 
+      if(digitalRead(LSR_Out2)==1 && order!=9 && reset_order ==0){   // This consider object detected. Inlcude reset joystick 
          order =0;        
          }
       else if (digitalRead(LSR_Out2)==1 && order ==9 && reset_order ==0){
         reset_order = 1;
          }
-      else if(digitalRead(LSR_Out3)){
+      else if(digitalRead(LSR_Out3) == 1){
         order =0;
       }
-            if (digitalRead(LSR_Out2==0)){
+      if (digitalRead(LSR_Out2)==0){
        reset_order =0;
-       Serial.println("obstacle detected");
+       Serial.println("no obstacle");
+      }
+
+       else if (digitalRead(LSR_Out2) == 1)
+      {
+        Serial.println("yes obstacle");
       }
       
-      */
+      
       heartbeat =0;
       move(order);
      
