@@ -249,7 +249,7 @@ void loop()
 
       if(analogRead(TILT_EN) < 455) 
       {
-        Serial.println("here");
+       // Serial.println("here");
         permitup = 0;
         permitdown = 1;
       
@@ -280,10 +280,9 @@ void loop()
         permitdown = 1;
       }
 
-      if (permitdown == 1)
-      {
+    
         move(8);
-      }
+    
 
       
     }
@@ -312,15 +311,33 @@ void loop()
     {
       int order = Serial.parseInt();
 
-      if (order == 8)
+    
+       if(analogRead(TILT_EN) > 550) 
       {
-         if(analogRead(TILT_EN) > 550 || analogRead(TILT_EN) < 455)
-           order = -1;
-         else{
-           order = 8;
-         }
-
+        permitdown = 0;
+        permitup = 1;
+      
       }
+
+      else
+      {
+        permitdown = 1;
+      }
+
+      if(analogRead(TILT_EN) < 455) 
+      {
+       // Serial.println("here");
+        permitup = 0;
+        permitdown = 1;
+      
+      }
+
+      else
+      {
+        permitup = 1;
+      }
+
+
 
       if(digitalRead(LSR_Out2)==1 && order!=9 && reset_order ==0){   // This consider object detected. Inlcude reset joystick 
          order =0;        
@@ -489,6 +506,7 @@ void move(int order)
 
     else if (permitup == 0)
     {
+      //Move tilt up stop
       digitalWrite(TILT_D1, LOW);
       digitalWrite(TILT_D2, HIGH);
       digitalWrite(PAN_D1, LOW);
@@ -498,11 +516,23 @@ void move(int order)
 
     else if (order == 8)
   {
+      if (permitdown == 1)
+    {
       //Move tilt down
       digitalWrite(TILT_D1, HIGH);
       digitalWrite(TILT_D2, LOW);
       digitalWrite(PAN_D1, LOW);
       //  Serial.print("Tilt Down");Serial.print("\n");
+    }
+
+    else if (permitdown == 0)
+    {
+      //Move tilt down stop
+      digitalWrite(TILT_D1, LOW);
+      digitalWrite(TILT_D2, LOW);
+      digitalWrite(PAN_D1, LOW);
+      //  Serial.print("Tilt Down");Serial.print("\n");
+    }
   }
 
   else if (order == 0)
