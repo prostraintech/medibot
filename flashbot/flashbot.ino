@@ -274,6 +274,7 @@ void loop()
     if(analogread(TILT_EN) < 455) 
       {
         permitup = 0;
+        permitdown = 1;
       
       }
 
@@ -285,6 +286,7 @@ void loop()
        if(analogread(TILT_EN) > 550) 
       {
         permitdown = 0;
+        permitup = 1;
       
       }
 
