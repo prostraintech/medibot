@@ -50,6 +50,12 @@ function getGamepadState() {
   
   else if (buttonPressed(gamepad.buttons[0])) {
     cnow = 0;
+
+    if (buttonPressed(gamepad.buttons[1]))
+    {
+      socket.emit('navi', 9);
+      console.log('reset - 9');
+    }
    
     //forward
     if (yAxis < -0.1 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)
