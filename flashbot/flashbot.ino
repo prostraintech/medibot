@@ -260,10 +260,8 @@ void loop()
         permitup = 1;
       }
 
-      if (permitup != 0)
-      {
         move(7);
-      }
+    
 
       
     }
@@ -481,10 +479,20 @@ void move(int order)
 
   else if (order == 7)
   {
+    if (permitup == 1)
+    {
       //Move tilt up
       digitalWrite(TILT_D1, HIGH);
       digitalWrite(TILT_D2, HIGH);
       digitalWrite(PAN_D1, LOW);
+    }
+
+    else if (permitup == 0)
+    {
+      digitalWrite(TILT_D1, LOW);
+      digitalWrite(TILT_D2, HIGH);
+      digitalWrite(PAN_D1, LOW);
+    }
       //  Serial.print("Tilt Up");Serial.print("\n");
   }
 
