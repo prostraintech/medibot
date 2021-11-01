@@ -245,8 +245,11 @@ void loop()
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
 
+      Serial.print("permitup ="); Serial.println(permitup);
+      
       if(analogRead(TILT_EN) < 455) 
       {
+        Serial.println("here");
         permitup = 0;
         permitdown = 1;
       
