@@ -49,6 +49,7 @@ int count = 0;
 int debug_speed = 0;
 int heartbeat =0;
 int reset_order =0;
+int permitup=0, permitdown=0;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
@@ -243,14 +244,21 @@ void loop()
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
-      if(analogRead(TILT_EN) > 455 && analogRead(TILT_EN) <= 550)
+      if(analogRead(TILT_EN) < 455)
       {
-      move(7);
+        permit = 0;
+      
+      }
+
+      if (permit == 1)
+      {
+        move(7);
       }
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
-      if(analogRead(TILT_EN) > 455 && analogRead(TILT_EN) <= 550) 
+
+      if (permit == 1)
       {
         move(8);
       }
@@ -262,6 +270,28 @@ void loop()
     {
       move(0);
     }
+
+    if(analogread(TILT_EN) < 455) 
+      {
+        permitup = 0;
+      
+      }
+
+      else
+      {
+        permitup = 1;
+      }
+
+       if(analogread(TILT_EN) > 550) 
+      {
+        permitdown = 0;
+      
+      }
+
+      else
+      {
+        permitdown = 1;
+      }
   }
 
 /*-------+
