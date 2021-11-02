@@ -45,6 +45,7 @@ int LED_B_RH = 9; //Digital Output (PWM)
 #define RH_ENB 45
 #define ESTOP 39
 #define MOTOR_SPEED 148
+#define DIFF_MOTOR_SPEED 190
 
 int count = 0;
 int debug_speed = 0;
@@ -248,7 +249,7 @@ void loop()
       {
         permitleft = 1;
       }
-      
+
       move(5);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
@@ -523,8 +524,8 @@ void move(int order)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, HIGH);
       digitalWrite(LH_D3, HIGH);
-      analogWrite(RH_D1, MOTOR_SPEED);
-      analogWrite(LH_D1, MOTOR_SPEED);
+      analogWrite(RH_D1, DIFF_MOTOR_SPEED);
+      analogWrite(LH_D1, DIFF_MOTOR_SPEED);
       //  analogWrite(LED_FRT,100);
       // Serial.print("Move Left");Serial.print("\n");
   }
@@ -536,8 +537,8 @@ void move(int order)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, LOW);
       digitalWrite(LH_D3, LOW);
-      analogWrite(RH_D1, MOTOR_SPEED);
-      analogWrite(LH_D1, MOTOR_SPEED);
+      analogWrite(RH_D1, DIFF_MOTOR_SPEED);
+      analogWrite(LH_D1, DIFF_MOTOR_SPEED);
       //  analogWrite(LED_FRT,100);
       // Serial.print("Move Right");Serial.print("\n");   
   }
