@@ -44,7 +44,7 @@ int LED_B_RH = 9; //Digital Output (PWM)
 #define RH_ENA 46
 #define RH_ENB 45
 #define ESTOP 39
-#define MOTOR_SPEED 140 //400RPM
+#define MOTOR_SPEED 50 //400RPM
 #define DIFF_MOTOR_SPEED 200 //150RPM
 
 int count = 0;
