@@ -50,7 +50,7 @@ int count = 0;
 int debug_speed = 0;
 int heartbeat =0;
 int reset_order =0;
-int permitup=0, permitdown=0;
+int permitup=0, permitdown=0, permitright=0, permitleft=0;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
@@ -237,10 +237,35 @@ void loop()
     }
     else if (digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
     {
+       if(analogRead(PAN_EN) < 350) 
+      {
+        permitleft = 0;
+        permitright = 1;
+      
+      }
+
+      else
+      {
+        permitleft = 1;
+      }
+      
       move(5);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
     {
+      if(analogRead(PAN_EN) > 550) 
+      {
+       // Serial.println("here");
+        permitright = 0;
+        permitleft = 1;
+      
+      }
+
+      else
+      {
+        permitright = 1;
+      }
+
       move(6);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
@@ -343,6 +368,32 @@ void loop()
       else
       {
         permitup = 1;
+      }
+
+      ///for pan limit
+       if(analogRead(PAN_EN) < 350) 
+      {
+        permitleft = 0;
+        permitright = 1;
+      
+      }
+
+      else
+      {
+        permitleft = 1;
+      }
+
+      if(analogRead(PAN_EN) > 550) 
+      {
+       // Serial.println("here");
+        permitright = 0;
+        permitleft = 1;
+      
+      }
+
+      else
+      {
+        permitright = 1;
       }
 
 
@@ -494,19 +545,39 @@ void move(int order)
   else if (order == 5)
   {
       //Move pan to the left
+        if (permitleft == 1)
+    {
       digitalWrite(PAN_D1, HIGH);
       digitalWrite(PAN_D2, HIGH);
       digitalWrite(TILT_D1, LOW);
-      //  Serial.print("Pan Left");Serial.print("\n");   
+      //  Serial.print("Pan Left");Serial.print("\n"); 
+    }
+
+    else if (permitleft== 0)
+    {
+      digitalWrite(PAN_D1, LOW);
+      digitalWrite(PAN_D2, HIGH);
+      digitalWrite(TILT_D1, LOW);
+    }  
   }
 
   else if (order == 6)
   {
       //move pan to the right
+      if (permitright == 1)
+    {
       digitalWrite(PAN_D1, HIGH);
       digitalWrite(PAN_D2, LOW);
       digitalWrite(TILT_D1, LOW);
+    }
       //  Serial.print("Pan Right");Serial.print("\n");
+
+      else if (permitright == 0)
+      {
+      digitalWrite(PAN_D1, LOW);
+      digitalWrite(PAN_D2, LOW);
+      digitalWrite(TILT_D1, LOW);
+      }
   }
 
   else if (order == 7)
