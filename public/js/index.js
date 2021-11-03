@@ -47,25 +47,34 @@ function set_stream (location) {
 
   if (location == 1)
   {
-    constraints = constraints_teleconf;
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia(constraints_teleconf)
+        .then(function (stream) {
+          videol.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+    
+    }
   }
   else if (location == 2)
   {
-    constraints = constraints_navi;
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia(constraints_navi)
+        .then(function (stream) {
+          videol.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+    
+    }
   }
 
   console.log("hi " + location);
 
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then(function (stream) {
-      videol.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
 
-}
 
 }
 
