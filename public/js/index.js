@@ -1,5 +1,6 @@
 var socket = io();
 var el;
+const constraints;
 var elemVid = document.getElementById("remotevideo");
 
 const spo2 = document.getElementById('spo2');
@@ -45,11 +46,11 @@ function set_stream (location) {
 
   if (location == 1)
   {
-    const constraints = constraints_teleconf;
+    constraints = constraints_teleconf;
   }
   else if (location == 2)
   {
-    const constraints = constraints_navi;
+    constraints = constraints_navi;
   }
 
 if (navigator.mediaDevices.getUserMedia) {
