@@ -71,7 +71,7 @@
       </div>
 
       <div class="col-8" style="color:wheat">
-        <video autoplay="true" id="videoElement"></video>
+        <video autoplay muted id="videoElement"></video>
       </div>
     </div>
 
@@ -91,12 +91,17 @@
 <script>
   var videol = document.querySelector("#videoElement");
 
-  const constraints = {
+  const constraints_navi = {
         'audio': {'echoCancellation': true},
         'video': {
-            'deviceId': 'b18c34404595c0cbdb4dd1bcf146b46f709d6357a6a2428910d3b4d17c7f4d5f',
-            'width': {'min': 640},
-            'height': {'min': 480}
+            'deviceId': 'b18c34404595c0cbdb4dd1bcf146b46f709d6357a6a2428910d3b4d17c7f4d5f'
+            }
+        }
+
+        const constraints_teleconf = {
+        'audio': {'echoCancellation': true},
+        'video': {
+            'deviceId': '6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723'
             }
         }
 
