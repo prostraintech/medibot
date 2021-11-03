@@ -49,14 +49,14 @@ function getGamepadState() {
 
   if (buttonPressed(gamepad.buttons[6]))
     {
-      //socket.emit('video_channel', 1);
-      set_stream(1);
+      socket.emit('video_channel', 1);
+      
     }
 
     if (buttonPressed(gamepad.buttons[10]))
     {
-      //socket.emit('video_channel', 1);
-      set_stream(1);
+      socket.emit('video_channel', 2);
+      
     }
 
   
