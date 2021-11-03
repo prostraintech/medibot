@@ -1,6 +1,6 @@
 var socket = io();
 var el;
-const constraints;
+const constraints = {};
 var elemVid = document.getElementById("remotevideo");
 
 const spo2 = document.getElementById('spo2');
