@@ -102,6 +102,7 @@ socket.on('time', (timeString) => {
 
 socket.on('dochannel', (channel) => {
   set_stream(channel);
+  console.log('masuk');
 });
 
 socket.on('resp', berrymedData => {
