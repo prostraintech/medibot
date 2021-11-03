@@ -36,6 +36,16 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Ward: Paediatric || Date: 2/1//2021</span>
+        <div class="select">
+          <label for="videoSource">Video source: </label><select id="videoSource"></select>
+      </div>
+      <div class="select">
+        <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
+    </div>
+    <div class="select">
+      <label for="audioOutput">Audio output destination: </label><select id="audioOutput"></select>
+  </div>
+
       </div>
     </nav>
 
@@ -61,7 +71,7 @@
       </div>
 
       <div class="col-8" style="color:wheat">
-        
+        <video autoplay="true" id="videoElement"></video>
       </div>
     </div>
 
@@ -78,7 +88,39 @@
   </div>
 
 
+<script>
+  var videol = document.querySelector("#videoElement");
 
+  const constraints = {
+        'audio': {'echoCancellation': true},
+        'video': {
+            'deviceId': '9e4cc88f0393f739a3594493bde70d6c22dc20f6e41e4810ef162eff27e3c81f',
+            'width': {'min': 640},
+            'height': {'min': 480}
+            }
+        }
+
+  function getConnectedDevices(type, callback) {
+    navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+            const filtered = devices.filter(device => device.kind === type);
+            callback(filtered);
+        });
+}
+
+getConnectedDevices('videoinput', cameras => console.log('Cameras found', cameras));
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+      videol.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+
+}
+</script>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
@@ -86,8 +128,9 @@
     crossorigin="anonymous"></script>
   <script src="js/index.js"></script>
   <script src="js/webrtc.js"></script>
-  <script src="js/adapter.js"></script>
+  <script src="js/adapter-latest.js"></script>
   <script src="js/gamepad.js"></script>
+
 
 </body>
 
