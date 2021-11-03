@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-var mset = require('./public/js/index.js');
+require('public/js/index.js')();
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
@@ -76,12 +76,12 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('webrtc', vid_channel);
 if(vid_channel == 1)
 {
-  mset.set_stream(1);
+  set_stream(1);
 }
 
 else if (vid_channel == 2)
 {
-  mset.set_stream(2);
+  set_stream(2);
 }
 
   });
