@@ -35,7 +35,7 @@ arduinoSerialPort.on('close', function () {
 });
 
 app.use(express.static('public'));
-app.use(express.static(__dirname + '/js'));
+app.use(express.static(__dirname + '/public/js'));
 // app.use('/css',express.static(__dirname + '/css'));
 // app.use('/webfonts',express.static(__dirname + '/webfonts'));
 // app.use('/vendor',express.static(__dirname + '/vendor'));
