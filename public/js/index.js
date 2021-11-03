@@ -39,8 +39,8 @@ getConnectedDevices('videoinput', cameras => console.log('Cameras found', camera
 
 //frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
 
-module.exports = {
-set_stream: function set_stream (location) {
+
+function set_stream (location) {
   // location
   // 1- teleconf
   // 2- navi
@@ -65,7 +65,6 @@ if (navigator.mediaDevices.getUserMedia) {
 
 }
 
-}
 }
 
 takeBtn.addEventListener('click', () => {
@@ -97,6 +96,10 @@ function getClear() {
 socket.on('time', (timeString) => {
   el = document.getElementById('server-time');
   el.innerHTML = timeString;
+});
+
+socket.on('dochannel', (channel) => {
+  set_stream(channel);
 });
 
 socket.on('resp', berrymedData => {
