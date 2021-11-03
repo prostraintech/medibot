@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-var mset = require('./js/index.js');
+var mset = require('./public/js/index.js');
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
