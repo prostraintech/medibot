@@ -71,20 +71,6 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('webrtc', webrtcdata);
   });
 
-  socket.on('video_channel', (vid_channel) => {
-    //console.log(webrtcdata);
-    socket.broadcast.emit('video_channel', vid_channel);
-if(vid_channel == 1)
-{
-  socket.emit('dochannel',1)
-}
-
-else if (vid_channel == 2)
-{
-  socket.emit('dochannel',2)
-}
-
-  });
 
   socket.on('navi', (status) => {
     socket.emit('navi', status);
