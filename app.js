@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-require('./public/js/index.js')();
+//require('./public/js/index.js')();
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
@@ -36,7 +36,7 @@ arduinoSerialPort.on('close', function () {
 });
 
 app.use(express.static('public'));
-//app.use(express.static('public/js'));
+//app.use(express.static('./public/js'));
 //app.use('',express.static(__dirname + '/css'));
 // app.use('/webfonts',express.static(__dirname + '/webfonts'));
 // app.use('/vendor',express.static(__dirname + '/vendor'));
@@ -76,12 +76,12 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('webrtc', vid_channel);
 if(vid_channel == 1)
 {
-  set_stream(1);
+  socket.emit('dochannel',1)
 }
 
 else if (vid_channel == 2)
 {
-  set_stream(2);
+  socket.emit('dochannel',2)
 }
 
   });
