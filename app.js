@@ -70,7 +70,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('webrtc', webrtcdata);
   });
 
-  socket.on('webrtc', (vid_channel) => {
+  socket.on('video_channel', (vid_channel) => {
     //console.log(webrtcdata);
     socket.broadcast.emit('webrtc', vid_channel);
 if(vid_channel == 1)
