@@ -54,6 +54,8 @@ function set_stream (location) {
     constraints = constraints_navi;
   }
 
+  console.log("hi " + location);
+
 if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia(constraints)
     .then(function (stream) {
