@@ -39,7 +39,8 @@ getConnectedDevices('videoinput', cameras => console.log('Cameras found', camera
 
 //frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
 
-function set_stream (location) {
+module.exports = {
+set_stream: function set_stream (location) {
   // location
   // 1- teleconf
   // 2- navi
@@ -64,6 +65,7 @@ if (navigator.mediaDevices.getUserMedia) {
 
 }
 
+}
 }
 
 takeBtn.addEventListener('click', () => {
