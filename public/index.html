@@ -88,44 +88,6 @@
   </div>
 
 
-<script>
-  var videol = document.querySelector("#videoElement");
-
-  const constraints_navi = {
-        'audio': {'echoCancellation': true},
-        'video': {
-            'deviceId': 'b18c34404595c0cbdb4dd1bcf146b46f709d6357a6a2428910d3b4d17c7f4d5f'
-            }
-        }
-
-        const constraints_teleconf = {
-        'audio': {'echoCancellation': true},
-        'video': {
-            'deviceId': '6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723'
-            }
-        }
-
-  function getConnectedDevices(type, callback) {
-    navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-            const filtered = devices.filter(device => device.kind === type);
-            callback(filtered);
-        });
-}
-
-getConnectedDevices('videoinput', cameras => console.log('Cameras found', cameras));
-
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then(function (stream) {
-      videol.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
-
-}//frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
-</script>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"

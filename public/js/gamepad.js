@@ -56,6 +56,18 @@ function getGamepadState() {
       socket.emit('navi', 9);
       console.log('reset - 9');
     }
+
+    if (buttonPressed(gamepad.buttons[6]))
+    {
+      //socket.emit('video_channel', 1);
+      set_stream(1);
+    }
+
+    if (buttonPressed(gamepad.buttons[10]))
+    {
+      //socket.emit('video_channel', 1);
+      set_stream(1);
+    }
    
     //forward
     if (yAxis < -0.1 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)

@@ -9,6 +9,62 @@ const patientRemark = document.getElementById('remarkInput');
 const resetBtn = document.getElementById('reset');
 const takeBtn = document.getElementById('take');
 
+var videol = document.querySelector("#videoElement");
+
+  const constraints_navi = {
+        'audio': {'echoCancellation': true},
+        'video': {
+            'deviceId': 'b18c34404595c0cbdb4dd1bcf146b46f709d6357a6a2428910d3b4d17c7f4d5f'
+            }
+        }
+
+        const constraints_teleconf = {
+        'audio': {'echoCancellation': true},
+        'video': {
+            'deviceId': '6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723'
+            }
+        }
+
+  function getConnectedDevices(type, callback) {
+    navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+            const filtered = devices.filter(device => device.kind === type);
+            callback(filtered);
+        });
+}
+
+getConnectedDevices('videoinput', cameras => console.log('Cameras found', cameras));
+
+
+//frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
+
+function set_stream (location) {
+  // location
+  // 1- teleconf
+  // 2- navi
+
+  if (location == 1)
+  {
+    const constraints = constraints_teleconf;
+  }
+  else if (location == 2)
+  {
+    const constraints = constraints_navi;
+  }
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+      videol.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+
+}
+
+}
+
 takeBtn.addEventListener('click', () => {
   socket.emit('patientData', {
     name: patientName.value,
