@@ -48,19 +48,19 @@ function getGamepadState() {
   }
 
   else if (buttonPressed(gamepad.buttons[11])) {
-    socket.broadcast.emit('testsock', "chicken");
+    socket.emit('testsock', "chicken");
     
   }
 
   else if (buttonPressed(gamepad.buttons[6]))
     {
-      socket.broadcast.emit('video_channel', 1);
+      socket.emit('video_channel', 1);
       
     }
 
     else if (buttonPressed(gamepad.buttons[10]))
     {
-      socket.broadcast.emit('video_channel', 2);
+      socket.emit('video_channel', 2);
       
     }
 
