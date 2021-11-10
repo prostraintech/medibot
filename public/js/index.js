@@ -3,13 +3,6 @@ var el;
 var constraints = {};
 var elemVid = document.getElementById("remotevideo");
 
-const spo2 = document.getElementById('spo2');
-const pulse = document.getElementById('pulse');
-const patientName = document.getElementById('nameInput');
-const patientRemark = document.getElementById('remarkInput');
-const resetBtn = document.getElementById('reset');
-const takeBtn = document.getElementById('take');
-
 var videol = document.querySelector("#videoElement");
 
   const constraints_navi = {
@@ -78,36 +71,7 @@ function set_stream (location) {
 
 }
 
-takeBtn.addEventListener('click', () => {
-  socket.emit('patientData', {
-    name: patientName.value,
-    remark: patientRemark.value,
-    info: {
-      spo2: spo2.innerHTML,
-      heartRate: pulse.innerHTML
-    }
-  });
 
-  getClear();
-
-  //console.log(patientName.value);
-});
-
-resetBtn.addEventListener('click', () => {
-  getClear(); 
-});
-
-function getClear() {
-  spo2.innerHTML = "--";
-  pulse.innerHTML = "--";
-  patientName.value = "";
-  patientRemark.value = "";
-}
-
-socket.on('time', (timeString) => {
-  el = document.getElementById('server-time');
-  el.innerHTML = timeString;
-});
 
 socket.on('testsock',(msg) => {
 console.log(msg);
@@ -116,11 +80,6 @@ console.log(msg);
 socket.on('video_channel', (channel) => {
   set_stream(channel);
   console.log('masuk');
-});
-
-socket.on('resp', berrymedData => {
-  pulse.innerHTML = berrymedData.pulse_rate;
-  spo2.innerHTML = berrymedData.spo2;
 });
 
 function openNav() {
