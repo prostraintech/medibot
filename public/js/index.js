@@ -109,6 +109,10 @@ socket.on('time', (timeString) => {
   el.innerHTML = timeString;
 });
 
+socket.on('testsock',(msg) => {
+console.log(msg);
+});
+
 socket.on('video_channel', (channel) => {
   set_stream(channel);
   console.log('masuk');
