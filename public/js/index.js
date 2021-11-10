@@ -71,9 +71,7 @@ function set_stream (location) {
 
 }
 
-
-
-socket.on('testsock',(msg) => {
+socket.on('testsock', function(msg) {
 console.log(msg);
 });
 
