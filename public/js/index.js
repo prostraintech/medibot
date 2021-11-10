@@ -74,6 +74,7 @@ function set_stream (location) {
 socket.on('time', (msg) => {
   el = document.getElementById('server-time');
   el.innerHTML = msg;
+  console.log('got time');
 });
 
 socket.on('video_channel', (channel) => {
