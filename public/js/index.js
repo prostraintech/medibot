@@ -71,7 +71,7 @@ function set_stream (location) {
 
 }
 
-socket.on('testsock', msg => {
+socket.on('time', (msg) => {
   el = document.getElementById('server-time');
   el.innerHTML = msg;
 });
