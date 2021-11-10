@@ -71,6 +71,9 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('webrtc', webrtcdata);
   });
 
+  socket.on('testsock', (status) => {
+    socket.emit('testsock', status);
+  });
 
   socket.on('navi', (status) => {
     socket.emit('navi', status);
