@@ -2,7 +2,6 @@ const refreshRate = 50;
 var pressed = 0;
 var cnow = 0;
 var clast = 1;
-var socket = io();
 
 
 window.addEventListener("gamepadconnected", (event) => {
