@@ -71,8 +71,9 @@ function set_stream (location) {
 
 }
 
-socket.on('testsock', function(msg) {
-console.log(msg);
+socket.on('testsock', msg => {
+  el = document.getElementById('server-time');
+  el.innerHTML = msg;
 });
 
 socket.on('video_channel', (channel) => {
