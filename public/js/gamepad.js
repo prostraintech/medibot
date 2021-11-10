@@ -37,12 +37,12 @@ function getGamepadState() {
   var pan_tilt = gamepad.axes[9];
 
   if (buttonPressed(gamepad.buttons[2])) {
-    socket.emit('connect', 1);
+    
     connect();
   }
 
   else if (buttonPressed(gamepad.buttons[3])) {
-    socket.emit('connect', 0);
+    
     disconnect();
   }
 

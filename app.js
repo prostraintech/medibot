@@ -72,7 +72,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('testsock', (status) => {
-    socket.emit('testsock', status);
+    io.emit('testsock', status);
   });
 
   socket.on('navi', (status) => {
