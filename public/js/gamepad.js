@@ -47,7 +47,7 @@ function getGamepadState() {
   }
 
   else if (buttonPressed(gamepad.buttons[11])) {
-    socket.emit('testsock', 'chicken');
+    socket.broadcast.emit('testsock', 'chicken');
     
   }
 
