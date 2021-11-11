@@ -311,7 +311,7 @@ if (cameras && cameras.length > 0)
   }
 
   catch {
-    console.log('no such input here');
+    console.log('hola');
   }
 });
 
