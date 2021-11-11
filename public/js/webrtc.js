@@ -125,6 +125,7 @@ function disconnect() {
 }
 
 function stop() {
+  stopMedia();
   console.log('stop');
   if (pc !== null) {
     pc.close();
