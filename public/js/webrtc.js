@@ -9,18 +9,6 @@ var dINIT = '';
 
 function startMedia(constraints) {
 
-  /*const constraints = {
-    "audio": true,
-    "video": {
-      "maxWidth": 1280,
-      "maxHeight": 720,
-      "aspectRatio": 16/9,
-      "frameRate": {
-        "min": "10"
-      }
-    }
-  };*/
-
   navigator.mediaDevices.getUserMedia(constraints)
     .then(function(stream) {
       localStream = stream;
@@ -52,6 +40,8 @@ function startMedia(constraints) {
       }
       console.error(err);
     });
+
+    connect();
 }
 
 // stop local video
