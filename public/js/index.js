@@ -107,8 +107,9 @@ function set_stream(location) {
         });
 
     }*/
-    startMedia(constraints_teleconf);
     disconnect();
+    startMedia(constraints_teleconf);
+    
     connect();
 
   }
@@ -137,8 +138,9 @@ function set_stream(location) {
         });
 
     }*/
-    startMedia(constraints_navi);
     disconnect();
+    startMedia(constraints_navi);
+    
     connect();
   }
 
