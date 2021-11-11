@@ -289,8 +289,15 @@ if (cameras && cameras.length > 0)
     startMedia(constraints_inity);
   }
 
-  else if (cameras.length <= 0)
-  {
+ 
+    
+ 
+    
+    
+  }
+
+  catch {
+    console.log('hola');
     console.log('xjumpa');
     const constraints_initn = {
       "audio": true,
@@ -305,13 +312,6 @@ if (cameras && cameras.length > 0)
     };
 
     startMedia(constraints_initn);
-  }
-    
-    
-  }
-
-  catch {
-    console.log('hola');
   }
 });
 
