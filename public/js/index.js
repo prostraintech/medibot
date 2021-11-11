@@ -22,7 +22,7 @@ var videol = document.querySelector("#videoElement");
   function getConnectedDevices(label, callback) {
     navigator.mediaDevices.enumerateDevices()
         .then(devices => {
-            const filtered = devices.filter(device => device.kind === label);
+            const filtered = devices.filter(device => device.label === label);
             callback(filtered);
         });
 }
