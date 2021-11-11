@@ -19,15 +19,15 @@ var videol = document.querySelector("#videoElement");
             }
         }
 
-  function getConnectedDevices(type, callback) {
+  function getConnectedDevices(label, callback) {
     navigator.mediaDevices.enumerateDevices()
         .then(devices => {
-            const filtered = devices.filter(device => device.kind === type);
+            const filtered = devices.filter(device => device.kind === label);
             callback(filtered);
         });
 }
 
-getConnectedDevices('videoinput', cameras => console.log('Cameras found', cameras));
+getConnectedDevices('Logitech B525 HD Webcam (046d:0836)', cameras => console.log('Cameras found',cameras,'id:', cameras[0].deviceId));
 
 
 //frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
