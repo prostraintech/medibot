@@ -2,21 +2,21 @@ var socket = io();
 var el;
 var constraints = {};
 var elemVid = document.getElementById("remotevideo");
-var dIDnavi;
+var dIDnavi, dIDtconf;
 
 var videol = document.querySelector("#videoElement");
 
   const constraints_navi = {
         'audio': {'echoCancellation': true},
         'video': {
-            'deviceId': dID
+            'deviceId': dIDnavi
             }
         }
 
         const constraints_teleconf = {
         'audio': {'echoCancellation': true},
         'video': {
-            'deviceId': '6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723'
+            'deviceId': dIDtconf
             }
         }
 
