@@ -2,7 +2,7 @@ var socket = io();
 var el;
 var constraints = {};
 var elemVid = document.getElementById("remotevideo");
-var dIDnavi ='', dIDtconf='';
+var dIDnavi = '', dIDtconf = '';
 
 var videol = document.getElementById("localvideo");
 
@@ -87,10 +87,16 @@ function set_stream(location) {
     const constraints_teleconf = {
       'audio': { 'echoCancellation': true },
       'video': {
-        'deviceId': dIDtconf
+        'deviceId': dIDtconf,
+        "maxWidth": 1280,
+        "maxHeight": 720,
+        "aspectRatio": 16 / 9,
+        "frameRate": {
+          "min": "10"
+        }
       }
     }
-    console.log(constraints_teleconf);
+    /*console.log(constraints_teleconf);
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(constraints_teleconf)
         .then(function (stream) {
@@ -100,16 +106,25 @@ function set_stream(location) {
           console.log("Something went wrong!");
         });
 
-    }
+    }*/
+    startMedia(constraints_teleconf);
+
   }
   else if (location == 2) {
 
     const constraints_navi = {
       'audio': { 'echoCancellation': true },
       'video': {
-        'deviceId': dIDnavi
+        'deviceId': dIDnavi,
+        "maxWidth": 1280,
+        "maxHeight": 720,
+        "aspectRatio": 16 / 9,
+        "frameRate": {
+          "min": "10"
+        }
       }
     }
+    /*
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(constraints_navi)
         .then(function (stream) {
@@ -119,7 +134,8 @@ function set_stream(location) {
           console.log("Something went wrong!");
         });
 
-    }
+    }*/
+    startMedia(constraints_navi);
   }
 
   console.log("hi " + location);

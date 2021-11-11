@@ -5,9 +5,9 @@ var pc = null;
 var mediaFlowing = false;
 var useH264 = false;
 
-function startMedia() {
+function startMedia(constraints) {
 
-  const constraints = {
+  /*const constraints = {
     "audio": true,
     "video": {
       "maxWidth": 1280,
@@ -17,7 +17,7 @@ function startMedia() {
         "min": "10"
       }
     }
-  };
+  };*/
 
   navigator.mediaDevices.getUserMedia(constraints)
     .then(function(stream) {
