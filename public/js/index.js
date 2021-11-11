@@ -2,7 +2,7 @@ var socket = io();
 var el;
 var constraints = {};
 var elemVid = document.getElementById("remotevideo");
-var dIDnavi, dIDtconf;
+var dIDnavi ='', dIDtconf='';
 
 var videol = document.querySelector("#videoElement");
 
