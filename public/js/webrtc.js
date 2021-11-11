@@ -270,6 +270,7 @@ initgetConnectedDevices('front_cam', cameras => {
     dINIT = cameras[0].deviceId;
 if (cameras && cameras.length > 0)
 {
+  console.log('jumpa');
     const constraints_inity = {
       "audio": true,
       "video": {
@@ -288,6 +289,7 @@ if (cameras && cameras.length > 0)
 
   else
   {
+    console.log('xjumpa');
     const constraints_initn = {
       "audio": true,
       "video": {
