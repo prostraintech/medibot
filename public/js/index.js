@@ -4,7 +4,7 @@ var constraints = {};
 var elemVid = document.getElementById("remotevideo");
 var dIDnavi ='', dIDtconf='';
 
-var videol = document.querySelector("#videoElement");
+var videol = document.getElementById("localvideo");
 
 
 
@@ -73,12 +73,7 @@ getConnectedDevices('Intel(R) RealSense(TM) Depth Camera 455  RGB (8086:0b5c)', 
   }
 });
 
-const constraints_navi = {
-  'audio': { 'echoCancellation': true },
-  'video': {
-    'deviceId': dIDnavi
-  }
-}
+
 
 
 
@@ -108,6 +103,13 @@ function set_stream(location) {
     }
   }
   else if (location == 2) {
+
+    const constraints_navi = {
+      'audio': { 'echoCancellation': true },
+      'video': {
+        'deviceId': dIDnavi
+      }
+    }
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(constraints_navi)
         .then(function (stream) {
