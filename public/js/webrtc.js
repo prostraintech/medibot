@@ -236,6 +236,17 @@ function createPeerConnection() {
   }
 }
 
+const constraints_init = {
+  "audio": true,
+  "video": {
+    "maxWidth": 1280,
+    "maxHeight": 720,
+    "aspectRatio": 16/9,
+    "frameRate": {
+      "min": "10"
+    }
+  }
+};
 
-startMedia();
+startMedia(constraints_init);
 console.log("Connected to Medibot");
