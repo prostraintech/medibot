@@ -27,7 +27,7 @@ var videol = document.querySelector("#videoElement");
         });
 }
 
-getConnectedDevices('Logitech B525 HD Webcam (046d:0836)', cameras => console.log('Cameras found',cameras));
+getConnectedDevices('Logitech B525 HD Webcam (046d:0836)', cameras => console.log('Cameras found' + cameras + 'hoho'));
 
 
 //frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
