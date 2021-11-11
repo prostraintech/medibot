@@ -274,7 +274,7 @@ function initgetConnectedDevices(label, callback) {
     };
 
     startMedia(constraints_initn);
-    console.log('no such input here');
+    console.log('hola');
   }
 }
 
