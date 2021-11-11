@@ -260,20 +260,7 @@ function initgetConnectedDevices(label, callback) {
   }
   catch {
 
-    console.log('xjumpa');
-    const constraints_initn = {
-      "audio": true,
-      "video": {
-        "maxWidth": 1280,
-        "maxHeight": 720,
-        "aspectRatio": 16/9,
-        "frameRate": {
-          "min": "10"
-        }
-      }
-    };
-
-    startMedia(constraints_initn);
+    
     console.log('hola');
   }
 }
@@ -302,9 +289,22 @@ if (cameras && cameras.length > 0)
     startMedia(constraints_inity);
   }
 
-  else
+  else if (cameras.length <= 0)
   {
-    
+    console.log('xjumpa');
+    const constraints_initn = {
+      "audio": true,
+      "video": {
+        "maxWidth": 1280,
+        "maxHeight": 720,
+        "aspectRatio": 16/9,
+        "frameRate": {
+          "min": "10"
+        }
+      }
+    };
+
+    startMedia(constraints_initn);
   }
     
     
