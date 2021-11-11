@@ -110,7 +110,7 @@ function set_stream(location) {
     disconnect();
     startMedia(constraints_teleconf);
     
-    connect();
+    //connect();
 
   }
   else if (location == 2) {
@@ -141,7 +141,7 @@ function set_stream(location) {
     disconnect();
     startMedia(constraints_navi);
     
-    connect();
+    //connect();
   }
 
   console.log("hi " + location);
