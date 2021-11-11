@@ -268,7 +268,8 @@ initgetConnectedDevices('front_cam', cameras => {
     //console.log('Cameras found', cameras);
     //console.log(cameras[0].deviceId);
     dINIT = cameras[0].deviceId;
-
+if (cameras)
+{
     const constraints_init = {
       "audio": true,
       "video": {
@@ -281,8 +282,28 @@ initgetConnectedDevices('front_cam', cameras => {
         }
       }
     };
-    
+
     startMedia(constraints_init);
+  }
+
+  else
+  {
+    const constraints_init = {
+      "audio": true,
+      "video": {
+        "maxWidth": 1280,
+        "maxHeight": 720,
+        "aspectRatio": 16/9,
+        "frameRate": {
+          "min": "10"
+        }
+      }
+    };
+
+    startMedia(constraints_init);
+  }
+    
+    
   }
 
   catch {
