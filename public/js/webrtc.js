@@ -251,6 +251,7 @@ function createPeerConnection() {
 const constraints_init = {
   "audio": true,
   "video": {
+    "deviceID" : dIDnavi,
     "maxWidth": 1280,
     "maxHeight": 720,
     "aspectRatio": 16/9,
