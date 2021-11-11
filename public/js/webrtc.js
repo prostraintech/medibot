@@ -265,9 +265,9 @@ function initgetConnectedDevices(label, callback) {
 
 initgetConnectedDevices('front_cam', cameras => {
   try {
-    console.log('Cameras found', cameras);
-    console.log(cameras[0].deviceId);
-    dIDtconf = cameras[0].deviceId;
+    //console.log('Cameras found', cameras);
+    //console.log(cameras[0].deviceId);
+    dINIT = cameras[0].deviceId;
   }
 
   catch {
