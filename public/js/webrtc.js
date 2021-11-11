@@ -24,7 +24,19 @@ function startMedia(constraints) {
       localStream = stream;
       try {
         localvid.srcObject = stream;
-        localvid.play();
+        var playPromise = localvid.play();
+
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            // Automatic playback started!
+            // Show playing UI.
+          })
+          .catch(error => {
+            // Auto-play was prevented
+            // Show paused UI.
+          });
+        }
+
       } catch (e) {
         console.log("Error setting video src: ", e);
       }
@@ -125,7 +137,6 @@ function disconnect() {
 }
 
 function stop() {
-  stopMedia();
   console.log('stop');
   if (pc !== null) {
     pc.close();
