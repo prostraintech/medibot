@@ -272,7 +272,7 @@ initgetConnectedDevices('front_cam', cameras => {
     const constraints_init = {
       "audio": true,
       "video": {
-        "deviceID" : dINIT,
+        "deviceId" : dINIT,
         "maxWidth": 1280,
         "maxHeight": 720,
         "aspectRatio": 16/9,
