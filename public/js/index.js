@@ -34,8 +34,20 @@ function getConnectedDevices(label, callback) {
     }
 }
 
-//find_frontcam
+//list all camera
+getAllConnectedDevices('videoinput', cameras => {
+  try{
+  console.log('Cameras found', cameras);
+  console.log(cameras[0].deviceId);
+  dIDtconf = cameras[0].deviceId;
+}
 
+catch{
+  console.log('no such input here');
+}
+});
+
+//find_frontcam
 getConnectedDevices('front_cam', cameras => {
   try{
   console.log('Cameras found', cameras);
@@ -48,19 +60,21 @@ catch{
 }
 });
 
-
-
-getAllConnectedDevices('videoinput', cameras => {
+//find_navi_cam
+getConnectedDevices('Intel(R) RealSense(TM) Depth Camera 455  RGB (8086:0b5c)', cameras => {
   try{
   console.log('Cameras found', cameras);
   console.log(cameras[0].deviceId);
-  dIDtconf = cameras[0].deviceId;
+  dIDnavi = cameras[0].deviceId;
 }
 
 catch{
   console.log('no such input here');
 }
 });
+
+
+
 
 
   const constraints_navi = {
