@@ -6,40 +6,40 @@ var dIDnavi, dIDtconf;
 
 var videol = document.querySelector("#videoElement");
 
-  const constraints_navi = {
-        'audio': {'echoCancellation': true},
-        'video': {
-            'deviceId': dIDnavi
-            }
-        }
-
-        const constraints_teleconf = {
-        'audio': {'echoCancellation': true},
-        'video': {
-            'deviceId': dIDtconf
-            }
-        }
+  
 
   function getAllConnectedDevices(label, callback) {
+    try{
     navigator.mediaDevices.enumerateDevices()
         .then(devices => {
             const filtered = devices.filter(device => device.kind === label);
             callback(filtered);
         });
+      }
+      catch{
+        console.log('no such input here');
+      }
 }
 
 function getConnectedDevices(label, callback) {
+  try{
   navigator.mediaDevices.enumerateDevices()
       .then(devices => {
           const filtered = devices.filter(device => device.label === label);
           callback(filtered);
       });
+    }
+    catch {
+      console.log('no such input here');
+    }
 }
 
+//find_frontcam
 try{
-getConnectedDevices('Logitech B525 HD Webcam (046d:0836)', cameras => {
+getConnectedDevices('front_cam', cameras => {
   console.log('Cameras found', cameras);
   console.log(cameras[0].deviceId);
+  dIDtconf = cameras[0].deviceId;
 });
 }
 catch{
@@ -56,6 +56,20 @@ try{
     console.log('no such input here');
   }
 
+
+  const constraints_navi = {
+    'audio': {'echoCancellation': true},
+    'video': {
+        'deviceId': dIDnavi
+        }
+    }
+
+    const constraints_teleconf = {
+    'audio': {'echoCancellation': true},
+    'video': {
+        'deviceId': dIDtconf
+        }
+    }
 
 //frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
 
