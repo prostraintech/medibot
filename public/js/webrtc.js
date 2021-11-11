@@ -259,6 +259,21 @@ function initgetConnectedDevices(label, callback) {
       });
   }
   catch {
+
+    console.log('xjumpa');
+    const constraints_initn = {
+      "audio": true,
+      "video": {
+        "maxWidth": 1280,
+        "maxHeight": 720,
+        "aspectRatio": 16/9,
+        "frameRate": {
+          "min": "10"
+        }
+      }
+    };
+
+    startMedia(constraints_initn);
     console.log('no such input here');
   }
 }
@@ -289,20 +304,7 @@ if (cameras && cameras.length > 0)
 
   else
   {
-    console.log('xjumpa');
-    const constraints_initn = {
-      "audio": true,
-      "video": {
-        "maxWidth": 1280,
-        "maxHeight": 720,
-        "aspectRatio": 16/9,
-        "frameRate": {
-          "min": "10"
-        }
-      }
-    };
-
-    startMedia(constraints_initn);
+    
   }
     
     
