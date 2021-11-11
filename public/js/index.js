@@ -108,6 +108,7 @@ function set_stream(location) {
 
     }*/
     startMedia(constraints_teleconf);
+    connect();
 
   }
   else if (location == 2) {
@@ -136,6 +137,7 @@ function set_stream(location) {
 
     }*/
     startMedia(constraints_navi);
+    connect();
   }
 
   console.log("hi " + location);
