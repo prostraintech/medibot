@@ -94,6 +94,7 @@ function set_stream(location) {
   // 2- navi
 
   if (location == 1) {
+    console.log(constraints_teleconf);
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(constraints_teleconf)
         .then(function (stream) {
