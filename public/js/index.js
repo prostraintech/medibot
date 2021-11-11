@@ -2,6 +2,7 @@ var socket = io();
 var el;
 var constraints = {};
 var elemVid = document.getElementById("remotevideo");
+var dID;
 
 var videol = document.querySelector("#videoElement");
 
@@ -27,10 +28,15 @@ var videol = document.querySelector("#videoElement");
         });
 }
 
+try{
 getConnectedDevices('Logitech B525 HD Webcam (046d:0836)', cameras => {
   console.log('Cameras found', cameras);
   console.log(cameras[0].deviceId);
 });
+}
+catch{
+  console.log('no such input here');
+}
 
 
 //frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
