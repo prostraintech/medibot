@@ -37,96 +37,85 @@ function getGamepadState() {
   var pan_tilt = gamepad.axes[9];
 
   if (buttonPressed(gamepad.buttons[2])) {
-    
+
     connect();
   }
 
   else if (buttonPressed(gamepad.buttons[3])) {
-    
+
     disconnect();
   }
 
   else if (buttonPressed(gamepad.buttons[11])) {
     socket.emit('testsock', 'chicken');
-    
+
   }
 
-  else if (buttonPressed(gamepad.buttons[6]))
-    {
-      socket.emit('video_channel', 1);
-      
-    }
+  else if (buttonPressed(gamepad.buttons[6])) {
+    socket.emit('video_channel', 1);
 
-    else if (buttonPressed(gamepad.buttons[10]))
-    {
-      socket.emit('video_channel', 2);
-      
-    }
+  }
 
-  
+  else if (buttonPressed(gamepad.buttons[7])) {
+    socket.emit('video_channel', 2);
+
+  }
+
+
   else if (buttonPressed(gamepad.buttons[0])) {
     cnow = 0;
 
-    if (buttonPressed(gamepad.buttons[1]))
-    {
+    if (buttonPressed(gamepad.buttons[1])) {
       socket.emit('navi', 9);
       console.log('reset - 9');
     }
 
-    
-   
+
+
     //forward
-    if (yAxis < -0.1 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5)
-    {
+    if (yAxis < -0.1 && pointTurnAxis < 0.5 && pointTurnAxis > -0.5) {
       socket.emit('navi', 1);
       console.log('forward - 1');
     }
 
     //reverse
-    else if (yAxis > 0.1 && pointTurnAxis < 0.8 && pointTurnAxis > -0.8)
-    {
+    else if (yAxis > 0.1 && pointTurnAxis < 0.8 && pointTurnAxis > -0.8) {
       socket.emit('navi', 2);
       console.log('reverse - 1');
     }
 
     //rotate right
-    else if (pointTurnAxis > 0.8)
-    {
+    else if (pointTurnAxis > 0.8) {
       socket.emit('navi', 3);
       console.log('right - 3');
     }
-    
+
     //rotate left
-    else if (pointTurnAxis < -0.8)
-    {
+    else if (pointTurnAxis < -0.8) {
       socket.emit('navi', 4);
       console.log('left - 4');
     }
 
     //pan left
-    else if (pan_tilt > 0.5 && pan_tilt < 1)
-    {
-    socket.emit('navi', 5);
-    console.log('pan left - 5');
+    else if (pan_tilt > 0.5 && pan_tilt < 1) {
+      socket.emit('navi', 5);
+      console.log('pan left - 5');
     }
 
     //pan right
-    else if (pan_tilt < 0 && pan_tilt > -0.5)
-    {
+    else if (pan_tilt < 0 && pan_tilt > -0.5) {
       socket.emit('navi', 6);
       console.log('pan right - 6');
     }
 
     //tilt up
-    else if (pan_tilt <  -0.5)
-    {
+    else if (pan_tilt < -0.5) {
       socket.emit('navi', 7);
       console.log('tilt up - 7');
     }
 
     //tilt down
-    else if (pan_tilt > 0 && pan_tilt < 0.5)
-    {
+    else if (pan_tilt > 0 && pan_tilt < 0.5) {
       socket.emit('navi', 8);
       console.log('tilt down - 8');
     }

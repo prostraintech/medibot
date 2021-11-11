@@ -6,101 +6,94 @@ var dIDnavi, dIDtconf;
 
 var videol = document.querySelector("#videoElement");
 
-  
 
-  function getAllConnectedDevices(label, callback) {
-    try{
+
+function getAllConnectedDevices(label, callback) {
+  try {
     navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-            const filtered = devices.filter(device => device.kind === label);
-            callback(filtered);
-        });
-      }
-      catch{
-        console.log('no such input here');
-      }
+      .then(devices => {
+        const filtered = devices.filter(device => device.kind === label);
+        callback(filtered);
+      });
+  }
+  catch {
+    console.log('no such input here');
+  }
 }
 
 function getConnectedDevices(label, callback) {
-  try{
-  navigator.mediaDevices.enumerateDevices()
+  try {
+    navigator.mediaDevices.enumerateDevices()
       .then(devices => {
-          const filtered = devices.filter(device => device.label === label);
-          callback(filtered);
+        const filtered = devices.filter(device => device.label === label);
+        callback(filtered);
       });
-    }
-    catch {
-      console.log('no such input here');
-    }
+  }
+  catch {
+    console.log('no such input here');
+  }
 }
 
 //list all camera
 getAllConnectedDevices('videoinput', cameras => {
-  try{
-  console.log('Cameras found', cameras);
-  console.log(cameras[0].deviceId);
-  dIDtconf = cameras[0].deviceId;
-}
+  try {
+    console.log('Cameras found', cameras);
+    console.log(cameras[0].deviceId);
+    dIDtconf = cameras[0].deviceId;
+  }
 
-catch{
-  console.log('no such input here');
-}
+  catch {
+    console.log('no such input here');
+  }
 });
 
 //find_frontcam
 getConnectedDevices('front_cam', cameras => {
-  try{
-  console.log('Cameras found', cameras);
-  console.log(cameras[0].deviceId);
-  dIDtconf = cameras[0].deviceId;
-}
+  try {
+    console.log('Cameras found', cameras);
+    console.log(cameras[0].deviceId);
+    dIDtconf = cameras[0].deviceId;
+  }
 
-catch{
-  console.log('no such input here');
-}
+  catch {
+    console.log('no such input here');
+  }
 });
 
 //find_navi_cam
 getConnectedDevices('Intel(R) RealSense(TM) Depth Camera 455  RGB (8086:0b5c)', cameras => {
-  try{
-  console.log('Cameras found', cameras);
-  console.log(cameras[0].deviceId);
-  dIDnavi = cameras[0].deviceId;
-}
+  try {
+    console.log('Cameras found', cameras);
+    console.log(cameras[0].deviceId);
+    dIDnavi = cameras[0].deviceId;
+  }
 
-catch{
-  console.log('no such input here');
-}
+  catch {
+    console.log('no such input here');
+  }
 });
 
+const constraints_navi = {
+  'audio': { 'echoCancellation': true },
+  'video': {
+    'deviceId': dIDnavi
+  }
+}
+
+const constraints_teleconf = {
+  'audio': { 'echoCancellation': true },
+  'video': {
+    'deviceId': dIDtconf
+  }
+}
 
 
-
-
-  const constraints_navi = {
-    'audio': {'echoCancellation': true},
-    'video': {
-        'deviceId': dIDnavi
-        }
-    }
-
-    const constraints_teleconf = {
-    'audio': {'echoCancellation': true},
-    'video': {
-        'deviceId': dIDtconf
-        }
-    }
-
-//frontcam - 6e5b4c36dc543308887c116abf5fac376a78987375fea5cce8fc254b6a145723
-
-
-function set_stream (location) {
+function set_stream(location) {
   // location
   // 1- teleconf
   // 2- navi
 
-  if (location == 1)
-  {
+  if (location == 1) {
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(constraints_teleconf)
         .then(function (stream) {
@@ -109,11 +102,10 @@ function set_stream (location) {
         .catch(function (err0r) {
           console.log("Something went wrong!");
         });
-    
+
     }
   }
-  else if (location == 2)
-  {
+  else if (location == 2) {
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(constraints_navi)
         .then(function (stream) {
@@ -122,7 +114,7 @@ function set_stream (location) {
         .catch(function (err0r) {
           console.log("Something went wrong!");
         });
-    
+
     }
   }
 

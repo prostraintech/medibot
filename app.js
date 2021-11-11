@@ -75,6 +75,10 @@ io.on('connection', (socket) => {
     io.emit('testsock', status);
   });
 
+  socket.on('video_channel', (status) => {
+    io.emit('video_channel', status);
+  });
+
   socket.on('navi', (status) => {
     socket.emit('navi', status);
 
