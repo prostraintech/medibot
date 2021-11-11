@@ -4,7 +4,7 @@ var localStream = null;
 var pc = null;
 var mediaFlowing = false;
 var useH264 = false;
-
+var dINIT = '';
 function startMedia(constraints) {
 
   /*const constraints = {
@@ -248,10 +248,30 @@ function createPeerConnection() {
   }
 }
 
+function initgetConnectedDevices(label, callback) {
+  try {
+    navigator.mediaDevices.enumerateDevices()
+      .then(devices => {
+        const filtered = devices.filter(device => device.label === label);
+        callback(filtered);
+      });
+  }
+  catch {
+    console.log('no such input here');
+  }
+}
+
+initgetConnectedDevices('front_cam', cameras => {
+  try {
+    //console.log('Cameras found', cameras);
+    //console.log(cameras[0].deviceId);
+    dINIT = cameras[0].deviceId;
+  }
+
 const constraints_init = {
   "audio": true,
   "video": {
-    "deviceID" : dIDnavi,
+    "deviceID" : dINIT,
     "maxWidth": 1280,
     "maxHeight": 720,
     "aspectRatio": 16/9,
