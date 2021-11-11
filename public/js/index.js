@@ -80,12 +80,7 @@ const constraints_navi = {
   }
 }
 
-const constraints_teleconf = {
-  'audio': { 'echoCancellation': true },
-  'video': {
-    'deviceId': dIDtconf
-  }
-}
+
 
 
 function set_stream(location) {
@@ -94,6 +89,12 @@ function set_stream(location) {
   // 2- navi
 
   if (location == 1) {
+    const constraints_teleconf = {
+      'audio': { 'echoCancellation': true },
+      'video': {
+        'deviceId': dIDtconf
+      }
+    }
     console.log(constraints_teleconf);
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(constraints_teleconf)
