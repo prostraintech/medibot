@@ -268,6 +268,21 @@ initgetConnectedDevices('front_cam', cameras => {
     //console.log('Cameras found', cameras);
     //console.log(cameras[0].deviceId);
     dINIT = cameras[0].deviceId;
+
+    const constraints_init = {
+      "audio": true,
+      "video": {
+        "deviceID" : dINIT,
+        "maxWidth": 1280,
+        "maxHeight": 720,
+        "aspectRatio": 16/9,
+        "frameRate": {
+          "min": "10"
+        }
+      }
+    };
+    
+    startMedia(constraints_init);
   }
 
   catch {
@@ -275,18 +290,5 @@ initgetConnectedDevices('front_cam', cameras => {
   }
 });
 
-const constraints_init = {
-  "audio": true,
-  "video": {
-    "deviceID" : dINIT,
-    "maxWidth": 1280,
-    "maxHeight": 720,
-    "aspectRatio": 16/9,
-    "frameRate": {
-      "min": "10"
-    }
-  }
-};
 
-startMedia(constraints_init);
 console.log("Connected to Medibot");
