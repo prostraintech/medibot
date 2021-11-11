@@ -35,26 +35,32 @@ function getConnectedDevices(label, callback) {
 }
 
 //find_frontcam
-try{
+
 getConnectedDevices('front_cam', cameras => {
+  try{
   console.log('Cameras found', cameras);
   console.log(cameras[0].deviceId);
   dIDtconf = cameras[0].deviceId;
-});
 }
+
 catch{
   console.log('no such input here');
 }
+});
 
-try{
-  getAllConnectedDevices('videoinput', cameras => {
-    console.log('Cameras found', cameras);
-    //console.log(cameras[0].deviceId);
-  });
-  }
-  catch{
-    console.log('no such input here');
-  }
+
+
+getAllConnectedDevices('videoinput', cameras => {
+  try{
+  console.log('Cameras found', cameras);
+  console.log(cameras[0].deviceId);
+  dIDtconf = cameras[0].deviceId;
+}
+
+catch{
+  console.log('no such input here');
+}
+});
 
 
   const constraints_navi = {
