@@ -107,6 +107,7 @@ function set_stream(location) {
         });
 
     }*/
+    control.log(dIDtconf);
     disconnect();
     startMedia(constraints_teleconf);
     
@@ -138,6 +139,7 @@ function set_stream(location) {
         });
 
     }*/
+    control.log(dIDnavi);
     disconnect();
     startMedia(constraints_navi);
     
