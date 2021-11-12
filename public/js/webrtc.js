@@ -41,7 +41,7 @@ function startMedia(constraints) {
       console.error(err);
     });
 
-    
+    connect();
 }
 
 // stop local video
