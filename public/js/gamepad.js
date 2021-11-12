@@ -1,7 +1,6 @@
 const refreshRate = 50;
 var pressed = 0;
-var cnow = 0;
-var clast = 1;
+var count = 0;
 
 
 window.addEventListener("gamepadconnected", (event) => {
@@ -18,7 +17,7 @@ window.addEventListener("gamepaddisconnected", (event) => {
 
 
 function getGamepadState() {
-
+ 
   // Returns up to 4 gamepads.
   const gamepads = navigator.getGamepads();
 
@@ -46,18 +45,19 @@ function getGamepadState() {
     disconnect();
   }
 
-  else if (buttonPressed(gamepad.buttons[11])) {
-    socket.emit('testsock', 'chicken');
-
-  }
-
   else if (buttonPressed(gamepad.buttons[6])) {
+    count++;
+    if(count < 2) {
     socket.emit('video_channel', 1);
+    }
 
   }
 
   else if (buttonPressed(gamepad.buttons[7])) {
+    count++;
+    if(count < 2) {
     socket.emit('video_channel', 2);
+    }
 
   }
 
@@ -131,6 +131,8 @@ function getGamepadState() {
   else {
 
     socket.emit('navi', 0);
+    count = 0;
+
   }
 
 
