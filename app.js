@@ -74,11 +74,11 @@ oneperson = socket.id;
   });
 
   socket.on('testsock', (status) => {
-    io.sockets.socket(oneperson).emit('testsock', status);
+    io.socket(oneperson).emit('testsock', status);
   });
 
   socket.on('video_channel', (status) => {
-    io.sockets.socket(oneperson).emit('video_channel', status);
+    io.socket(oneperson).emit('video_channel', status);
   });
 
   socket.on('navi', (status) => {
