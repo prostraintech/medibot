@@ -108,7 +108,7 @@ function set_stream(location) {
 
     }*/
     disconnect();
-    startMedia(constraints_teleconf);connect();
+    startMedia(constraints_teleconf);
     
     //connect();
 
@@ -139,7 +139,7 @@ function set_stream(location) {
 
     }*/
     disconnect();
-    startMedia(constraints_navi);connect();
+    startMedia(constraints_navi);
     
     //connect();
   }

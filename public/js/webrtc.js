@@ -19,7 +19,7 @@ function startMedia(constraints) {
         if (playPromise !== undefined) {
           playPromise.then(_ => {
             // Automatic playback started!
-            // Show playing UI.
+            connect();
           })
           .catch(error => {
             // Auto-play was prevented
