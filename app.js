@@ -11,6 +11,7 @@ var https = require('https').createServer({
 var cmd = 0;
 var count = 0;
 var res;
+var oneperson;
 
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline');
@@ -54,6 +55,7 @@ https.listen(443, () => {
 var io = require('socket.io')(https);
 
 io.on('connection', (socket) => {
+oneperson = socket.id;
 
   console.log('a user connected');
   
@@ -72,11 +74,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('testsock', (status) => {
-    io.emit('testsock', status);
+    io.sockets.socket(oneperson).emit('testsock', status);
   });
 
   socket.on('video_channel', (status) => {
-    io.emit('video_channel', status);
+    io.sockets.socket(oneperson).emit('video_channel', status);
   });
 
   socket.on('navi', (status) => {

@@ -23,8 +23,7 @@ function startMedia(constraints) {
           })
           .catch(error => {
             // Auto-play was prevented
-            disconnect();
-            connect();
+        
           });
         }
 
