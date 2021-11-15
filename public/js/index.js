@@ -6,7 +6,7 @@ var dIDnavi = '', dIDtconf = '';
 
 var videol = document.getElementById("localvideo");
 var sid;
-
+var gmarker = document.getElementById("gmarker");
 
 
 function getAllConnectedDevices(label, callback) {
@@ -49,14 +49,6 @@ getAllConnectedDevices('videoinput', cameras => {
 });
 
 
-
-//find_frontcam
-
-
-
-
-
-
 function set_stream(location) {
   // location
   // 1- teleconf
@@ -75,22 +67,10 @@ function set_stream(location) {
         }
       }
     }
-    /*console.log(constraints_teleconf);
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia(constraints_teleconf)
-        .then(function (stream) {
-          videol.srcObject = stream;
-        })
-        .catch(function (err0r) {
-          console.log("Something went wrong!");
-        });
 
-    }*/
-    //control.log(dIDtconf);
+    gmarker.style.display="none";
     disconnect();
     startMedia(constraints_teleconf);
-    
-    //connect();
 
   }
   else if (location == 2) {
@@ -107,22 +87,10 @@ function set_stream(location) {
         }
       }
     }
-    /*
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia(constraints_navi)
-        .then(function (stream) {
-          videol.srcObject = stream;
-        })
-        .catch(function (err0r) {
-          console.log("Something went wrong!");
-        });
-
-    }*/
-    //control.log(dIDnavi);
+    
     disconnect();
     startMedia(constraints_navi);
     
-    //connect();
   }
 
   console.log("hi " + location);
@@ -148,12 +116,12 @@ socket.on('connect', () => {
       dIDtconf = cameras[0].deviceId;
       if (cameras.length > 0)
       {
-        //console.log("masuk here oready");
+
         socket.emit('identifymedibot', sid);
-        var gmarker = document.getElementById("gmarker");
+        
         gmarker.style.display = "none";
 
-        //console.log("thisisit"+ sid);
+ 
       }
     }
   
