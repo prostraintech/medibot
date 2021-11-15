@@ -46,7 +46,8 @@ function getGamepadState() {
     gmarker.style.display = 'none';
   }
 
-  else if (buttonPressed(gamepad.buttons[6])) {
+  //teleconference mode
+  else if (buttonPressed(gamepad.buttons[4])) {
     count++;
     if(count < 2) {
     socket.emit('video_channel', 1);
@@ -54,8 +55,8 @@ function getGamepadState() {
     }
 
   }
-
-  else if (buttonPressed(gamepad.buttons[7])) {
+  //navigation mode
+  else if (buttonPressed(gamepad.buttons[5])) {
     count++;
     if(count < 2) {
     socket.emit('video_channel', 2);

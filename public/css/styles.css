@@ -120,17 +120,6 @@ top: 0;
 padding-top: 20px;
 }
 
-#video_overlays {
-  position:absolute;
-  width:160px;
-  min-height:40px;
-  background-color:#dadada;
-  z-index:300000;
-  bottom:10px;
-  left:10px;
-  text-align:center;
-}
-
 .responsive-iframe {
   background: #A8AABC url('disconnect.png') 50% 50% / 15% no-repeat;
   border: 3px solid midnightblue !important;
