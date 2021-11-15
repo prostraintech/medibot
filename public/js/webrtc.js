@@ -313,7 +313,7 @@ if (cameras && cameras.length > 0)
       }
     };
 
-    startMedia(constraints_inity);
+    startLocalMedia(constraints_inity);
   }
 
  
