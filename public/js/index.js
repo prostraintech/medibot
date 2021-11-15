@@ -63,7 +63,7 @@ getConnectedDevices('front_cam', cameras => {
     {
       console.log("masuk here oready");
       socket.emit('identifymedibot', sid);
-      console.log("thisisit "+ sid);
+      console.log("thisisit"+ sid);
     }
   }
 
