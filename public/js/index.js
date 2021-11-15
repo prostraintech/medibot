@@ -7,7 +7,7 @@ var dIDnavi = '', dIDtconf = '';
 var videol = document.getElementById("localvideo");
 var sid = '';
 
-socket.on('connect', function() {
+socket.on('connect', () => {
   sid = socket.id; //
   console.log(socket.id);
 });
@@ -43,7 +43,7 @@ getAllConnectedDevices('videoinput', cameras => {
   try {
     console.log('Cameras found', cameras);
     console.log(cameras[0].deviceId);
-    dIDtconf = cameras[0].deviceId;
+    //dIDtconf = cameras[0].deviceId;
   }
 
   catch {
@@ -62,6 +62,7 @@ getConnectedDevices('front_cam', cameras => {
     if (cameras.length > 0)
     {
       socket.emit('identifymedibot', sid);
+      console.log(sid);
     }
   }
 
