@@ -132,6 +132,13 @@ padding-top: 20px;
   border: none;
 }
 
+.small-iframe
+{
+  width: 40vh;
+  background-color: #3157a7;
+  border:3px solid yellow;
+}
+
 /* -------Sidebar------- */
 #img-home {
   width: 40px;
