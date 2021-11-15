@@ -43,6 +43,19 @@ function getGamepadState() {
   else if (buttonPressed(gamepad.buttons[3])) {
 
     disconnect();
+    const constraints_initn = {
+      "audio": true,
+      "video": {
+        "maxWidth": 1280,
+        "maxHeight": 720,
+        "aspectRatio": 16/9,
+        "frameRate": {
+          "min": "10"
+        }
+      }
+    };
+
+    startLocalMedia(constraints_initn);
   }
 
   else if (buttonPressed(gamepad.buttons[6])) {
