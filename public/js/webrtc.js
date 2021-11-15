@@ -171,7 +171,7 @@ function stop() {
     pc.close();
     pc = null;
     remotevid.src = "";
-    remotevid.getVideoTracks()[0].stop();
+    //remotevid.getVideoTracks()[0].stop();
     mediaFlowing = false;
   }
 }
