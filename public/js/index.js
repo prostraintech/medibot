@@ -150,7 +150,7 @@ socket.on('connect', () => {
       {
         //console.log("masuk here oready");
         socket.emit('identifymedibot', sid);
-        var gmarker = document.getElementById("overlayimg");
+        var gmarker = document.getElementById("gmarker");
         gmarker.style.display = "none";
 
         //console.log("thisisit"+ sid);
