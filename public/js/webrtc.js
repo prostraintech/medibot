@@ -170,7 +170,7 @@ function stop() {
   if (pc !== null) {
     pc.close();
     pc = null;
-    remotevid.src = "";
+    remotevid.srcObject = null;
     //remotevid.getVideoTracks()[0].stop();
     mediaFlowing = false;
   }
@@ -316,11 +316,7 @@ if (cameras && cameras.length > 0)
 
     startLocalMedia(constraints_inity);
   }
-
- 
-    
- 
-    
+   
     
   }
 
