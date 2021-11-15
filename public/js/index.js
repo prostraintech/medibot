@@ -5,6 +5,7 @@ var elemVid = document.getElementById("remotevideo");
 var dIDnavi = '', dIDtconf = '';
 
 var videol = document.getElementById("localvideo");
+const sid;
 
 
 
@@ -47,6 +48,10 @@ getAllConnectedDevices('videoinput', cameras => {
   }
 });
 
+socketConnection.on('connect', function() {
+  sid = socket.id; //
+});
+
 //find_frontcam
 getConnectedDevices('front_cam', cameras => {
   try {
@@ -55,7 +60,7 @@ getConnectedDevices('front_cam', cameras => {
     dIDtconf = cameras[0].deviceId;
     if (cameras.length > 0)
     {
-      socket.emit('identifymedibot',socket.id);
+      socket.emit('identifymedibot', sid);
     }
   }
 
