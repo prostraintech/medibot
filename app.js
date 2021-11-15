@@ -79,7 +79,7 @@ io.on('connection', (socket) => {
 
   socket.on('identifymedibot', (status) => {
     oneperson = status;
-    console.log('medibot reported with id ->' + status)
+    console.log('medibot reported with id' + status)
   });
 
   socket.on('navi', (status) => {
