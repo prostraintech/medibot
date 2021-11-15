@@ -9,7 +9,7 @@ var sid = '';
 
 socket.on('connect', () => {
   sid = socket.id; //
-  console.log(socket.id);
+  //console.log(socket.id);
 });
 
 function getAllConnectedDevices(label, callback) {
@@ -63,7 +63,7 @@ getConnectedDevices('front_cam', cameras => {
     {
       console.log("masuk here oready");
       socket.emit('identifymedibot', sid);
-      console.log(sid);
+      console.log("thisisit "+ sid);
     }
   }
 
