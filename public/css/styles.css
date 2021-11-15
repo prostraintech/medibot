@@ -122,7 +122,8 @@ padding-top: 20px;
 
 
 .responsive-iframe {
-  
+  background-color: #A8AABC;
+  border: 3px solid midnightblue;
   top: 0;
   left: 0;
   bottom: 0;
@@ -130,6 +131,7 @@ padding-top: 20px;
   width: 100%;
   height: 65vh;
   border: none;
+  object-fit: cover;
 }
 
 .small-iframe
