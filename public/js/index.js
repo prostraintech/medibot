@@ -51,36 +51,7 @@ getAllConnectedDevices('videoinput', cameras => {
 
 
 //find_frontcam
-getConnectedDevices('front_cam', cameras => {
-  try {
-    console.log('Cameras found', cameras);
-    console.log(cameras[0].deviceId);
-    dIDtconf = cameras[0].deviceId;
-    if (cameras.length > 0)
-    {
-      console.log("masuk here oready");
-      socket.emit('identifymedibot', sid);
-      console.log("thisisit"+ sid);
-    }
-  }
 
-  catch {
-    console.log('no such input here');
-  }
-});
-
-//find_navi_cam
-getConnectedDevices('Intel(R) RealSense(TM) Depth Camera 455  RGB (8086:0b5c)', cameras => {
-  try {
-    console.log('Cameras found', cameras);
-    console.log(cameras[0].deviceId);
-    dIDnavi = cameras[0].deviceId;
-  }
-
-  catch {
-    console.log('no such input here');
-  }
-});
 
 
 
@@ -173,7 +144,39 @@ socket.on('video_channel', (channel) => {
 
 socket.on('connect', () => {
   sid = socket.id; //
-  //console.log(socket.id);
+  console.log("client acknowledge connection");
+
+  getConnectedDevices('front_cam', cameras => {
+    try {
+      console.log('Cameras found', cameras);
+      console.log(cameras[0].deviceId);
+      dIDtconf = cameras[0].deviceId;
+      if (cameras.length > 0)
+      {
+        console.log("masuk here oready");
+        socket.emit('identifymedibot', sid);
+        console.log("thisisit"+ sid);
+      }
+    }
+  
+    catch {
+      console.log('no such input here');
+    }
+  });
+  
+  //find_navi_cam
+  getConnectedDevices('Intel(R) RealSense(TM) Depth Camera 455  RGB (8086:0b5c)', cameras => {
+    try {
+      console.log('Cameras found', cameras);
+      console.log(cameras[0].deviceId);
+      dIDnavi = cameras[0].deviceId;
+    }
+  
+    catch {
+      console.log('no such input here');
+    }
+  });
+
 });
 
 
