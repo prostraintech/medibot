@@ -170,8 +170,8 @@ function stop() {
   if (pc !== null) {
     pc.close();
     pc = null;
-    localvid.src = "";
-    localStream.getVideoTracks()[0].stop();
+    remotevid.src = "";
+    remotevid.getVideoTracks()[0].stop();
     mediaFlowing = false;
   }
 }
