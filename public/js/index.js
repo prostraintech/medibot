@@ -131,11 +131,6 @@ function set_stream(location) {
 
 }
 
-socket.on('testsock', (msg) => {
-  el = document.getElementById('server-time');
-  el.innerHTML = msg;
-  console.log('got sock');
-});
 
 socket.on('video_channel', (channel) => {
   set_stream(channel);

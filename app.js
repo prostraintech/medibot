@@ -73,9 +73,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('webrtc', webrtcdata);
   });
 
-  socket.on('testsock', (status) => {
-    io.in(oneperson).emit('testsock', status);
-  });
+
 
   socket.on('video_channel', (status) => {
     io.in(oneperson).emit('video_channel', status);
