@@ -144,6 +144,17 @@ padding-top: 20px;
   object-fit: cover;
 }
 
+.responsive-iframe > .overlayimg {
+  background: url('https://media.tenor.com/images/0a1652de311806ce55820a7115993853/tenor.gif') center center;
+  height: 128px;
+  left: 50%;
+  margin: -64px 0 0 -64px;
+  position: absolute;
+  top: 50%;
+  width: 128px;
+  z-index: 1;
+}
+
 .small-iframe
 {
   width: 40vh;
