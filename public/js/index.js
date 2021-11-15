@@ -148,9 +148,12 @@ socket.on('connect', () => {
       dIDtconf = cameras[0].deviceId;
       if (cameras.length > 0)
       {
-        console.log("masuk here oready");
+        //console.log("masuk here oready");
         socket.emit('identifymedibot', sid);
-        console.log("thisisit"+ sid);
+        var gmarker = document.getElementById("overlayimg");
+        gmarker.style.display = "none";
+
+        //console.log("thisisit"+ sid);
       }
     }
   
