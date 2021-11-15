@@ -61,6 +61,7 @@ getConnectedDevices('front_cam', cameras => {
     dIDtconf = cameras[0].deviceId;
     if (cameras.length > 0)
     {
+      console.log("masuk here oready");
       socket.emit('identifymedibot', sid);
       console.log(sid);
     }
