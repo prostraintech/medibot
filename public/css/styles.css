@@ -132,7 +132,7 @@ padding-top: 20px;
 }
 
 .responsive-iframe {
-  background-color: #A8AABC;
+  background: transparent url('disconnect.png') 50% 50% / 15% no-repeat;
   border: 3px solid midnightblue !important;
   top: 0;
   left: 0;
