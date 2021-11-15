@@ -23,8 +23,44 @@ function startMedia(constraints) {
           })
           .catch(error => {
             // Auto-play was prevented
-            disconnect();
-            connect();
+         
+          });
+        }
+
+      } catch (e) {
+        console.log("Error setting video src: ", e);
+      }
+    })
+    .catch(function(err) {
+      console.log(err.name + ": " + err.message);
+      if (location.protocol === 'http:') {
+        alert('Please test this using HTTPS.');
+      } else {
+        alert('Have you enabled the appropriate flag? see README.md');
+      }
+      console.error(err);
+    });
+
+    
+}
+
+function startLocalMedia(constraints) {
+
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then(function(stream) {
+      localStream = stream;
+      try {
+        localvid.srcObject = stream;
+        var playPromise = localvid.play();
+
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            // Automatic playback started!
+            //connect();
+          })
+          .catch(error => {
+            // Auto-play was prevented
+         
           });
         }
 
@@ -302,7 +338,7 @@ if (cameras && cameras.length > 0)
       }
     };
 
-    startMedia(constraints_initn);
+    startLocalMedia(constraints_initn);
   }
 });
 
