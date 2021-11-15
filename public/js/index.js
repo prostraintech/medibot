@@ -5,7 +5,7 @@ var elemVid = document.getElementById("remotevideo");
 var dIDnavi = '', dIDtconf = '';
 
 var videol = document.getElementById("localvideo");
-const sid;
+var sid = '';
 
 
 
@@ -48,7 +48,7 @@ getAllConnectedDevices('videoinput', cameras => {
   }
 });
 
-socketConnection.on('connect', function() {
+socket.on('connect', function() {
   sid = socket.id; //
 });
 
