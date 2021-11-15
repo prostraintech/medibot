@@ -59,12 +59,11 @@ getConnectedDevices('front_cam', cameras => {
     console.log('Cameras found', cameras);
     console.log(cameras[0].deviceId);
     dIDtconf = cameras[0].deviceId;
-    if (cameras.length > 0)
-    {
+    
       console.log("masuk here oready");
       socket.emit('identifymedibot', sid);
       console.log(sid);
-    }
+    
   }
 
   catch {
