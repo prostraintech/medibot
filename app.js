@@ -55,7 +55,7 @@ https.listen(443, () => {
 var io = require('socket.io')(https);
 
 io.on('connection', (socket) => {
-oneperson = socket.id;
+//oneperson = socket.id;
 
   console.log('a user connected');
   
@@ -79,6 +79,11 @@ oneperson = socket.id;
 
   socket.on('video_channel', (status) => {
     io.in(oneperson).emit('video_channel', status);
+  });
+
+  socket.on('identifymedibot', (status) => {
+    oneperson = status;
+    console.log('medibot reported with id' + status)
   });
 
   socket.on('navi', (status) => {
