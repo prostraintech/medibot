@@ -5,7 +5,7 @@ var elemVid = document.getElementById("remotevideo");
 var dIDnavi = '', dIDtconf = '';
 
 var videol = document.getElementById("localvideo");
-var sid = '';
+var sid;
 
 
 
