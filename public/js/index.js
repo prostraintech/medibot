@@ -82,10 +82,6 @@ getConnectedDevices('Intel(R) RealSense(TM) Depth Camera 455  RGB (8086:0b5c)', 
   }
 });
 
-socket.on('connect', () => {
-  sid = socket.id; //
-  //console.log(socket.id);
-});
 
 
 
@@ -174,6 +170,12 @@ socket.on('video_channel', (channel) => {
   set_stream(channel);
   console.log('masuk');
 });
+
+socket.on('connect', () => {
+  sid = socket.id; //
+  //console.log(socket.id);
+});
+
 
 function openNav() {
   document.getElementById("sidenav").classList.add("open-nav");
