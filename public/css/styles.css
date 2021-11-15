@@ -157,6 +157,7 @@ padding-top: 20px;
   top: 50%;
   width: 100%;
   z-index: 1;
+  display: none;
 }
 
 .small-iframe
