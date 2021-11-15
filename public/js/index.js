@@ -9,6 +9,7 @@ var sid = '';
 
 socket.on('connect', function() {
   sid = socket.id; //
+  console.log(socket.id);
 });
 
 function getAllConnectedDevices(label, callback) {
