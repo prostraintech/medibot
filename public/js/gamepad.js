@@ -56,6 +56,7 @@ function getGamepadState() {
     };
 
     startLocalMedia(constraints_initn);
+    gmarker.style.display = 'none';
   }
 
   else if (buttonPressed(gamepad.buttons[6])) {

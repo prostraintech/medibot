@@ -339,7 +339,7 @@ if (cameras && cameras.length > 0)
     };
 
     startLocalMedia(constraints_initn);
-    gmarker.style.display = 'none';
+
   }
 });
 
