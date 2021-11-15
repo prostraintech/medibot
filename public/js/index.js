@@ -87,7 +87,7 @@ function set_stream(location) {
         }
       }
     }
-    
+    gmarker.style.display="none";
     disconnect();
     startMedia(constraints_navi);
     

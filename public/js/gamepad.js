@@ -58,6 +58,7 @@ function getGamepadState() {
     count++;
     if(count < 2) {
     socket.emit('video_channel', 2);
+    gmarker.style.display = 'block';
     }
 
   }
