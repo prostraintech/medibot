@@ -252,6 +252,7 @@ padding-top: 20px;
   position: relative;
   top: -70px;
   margin-bottom: -54px;
+  z-index: 30000;
 }
 
 .vid-button span {
