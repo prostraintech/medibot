@@ -5,12 +5,9 @@ var elemVid = document.getElementById("remotevideo");
 var dIDnavi = '', dIDtconf = '';
 
 var videol = document.getElementById("localvideo");
-var sid;
+var sid = '';
 
-socket.on('connect', () => {
-  sid = socket.id; //
-  //console.log(socket.id);
-});
+
 
 function getAllConnectedDevices(label, callback) {
   try {
@@ -85,7 +82,10 @@ getConnectedDevices('Intel(R) RealSense(TM) Depth Camera 455  RGB (8086:0b5c)', 
   }
 });
 
-
+socket.on('connect', () => {
+  sid = socket.id; //
+  //console.log(socket.id);
+});
 
 
 
