@@ -7,7 +7,9 @@ var dIDnavi = '', dIDtconf = '';
 var videol = document.getElementById("localvideo");
 var sid = '';
 
-
+socket.on('connect', function() {
+  sid = socket.id; //
+});
 
 function getAllConnectedDevices(label, callback) {
   try {
@@ -48,9 +50,7 @@ getAllConnectedDevices('videoinput', cameras => {
   }
 });
 
-socket.on('connect', function() {
-  sid = socket.id; //
-});
+
 
 //find_frontcam
 getConnectedDevices('front_cam', cameras => {
