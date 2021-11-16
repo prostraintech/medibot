@@ -73,6 +73,11 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('webrtc', webrtcdata);
   });
 
+  socket.on('statbar', (status) => {
+    //console.log(webrtcdata);
+    io.emit('statbar', status);
+  });
+
 
 
   socket.on('video_channel', (status) => {

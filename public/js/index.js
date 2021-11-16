@@ -8,6 +8,8 @@ var videol = document.getElementById("localvideo");
 var sid;
 var gmarker = document.getElementById("gmarker");
 
+var set_statbar = document.getElementById("statbar");
+
 
 function getAllConnectedDevices(label, callback) {
   try {
@@ -103,6 +105,18 @@ function set_stream(location) {
 socket.on('video_channel', (channel) => {
   set_stream(channel);
   console.log('masuk');
+});
+
+socket.on('set_statbar', (status) => {
+  if (status == 1)
+  {
+    set_statbar.innerHTML = 'TELEPERESENCE';
+  }
+
+  else if (status == 2)
+  {
+    set_statbar.innerHTML = 'NAVIGATION';
+  }
 });
 
 socket.on('connect', () => {

@@ -30,16 +30,19 @@ function getGamepadState() {
     return;
   }
 
-  var xAxis = gamepad.axes[0];
   var yAxis = gamepad.axes[1];
   var pointTurnAxis = gamepad.axes[5];
   var pan_tilt = gamepad.axes[9];
 
+  //start camera
   if (buttonPressed(gamepad.buttons[2])) {
-
+    
+    
     connect();
+
   }
 
+  //stop camera
   else if (buttonPressed(gamepad.buttons[3])) {
 
     disconnect();
@@ -51,6 +54,7 @@ function getGamepadState() {
     count++;
     if(count < 2) {
     socket.emit('video_channel', 1);
+    socket.emit('statbar',1);
     gmarker.style.display = 'none';
     }
 
@@ -60,7 +64,9 @@ function getGamepadState() {
     count++;
     if(count < 2) {
     socket.emit('video_channel', 2);
+    socket.emit('statbar',2);
     gmarker.style.display = 'block';
+   
     }
 
   }
