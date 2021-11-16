@@ -148,6 +148,10 @@ padding-top: 20px;
   display: none;
 }
 
+.dis {
+  pointer-events: none;
+}
+
 .small-iframe
 {
   width: 40vh;
