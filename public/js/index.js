@@ -113,7 +113,7 @@ socket.on('statbar', (status) => {
     set_statbar.innerHTML = 'TELEPERESENCE';
     set_statbar.remove("btn-primary");
     set_statbar.remove("btn-warning");
-    set_statbar.Add("btn-info");
+    set_statbar.add("btn-info");
   }
 
   else if (status == 2)
@@ -121,7 +121,7 @@ socket.on('statbar', (status) => {
     set_statbar.innerHTML = 'NAVIGATION';
     set_statbar.remove("btn-primary");
     set_statbar.remove("btn-info");
-    set_statbar.Add("btn-warning");
+    set_statbar.add("btn-warning");
   }
 });
 
