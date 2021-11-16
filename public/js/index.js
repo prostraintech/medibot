@@ -58,7 +58,7 @@ function set_stream(location) {
 
   if (location == 1) {
     const constraints_teleconf = {
-
+      'audio' : true,
       'video': {
         'deviceId': dIDtconf,
         "maxWidth": 1280,
@@ -78,6 +78,7 @@ function set_stream(location) {
   else if (location == 2) {
 
     const constraints_navi = {
+      'audio' : true,
       'video': {
         'deviceId': dIDnavi,
         "maxWidth": 1280,
