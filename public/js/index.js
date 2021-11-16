@@ -107,7 +107,7 @@ socket.on('video_channel', (channel) => {
   console.log('masuk');
 });
 
-socket.on('set_statbar', (status) => {
+socket.on('statbar', (status) => {
   if (status == 1)
   {
     set_statbar.innerHTML = 'TELEPERESENCE';
