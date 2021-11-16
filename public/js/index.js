@@ -111,11 +111,17 @@ socket.on('statbar', (status) => {
   if (status == 1)
   {
     set_statbar.innerHTML = 'TELEPERESENCE';
+    set_statbar.remove("btn-primary");
+    set_statbar.remove("btn-warning");
+    set_statbar.Add("btn-info");
   }
 
   else if (status == 2)
   {
     set_statbar.innerHTML = 'NAVIGATION';
+    set_statbar.remove("btn-primary");
+    set_statbar.remove("btn-info");
+    set_statbar.Add("btn-warning");
   }
 });
 
