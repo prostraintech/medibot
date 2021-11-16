@@ -46,6 +46,7 @@ function getGamepadState() {
   else if (buttonPressed(gamepad.buttons[3])) {
 
     disconnect();
+    socket.emit('statbar',0);
     gmarker.style.display = 'none';
   }
 
