@@ -111,7 +111,6 @@ socket.on('statbar', (status) => {
   if (status == 1)
   {
     set_statbar.innerHTML = 'TELEPERESENCE';
-    set_statbar.classList.remove("btn-primary");
     set_statbar.classList.remove("btn-warning");
     set_statbar.classList.remove("btn-danger");
     set_statbar.classList.add("btn-info");
@@ -120,7 +119,6 @@ socket.on('statbar', (status) => {
   else if (status == 2)
   {
     set_statbar.innerHTML = 'NAVIGATION';
-    set_statbar.classList.remove("btn-primary");
     set_statbar.classList.remove("btn-info");
     set_statbar.classList.remove("btn-danger");
     set_statbar.classList.add("btn-warning");
@@ -129,7 +127,6 @@ socket.on('statbar', (status) => {
   else if (status == 0)
   {
     set_statbar.innerHTML = 'DISCONNECTED';
-    set_statbar.classList.remove("btn-primary");
     set_statbar.classList.remove("btn-info");
     set_statbar.classList.remove("btn-warning");
     set_statbar.classList.add("btn-danger");
