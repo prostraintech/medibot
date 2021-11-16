@@ -10,6 +10,7 @@ var gmarker = document.getElementById("gmarker");
 
 var set_statbar = document.getElementById("statbar");
 
+videol.volume = 0;
 
 function getAllConnectedDevices(label, callback) {
   try {
