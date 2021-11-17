@@ -9,6 +9,7 @@ var sid;
 var gmarker = document.getElementById("gmarker");
 
 var set_statbar = document.getElementById("statbar");
+var set_ip = document.getElementById("loc_ip");
 
 videol.volume = 0;
 
@@ -106,6 +107,11 @@ function set_stream(location) {
 socket.on('video_channel', (channel) => {
   set_stream(channel);
   console.log('masuk');
+});
+
+socket.on('local_ip', (locip) => {
+  set_ip.innerHTML = locip;
+  //console.log('masuk');
 });
 
 socket.on('statbar', (status) => {
