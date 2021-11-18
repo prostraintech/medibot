@@ -34,16 +34,16 @@ function getGamepadState() {
   var pointTurnAxis = gamepad.axes[5];
   var pan_tilt = gamepad.axes[9];
 
-  //start camera
+  /*start camera
   if (buttonPressed(gamepad.buttons[2])) {
     
     
     connect();
 
-  }
+  }*/
 
   //stop camera
-  else if (buttonPressed(gamepad.buttons[3])) {
+  if (buttonPressed(gamepad.buttons[5])) {
 
     socket.emit('statbar',0);
     disconnect();
@@ -51,7 +51,7 @@ function getGamepadState() {
   }
 
   //teleconference mode
-  else if (buttonPressed(gamepad.buttons[4])) {
+  else if (buttonPressed(gamepad.buttons[2])) {
     count++;
     if(count < 2) {
     socket.emit('video_channel', 1);
@@ -61,7 +61,7 @@ function getGamepadState() {
 
   }
   //navigation mode
-  else if (buttonPressed(gamepad.buttons[5])) {
+  else if (buttonPressed(gamepad.buttons[3])) {
     count++;
     if(count < 2) {
     socket.emit('video_channel', 2);
