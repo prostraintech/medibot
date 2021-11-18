@@ -627,10 +627,11 @@ void move(int order)
       //Stop all motors
       digitalWrite(TILT_D1, LOW);
       digitalWrite(PAN_D1, LOW);
-      digitalWrite(LH_D2, LOW);
-      digitalWrite(RH_D2, LOW);
       analogWrite(RH_D1, 229);
       analogWrite(LH_D1, 229);
+      digitalWrite(LH_D2, LOW);
+      digitalWrite(RH_D2, LOW);
+
   }
 
     else
