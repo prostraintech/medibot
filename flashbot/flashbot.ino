@@ -629,7 +629,7 @@ void move(int order)
       digitalWrite(PAN_D1, LOW);
       analogWrite(RH_D1, 229);
       analogWrite(LH_D1, 229);
-      delay(400);
+      //delay(00);
       digitalWrite(LH_D2, LOW);
       digitalWrite(RH_D2, LOW);
 
