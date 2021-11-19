@@ -10,7 +10,7 @@ var https = require('https').createServer({
 
 var cmd = '0:0';
 var count = 0;
-var res;
+var res ='';
 var oneperson;
 var locip;
 
