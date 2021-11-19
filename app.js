@@ -40,7 +40,7 @@ locip = results["wlan0"][0];
 var arduinoCOMPort = "/dev/ttyACM0";
 
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
-  baudRate: 9600
+  baudRate: 38400
 });
 
 //const parser = arduinoSerialPort.pipe(new Readline());

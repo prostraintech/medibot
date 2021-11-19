@@ -126,7 +126,7 @@ void setup()
   analogWrite(LH_D1, 229);
   digitalWrite(BRAKE, HIGH);
 
-  Serial.begin(9600);
+  Serial.begin(38400);
   digitalWrite(RH_D2, LOW);
   digitalWrite(RH_D3, LOW);
   digitalWrite(LH_D2, LOW);
