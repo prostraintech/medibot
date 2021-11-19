@@ -160,7 +160,7 @@ void loop()
 /*-------+
 + DEBUG  +
 +--------*/
-
+/*
   debug_speed++;
   if (debug_speed % 20 == 0)
   {
@@ -206,6 +206,7 @@ void loop()
     if (debug_speed == 15000)
       debug_speed = 0;
   }
+*/
 
 /*-------+
 +  NOTE  +
