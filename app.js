@@ -43,7 +43,7 @@ var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
   baudRate: 9600
 });
 
-const parser = arduinoSerialPort.pipe(new Readline());
+//const parser = arduinoSerialPort.pipe(new Readline());
 
 arduinoSerialPort.on('error', function () {
   console.log('Serial Port ' + arduinoCOMPort + ' is not available');
@@ -80,10 +80,10 @@ io.on('connection', (socket) => {
 
   console.log('a user connected');
   
-  parser.on('data', (vbat) => {
+  /*parser.on('data', (vbat) => {
     // console.log('got word from arduino:', vbat);
     socket.emit('vbat', vbat);
-  });
+  });*/
 
     socket.on('disconnect', () => {
     console.log('user disconnected');
@@ -117,7 +117,7 @@ io.on('connection', (socket) => {
     if (cmd != status) {
       cmd = status;
       res = cmd.toString();
-      arduinoSerialPort.write(res + '\n');
+      arduinoSerialPort.write('<' + res + '>');
       console.log(res);
     }
 
@@ -127,7 +127,7 @@ io.on('connection', (socket) => {
 
       if (count > 10) {
         res = cmd.toString();
-        arduinoSerialPort.write(res + '\n');
+        arduinoSerialPort.write('<' + res + '>');
         console.log(res);
         count = 0;
       }

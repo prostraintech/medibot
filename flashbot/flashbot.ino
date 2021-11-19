@@ -53,6 +53,15 @@ int heartbeat =0;
 int reset_order =0;
 int permitup=0, permitdown=0, permitright=0, permitleft=0;
 
+
+const byte numChars = 32;
+char receivedChars[numChars];
+char tempChars[numChars];
+
+int order = 0, motor_speed = 0;
+
+boolean newData = false;
+
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
 
@@ -222,19 +231,19 @@ void loop()
 
     if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(3);
+      move(3,50);
     }
     else if (digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(4);
+      move(4,50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(1);
+      move(1,50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(2);
+      move(2,50);
     }
     else if (digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
     {
@@ -250,7 +259,7 @@ void loop()
         permitleft = 1;
       }
 
-      move(5);
+      move(5,50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
     {
@@ -267,7 +276,7 @@ void loop()
         permitright = 1;
       }
 
-      move(6);
+      move(6,50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
@@ -287,7 +296,7 @@ void loop()
         permitup = 1;
       }
 
-        move(7);
+        move(7,50);
     
 
       
@@ -308,7 +317,7 @@ void loop()
       }
 
     
-        move(8);
+        move(8,50);
     
 
       
@@ -316,7 +325,7 @@ void loop()
 
     else
     {
-      move(0);
+      move(0,0);
     }
 
     
@@ -340,10 +349,18 @@ void loop()
       {
         Serial.println("no obstacle");
       }*/
+   
     
-    while (Serial.available() > 0)
-    {
-      int order = Serial.parseInt();
+    recvWithStartEndMarkers();
+    if (newData == true) {
+        strcpy(tempChars, receivedChars);
+            // this temporary copy is necessary to protect the original data
+            //   because strtok() used in parseData() replaces the commas with \0
+        parseData();
+    
+      //int order = Serial.parseInt();
+
+      
 
     
        if(analogRead(TILT_EN) > 550) 
@@ -420,19 +437,19 @@ void loop()
       
       
       heartbeat =0;
-      move(order);
+      move(order, motor_speed);
      
-     }
-
+ 
+    }
       
 
   heartbeat++;
     if (heartbeat>300){
-      move(0);
+      move(0, motor_speed);
     }
 
      
-
+  newData = false;
     
        
   }
@@ -441,9 +458,59 @@ void loop()
   count++;
 }
 
+/*-----------+
++ PARSE_UTIL +
++------------*/
+
+void recvWithStartEndMarkers() {
+    static boolean recvInProgress = false;
+    static byte ndx = 0;
+    char startMarker = '<';
+    char endMarker = '>';
+    char rc;
+
+    while (Serial.available() > 0 && newData == false) {
+        rc = Serial.read();
+
+        if (recvInProgress == true) {
+            if (rc != endMarker) {
+                receivedChars[ndx] = rc;
+                ndx++;
+                if (ndx >= numChars) {
+                    ndx = numChars - 1;
+                }
+            }
+            else {
+                receivedChars[ndx] = '\0'; // terminate the string
+                recvInProgress = false;
+                ndx = 0;
+                newData = true;
+            }
+        }
+
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
+    }
+}
+
+//============
+
+void parseData() {      // split the data into its parts
+
+    char * strtokIndx; // this is used by strtok() as an index
+
+    strtokIndx = strtok(tempChars,":");      // get the first part - the order
+    order = atoi(strtokIndx); // copy it to order
+ 
+    strtokIndx = strtok(NULL, ":"); // this continues where the previous call left off
+    motor_speed = atoi(strtokIndx);     // copy to  motor_speed
+
+}
+
 /*-------+
 + E_STOP +
-+-------*/
++--------*/
 
 void EMG_STOP()
 {
@@ -489,7 +556,7 @@ void Encoder_LH_ENA()
 + MOTOR, PAN, TILT +
 +------------------*/
 
-void move(int order)
+void move(int order, int motor_speed)
 {
   if (order == 1)
   {
@@ -511,8 +578,8 @@ void move(int order)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, HIGH);
       digitalWrite(LH_D3, LOW);
-      analogWrite(RH_D1, MOTOR_SPEED);
-      analogWrite(LH_D1, MOTOR_SPEED);
+      analogWrite(RH_D1, motor_speed);
+      analogWrite(LH_D1, motor_speed);
       // analogWrite(LED_FRT,100);
       //  Serial.print("Move Reverse");Serial.print("\n");
   }
