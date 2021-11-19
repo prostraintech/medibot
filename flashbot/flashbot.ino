@@ -438,7 +438,7 @@ void loop()
       
       heartbeat =0;
       move(order, motor_speed);
-     
+     newData = false;
  
     }
       
@@ -449,7 +449,7 @@ void loop()
     }
 
      
-  newData = false;
+  
     
        
   }
