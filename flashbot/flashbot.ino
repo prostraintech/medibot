@@ -401,7 +401,7 @@ void loop()
     if (digitalRead(LSR_Out2) == 1 && order != 9 && reset_order == 0)
     { // This consider object detected. Inlcude reset joystick
       order = 0;
-      move(order, 0)
+      move(order, 0);
     }
     else if (digitalRead(LSR_Out2) == 1 && order == 9 && reset_order == 0)
     {
