@@ -133,9 +133,13 @@ io.on('connection', (socket) => {
       }
     }*/
 
+    if (cmd !== status)
+    {
     res = '<' + status + '>';
     arduinoSerialPort.write(res);
+    cmd = status;
     console.log(res);
+    }
 
 
   });
