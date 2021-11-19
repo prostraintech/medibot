@@ -114,14 +114,14 @@ io.on('connection', (socket) => {
   socket.on('navi', (status) => {
     socket.emit('navi', status);
 
-    if (cmd != status) {
+    if (cmd !== status) {
       cmd = status;
       res = '<' + cmd + '>';
       arduinoSerialPort.write(res);
       console.log(res);
     }
 
-    else if (cmd == status) {
+    else if (cmd === status) {
 
       count++;
 
