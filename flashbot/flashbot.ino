@@ -54,7 +54,7 @@ int reset_order =0;
 int permitup=0, permitdown=0, permitright=0, permitleft=0;
 
 
-const byte numChars = 320;
+const byte numChars = 32;
 char receivedChars[numChars];
 char tempChars[numChars];
 
