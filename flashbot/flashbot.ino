@@ -4,7 +4,7 @@ int IR3 = A2;
 int SON1 = A3;
 int PAN_EN = A4;
 int TILT_EN = A5;
-int CSENS = A6; //Analog Input
+int CSENS = A6;  //Analog Input
 int LH_ENA = 44; // try git
 int LH_ENB = 43;
 int RH_ENA = 46;
@@ -14,7 +14,7 @@ int CS_STP = 67;
 int CS_FWD = 68;
 int CS_RVR = 69;
 int CS_RGT = 49;
-int CS_LFT = 48; // Digital Input Console
+int CS_LFT = 48;   // Digital Input Console
 int LSR_Out1 = 42; // free Zone (outside)
 int LSR_Out2 = 41; // caution zone (middle)
 int LSR_Out3 = 40; // danger zone (inside)
@@ -44,15 +44,14 @@ int LED_B_RH = 9; //Digital Output (PWM)
 #define RH_ENA 46
 #define RH_ENB 45
 #define ESTOP 39
-#define MOTOR_SPEED 148 //148 original
+#define MOTOR_SPEED 148      //148 original
 #define DIFF_MOTOR_SPEED 200 //150RPM
 
 int count = 0;
 int debug_speed = 0;
-int heartbeat =0;
-int reset_order =0;
-int permitup=0, permitdown=0, permitright=0, permitleft=0;
-
+int heartbeat = 0;
+int reset_order = 0;
+int permitup = 0, permitdown = 0, permitright = 0, permitleft = 0;
 
 const byte numChars = 32;
 char receivedChars[numChars];
@@ -74,18 +73,18 @@ void setup()
   pinMode(RH_ENB, INPUT);
   pinMode(SW_Mode, INPUT);
   pinMode(ESTOP, INPUT);
-  pinMode(LSR_Out1,INPUT);
-  pinMode(LSR_Out2,INPUT);
-  pinMode(LSR_Out3,INPUT);
+  pinMode(LSR_Out1, INPUT);
+  pinMode(LSR_Out2, INPUT);
+  pinMode(LSR_Out3, INPUT);
   digitalWrite(LH_ENA, HIGH);
   digitalWrite(LH_ENB, HIGH);
   digitalWrite(RH_ENA, HIGH);
   digitalWrite(RH_ENB, HIGH);
   digitalWrite(SW_Mode, HIGH);
   digitalWrite(ESTOP, HIGH);
-  digitalWrite(LSR_Out1,HIGH);
-  digitalWrite(LSR_Out2,HIGH);
-  digitalWrite(LSR_Out3,HIGH);
+  digitalWrite(LSR_Out1, HIGH);
+  digitalWrite(LSR_Out2, HIGH);
+  digitalWrite(LSR_Out3, HIGH);
 
   pinMode(CS_STT, INPUT);
   pinMode(CS_STP, INPUT);
@@ -150,17 +149,17 @@ void set_led_left(int r, int g, int b)
 void loop()
 {
 
-/*-------+
+  /*-------+
 +  LED   +
 +--------*/
 
   set_led_right(255, 255, 0); //RGB
   set_led_left(255, 255, 0);  //RGB
 
-/*-------+
+  /*-------+
 + DEBUG  +
 +--------*/
-/*
+  /*
   debug_speed++;
   if (debug_speed % 20 == 0)
   {
@@ -208,7 +207,7 @@ void loop()
   }
 */
 
-/*-------+
+  /*-------+
 +  NOTE  +
 +--------+
 
@@ -232,27 +231,26 @@ void loop()
 
     if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(3,50);
+      move(3, 50);
     }
     else if (digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(4,50);
+      move(4, 50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(1,50);
+      move(1, 50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 1)
     {
-      move(2,50);
+      move(2, 50);
     }
     else if (digitalRead(CS_LFT) == 0 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
     {
-       if(analogRead(PAN_EN) < 350) 
+      if (analogRead(PAN_EN) < 350)
       {
         permitleft = 0;
         permitright = 1;
-      
       }
 
       else
@@ -260,16 +258,15 @@ void loop()
         permitleft = 1;
       }
 
-      move(5,50);
+      move(5, 50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 0 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 0 && digitalRead(CS_STP) == 1)
     {
-      if(analogRead(PAN_EN) > 550) 
+      if (analogRead(PAN_EN) > 550)
       {
-       // Serial.println("here");
+        // Serial.println("here");
         permitright = 0;
         permitleft = 1;
-      
       }
 
       else
@@ -277,19 +274,19 @@ void loop()
         permitright = 1;
       }
 
-      move(6,50);
+      move(6, 50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 0 && digitalRead(CS_RVR) == 1 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
 
-      Serial.print("permitup ="); Serial.println(permitup);
+      Serial.print("permitup =");
+      Serial.println(permitup);
 
-      if(analogRead(TILT_EN) < 455) 
+      if (analogRead(TILT_EN) < 455)
       {
-       // Serial.println("here");
+        // Serial.println("here");
         permitup = 0;
         permitdown = 1;
-      
       }
 
       else
@@ -297,19 +294,15 @@ void loop()
         permitup = 1;
       }
 
-        move(7,50);
-    
-
-      
+      move(7, 50);
     }
     else if (digitalRead(CS_LFT) == 1 && digitalRead(CS_RGT) == 1 && digitalRead(CS_FWD) == 1 && digitalRead(CS_RVR) == 0 && digitalRead(CS_STT) == 1 && digitalRead(CS_STP) == 0)
     {
 
-       if(analogRead(TILT_EN) > 550) 
+      if (analogRead(TILT_EN) > 550)
       {
         permitdown = 0;
         permitup = 1;
-      
       }
 
       else
@@ -317,30 +310,22 @@ void loop()
         permitdown = 1;
       }
 
-    
-        move(8,50);
-    
-
-      
+      move(8, 50);
     }
 
     else
     {
-      move(0,0);
+      move(0, 0);
     }
-
-    
-
-      
   }
 
-/*-------+
+  /*-------+
 + REMOTE +
 +--------*/
 
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
-  
+
     // Serial.println("Remote Mode");
     /*if (digitalRead(LSR_Out2) ==1 ){
        //reset_order =0;
@@ -350,109 +335,99 @@ void loop()
       {
         Serial.println("no obstacle");
       }*/
-   
-    
+
     recvWithStartEndMarkers();
-    if (newData == true) {
-        strcpy(tempChars, receivedChars);
-            // this temporary copy is necessary to protect the original data
-            //   because strtok() used in parseData() replaces the commas with \0
-        parseData();
-    
+    if (newData == true)
+    {
+      strcpy(tempChars, receivedChars);
+      // this temporary copy is necessary to protect the original data
+      //   because strtok() used in parseData() replaces the commas with \0
+      parseData();
+
       //int order = Serial.parseInt();
 
-      
-
-    
-       if(analogRead(TILT_EN) > 550) 
-      {
-        permitdown = 0;
-        permitup = 1;
-      
-      }
-
-      else
-      {
-        permitdown = 1;
-      }
-
-      if(analogRead(TILT_EN) < 455) 
-      {
-       // Serial.println("here");
-        permitup = 0;
-        permitdown = 1;
-      
-      }
-
-      else
-      {
-        permitup = 1;
-      }
-
-      ///for pan limit
-       if(analogRead(PAN_EN) < 350) 
-      {
-        permitleft = 0;
-        permitright = 1;
-      
-      }
-
-      else
-      {
-        permitleft = 1;
-      }
-
-      if(analogRead(PAN_EN) > 550) 
-      {
-       // Serial.println("here");
-        permitright = 0;
-        permitleft = 1;
-      
-      }
-
-      else
-      {
-        permitright = 1;
-      }
-
-
-
-      if(digitalRead(LSR_Out2)==1 && order!=9 && reset_order ==0){   // This consider object detected. Inlcude reset joystick 
-         order =0;        
-         }
-      else if (digitalRead(LSR_Out2)==1 && order ==9 && reset_order ==0){
-        reset_order = 1;
-         }
-      else if(digitalRead(LSR_Out3) == 1){
-        order =0;
-      }
-      if (digitalRead(LSR_Out2)==0){
-       reset_order =0;
-       Serial.println("no obstacle");
-      }
-
-       else if (digitalRead(LSR_Out2) == 1)
-      {
-        Serial.println("yes obstacle");
-      }
-      
-      
-      heartbeat =0;
+      heartbeat = 0;
       move(order, motor_speed);
-     newData = false;
- 
+      newData = false;
     }
-      
 
-  heartbeat++;
-    if (heartbeat>300){
+    if (analogRead(TILT_EN) > 550)
+    {
+      permitdown = 0;
+      permitup = 1;
+    }
+
+    else
+    {
+      permitdown = 1;
+    }
+
+    if (analogRead(TILT_EN) < 455)
+    {
+      // Serial.println("here");
+      permitup = 0;
+      permitdown = 1;
+    }
+
+    else
+    {
+      permitup = 1;
+    }
+
+    ///for pan limit
+    if (analogRead(PAN_EN) < 350)
+    {
+      permitleft = 0;
+      permitright = 1;
+    }
+
+    else
+    {
+      permitleft = 1;
+    }
+
+    if (analogRead(PAN_EN) > 550)
+    {
+      // Serial.println("here");
+      permitright = 0;
+      permitleft = 1;
+    }
+
+    else
+    {
+      permitright = 1;
+    }
+
+    if (digitalRead(LSR_Out2) == 1 && order != 9 && reset_order == 0)
+    { // This consider object detected. Inlcude reset joystick
+      order = 0;
+      move(order, 0)
+    }
+    else if (digitalRead(LSR_Out2) == 1 && order == 9 && reset_order == 0)
+    {
+      reset_order = 1;
+    }
+    else if (digitalRead(LSR_Out3) == 1)
+    {
+      order = 0;
+      move(order, 0);
+    }
+    if (digitalRead(LSR_Out2) == 0)
+    {
+      reset_order = 0;
+      //Serial.println("no obstacle");
+    }
+
+    else if (digitalRead(LSR_Out2) == 1)
+    {
+      // Serial.println("yes obstacle");
+    }
+
+    heartbeat++;
+    if (heartbeat > 300)
+    {
       move(0, motor_speed);
     }
-
-     
-  
-    
-       
   }
 
   delay(100); // delay in between reads for stability
@@ -463,50 +438,57 @@ void loop()
 + PARSE_UTIL +
 +------------*/
 
-void recvWithStartEndMarkers() {
-    static boolean recvInProgress = false;
-    static byte ndx = 0;
-    char startMarker = '<';
-    char endMarker = '>';
-    char rc;
+void recvWithStartEndMarkers()
+{
+  static boolean recvInProgress = false;
+  static byte ndx = 0;
+  char startMarker = '<';
+  char endMarker = '>';
+  char rc;
 
-    while (Serial.available() > 0 && newData == false) {
-        rc = Serial.read();
+  while (Serial.available() > 0 && newData == false)
+  {
+    rc = Serial.read();
 
-        if (recvInProgress == true) {
-            if (rc != endMarker) {
-                receivedChars[ndx] = rc;
-                ndx++;
-                if (ndx >= numChars) {
-                    ndx = numChars - 1;
-                }
-            }
-            else {
-                receivedChars[ndx] = '\0'; // terminate the string
-                recvInProgress = false;
-                ndx = 0;
-                newData = true;
-            }
+    if (recvInProgress == true)
+    {
+      if (rc != endMarker)
+      {
+        receivedChars[ndx] = rc;
+        ndx++;
+        if (ndx >= numChars)
+        {
+          ndx = numChars - 1;
         }
-
-        else if (rc == startMarker) {
-            recvInProgress = true;
-        }
+      }
+      else
+      {
+        receivedChars[ndx] = '\0'; // terminate the string
+        recvInProgress = false;
+        ndx = 0;
+        newData = true;
+      }
     }
+
+    else if (rc == startMarker)
+    {
+      recvInProgress = true;
+    }
+  }
 }
 
 //============
 
-void parseData() {      // split the data into its parts
+void parseData()
+{ // split the data into its parts
 
-    char * strtokIndx; // this is used by strtok() as an index
+  char *strtokIndx; // this is used by strtok() as an index
 
-    strtokIndx = strtok(tempChars,":");      // get the first part - the order
-    order = atoi(strtokIndx); // copy it to order
- 
-    strtokIndx = strtok(NULL, ":"); // this continues where the previous call left off
-    motor_speed = atoi(strtokIndx);     // copy to  motor_speed
+  strtokIndx = strtok(tempChars, ":"); // get the first part - the order
+  order = atoi(strtokIndx);            // copy it to order
 
+  strtokIndx = strtok(NULL, ":"); // this continues where the previous call left off
+  motor_speed = atoi(strtokIndx); // copy to  motor_speed
 }
 
 /*-------+
@@ -562,91 +544,91 @@ void move(int order, int motor_speed)
   if (order == 1)
   {
     //Move forward
-      digitalWrite(RH_D2, HIGH);
-      digitalWrite(LH_D2, HIGH);
-      digitalWrite(RH_D3, LOW);
-      digitalWrite(LH_D3, HIGH);
-      analogWrite(RH_D1, motor_speed);
-      analogWrite(LH_D1, motor_speed);
+    digitalWrite(RH_D2, HIGH);
+    digitalWrite(LH_D2, HIGH);
+    digitalWrite(RH_D3, LOW);
+    digitalWrite(LH_D3, HIGH);
+    analogWrite(RH_D1, motor_speed);
+    analogWrite(LH_D1, motor_speed);
     //  Serial.print("Move Forward");Serial.print("\n");
     // analogWrite(LED_FRT,100);
   }
 
   else if (order == 2)
   {
-      //move reverse
-      digitalWrite(RH_D2, HIGH);
-      digitalWrite(LH_D2, HIGH);
-      digitalWrite(RH_D3, HIGH);
-      digitalWrite(LH_D3, LOW);
-      analogWrite(RH_D1, motor_speed);
-      analogWrite(LH_D1, motor_speed);
-      // analogWrite(LED_FRT,100);
-      //  Serial.print("Move Reverse");Serial.print("\n");
+    //move reverse
+    digitalWrite(RH_D2, HIGH);
+    digitalWrite(LH_D2, HIGH);
+    digitalWrite(RH_D3, HIGH);
+    digitalWrite(LH_D3, LOW);
+    analogWrite(RH_D1, motor_speed);
+    analogWrite(LH_D1, motor_speed);
+    // analogWrite(LED_FRT,100);
+    //  Serial.print("Move Reverse");Serial.print("\n");
   }
 
   else if (order == 3)
   {
-      //Move differential to the right
-      digitalWrite(RH_D2, HIGH);
-      digitalWrite(LH_D2, HIGH);
-      digitalWrite(RH_D3, HIGH);
-      digitalWrite(LH_D3, HIGH);
-      analogWrite(RH_D1, motor_speed);
-      analogWrite(LH_D1, motor_speed);
-      //  analogWrite(LED_FRT,100);
-      // Serial.print("Move Left");Serial.print("\n");
+    //Move differential to the right
+    digitalWrite(RH_D2, HIGH);
+    digitalWrite(LH_D2, HIGH);
+    digitalWrite(RH_D3, HIGH);
+    digitalWrite(LH_D3, HIGH);
+    analogWrite(RH_D1, motor_speed);
+    analogWrite(LH_D1, motor_speed);
+    //  analogWrite(LED_FRT,100);
+    // Serial.print("Move Left");Serial.print("\n");
   }
 
   else if (order == 4)
   {
-       //Move differential to the left
-      digitalWrite(RH_D2, HIGH);
-      digitalWrite(LH_D2, HIGH);
-      digitalWrite(RH_D3, LOW);
-      digitalWrite(LH_D3, LOW);
-      analogWrite(RH_D1, motor_speed);
-      analogWrite(LH_D1, motor_speed);
-      //  analogWrite(LED_FRT,100);
-      // Serial.print("Move Right");Serial.print("\n");   
+    //Move differential to the left
+    digitalWrite(RH_D2, HIGH);
+    digitalWrite(LH_D2, HIGH);
+    digitalWrite(RH_D3, LOW);
+    digitalWrite(LH_D3, LOW);
+    analogWrite(RH_D1, motor_speed);
+    analogWrite(LH_D1, motor_speed);
+    //  analogWrite(LED_FRT,100);
+    // Serial.print("Move Right");Serial.print("\n");
   }
 
   else if (order == 5)
   {
-      //Move pan to the left
-        if (permitleft == 1)
+    //Move pan to the left
+    if (permitleft == 1)
     {
       digitalWrite(PAN_D1, HIGH);
       digitalWrite(PAN_D2, HIGH);
       digitalWrite(TILT_D1, LOW);
-      //  Serial.print("Pan Left");Serial.print("\n"); 
+      //  Serial.print("Pan Left");Serial.print("\n");
     }
 
-    else if (permitleft== 0)
+    else if (permitleft == 0)
     {
       digitalWrite(PAN_D1, LOW);
       digitalWrite(PAN_D2, HIGH);
       digitalWrite(TILT_D1, LOW);
-    }  
+    }
   }
 
   else if (order == 6)
   {
-      //move pan to the right
-      if (permitright == 1)
+    //move pan to the right
+    if (permitright == 1)
     {
       digitalWrite(PAN_D1, HIGH);
       digitalWrite(PAN_D2, LOW);
       digitalWrite(TILT_D1, LOW);
     }
-      //  Serial.print("Pan Right");Serial.print("\n");
+    //  Serial.print("Pan Right");Serial.print("\n");
 
-      else if (permitright == 0)
-      {
+    else if (permitright == 0)
+    {
       digitalWrite(PAN_D1, LOW);
       digitalWrite(PAN_D2, LOW);
       digitalWrite(TILT_D1, LOW);
-      }
+    }
   }
 
   else if (order == 7)
@@ -666,12 +648,12 @@ void move(int order, int motor_speed)
       digitalWrite(TILT_D2, HIGH);
       digitalWrite(PAN_D1, LOW);
     }
-      //  Serial.print("Tilt Up");Serial.print("\n");
+    //  Serial.print("Tilt Up");Serial.print("\n");
   }
 
-    else if (order == 8)
+  else if (order == 8)
   {
-      if (permitdown == 1)
+    if (permitdown == 1)
     {
       //Move tilt down
       digitalWrite(TILT_D1, HIGH);
@@ -692,21 +674,18 @@ void move(int order, int motor_speed)
 
   else if (order == 0)
   {
-      //Stop all motors
-      digitalWrite(TILT_D1, LOW);
-      digitalWrite(PAN_D1, LOW);
-      analogWrite(RH_D1, 229);
-      analogWrite(LH_D1, 229);
-      //delay(00);
-      digitalWrite(LH_D2, LOW);
-      digitalWrite(RH_D2, LOW);
-
+    //Stop all motors
+    digitalWrite(TILT_D1, LOW);
+    digitalWrite(PAN_D1, LOW);
+    analogWrite(RH_D1, 229);
+    analogWrite(LH_D1, 229);
+    //delay(00);
+    digitalWrite(LH_D2, LOW);
+    digitalWrite(RH_D2, LOW);
   }
 
-    else
+  else
   {
     Serial.println("Error: order Not understood");
   }
-
-  
 }
