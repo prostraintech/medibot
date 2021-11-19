@@ -565,8 +565,8 @@ void move(int order, int motor_speed)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, LOW);
       digitalWrite(LH_D3, HIGH);
-      analogWrite(RH_D1, MOTOR_SPEED);
-      analogWrite(LH_D1, MOTOR_SPEED);
+      analogWrite(RH_D1, motor_speed);
+      analogWrite(LH_D1, motor_speed);
     //  Serial.print("Move Forward");Serial.print("\n");
     // analogWrite(LED_FRT,100);
   }
@@ -591,8 +591,8 @@ void move(int order, int motor_speed)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, HIGH);
       digitalWrite(LH_D3, HIGH);
-      analogWrite(RH_D1, DIFF_MOTOR_SPEED);
-      analogWrite(LH_D1, DIFF_MOTOR_SPEED);
+      analogWrite(RH_D1, motor_speed);
+      analogWrite(LH_D1, motor_speed);
       //  analogWrite(LED_FRT,100);
       // Serial.print("Move Left");Serial.print("\n");
   }
@@ -604,8 +604,8 @@ void move(int order, int motor_speed)
       digitalWrite(LH_D2, HIGH);
       digitalWrite(RH_D3, LOW);
       digitalWrite(LH_D3, LOW);
-      analogWrite(RH_D1, DIFF_MOTOR_SPEED);
-      analogWrite(LH_D1, DIFF_MOTOR_SPEED);
+      analogWrite(RH_D1, motor_speed);
+      analogWrite(LH_D1, motor_speed);
       //  analogWrite(LED_FRT,100);
       // Serial.print("Move Right");Serial.print("\n");   
   }
