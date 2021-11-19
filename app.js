@@ -114,7 +114,7 @@ io.on('connection', (socket) => {
   socket.on('navi', (status) => {
     socket.emit('navi', status);
 
-    if (cmd !== status) {
+    /*if (cmd !== status) {
       cmd = status;
       res = '<' + cmd + '>';
       arduinoSerialPort.write(res);
@@ -131,7 +131,11 @@ io.on('connection', (socket) => {
         console.log(res);
         count = 0;
       }
-    }
+    }*/
+
+    res = '<' + status + '>';
+    arduinoSerialPort.write(res);
+    console.log(res);
 
 
   });
