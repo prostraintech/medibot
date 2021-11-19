@@ -58,7 +58,7 @@ const byte numChars = 32;
 char receivedChars[numChars];
 char tempChars[numChars];
 
-int order = 0, motor_speed = 0;
+int order = 0, motor_speed = 220;
 
 boolean newData = false;
 
