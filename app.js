@@ -116,8 +116,8 @@ io.on('connection', (socket) => {
 
     if (cmd != status) {
       cmd = status;
-      res = cmd.toString();
-      arduinoSerialPort.write('<' + res + '>');
+      res = '<' + cmd.toString() + '>';
+      arduinoSerialPort.write(res);
       console.log(res);
     }
 
@@ -126,8 +126,8 @@ io.on('connection', (socket) => {
       count++;
 
       if (count > 10) {
-        res = cmd.toString();
-        arduinoSerialPort.write('<' + res + '>');
+        res = '<' + cmd.toString() + '>';
+        arduinoSerialPort.write(res);
         console.log(res);
         count = 0;
       }

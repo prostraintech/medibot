@@ -147,7 +147,7 @@ function getGamepadState() {
 
   else {
 
-    socket.emit('navi', 0);
+    socket.emit('navi', '0:' + pt_speed);
     count = 0;
 
   }
