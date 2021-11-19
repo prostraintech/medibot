@@ -8,7 +8,7 @@ var https = require('https').createServer({
   cert: fs.readFileSync('webrtcwwsocket-cert.pem')
 }, app);
 
-var cmd = 0;
+var cmd = '0:0';
 var count = 0;
 var res;
 var oneperson;
@@ -116,7 +116,7 @@ io.on('connection', (socket) => {
 
     if (cmd != status) {
       cmd = status;
-      res = '<' + cmd.toString() + '>';
+      res = '<' + cmd + '>';
       arduinoSerialPort.write(res);
       console.log(res);
     }
@@ -126,7 +126,7 @@ io.on('connection', (socket) => {
       count++;
 
       if (count > 10) {
-        res = '<' + cmd.toString() + '>';
+        res = '<' + cmd + '>';
         arduinoSerialPort.write(res);
         console.log(res);
         count = 0;
