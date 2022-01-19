@@ -15,9 +15,9 @@ int CS_FWD = 68;
 int CS_RVR = 69;
 int CS_RGT = 49;
 int CS_LFT = 48;   // Digital Input Console
-//int LSR_Out1 = 42; // free Zone (outside)
-//int LSR_Out2 = 41; // caution zone (middle)
-//int LSR_Out3 = 40; // danger zone (inside)
+int LSR_Out1 = 4442; // free Zone (outside)
+int LSR_Out2 = 4441; // caution zone (middle)
+int LSR_Out3 = 4440; // danger zone (inside)
 int ESTOP = 39;
 int SW_Mode = 38; // Digital Input General
 
