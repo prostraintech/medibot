@@ -15,9 +15,9 @@ int CS_FWD = 68;
 int CS_RVR = 69;
 int CS_RGT = 49;
 int CS_LFT = 48;   // Digital Input Console
-int LSR_Out1 = 42; // free Zone (outside)
-int LSR_Out2 = 41; // caution zone (middle)
-int LSR_Out3 = 40; // danger zone (inside)
+//int LSR_Out1 = 42; // free Zone (outside)
+//int LSR_Out2 = 41; // caution zone (middle)
+//int LSR_Out3 = 40; // danger zone (inside)
 int ESTOP = 39;
 int SW_Mode = 38; // Digital Input General
 
@@ -82,9 +82,9 @@ void setup()
   digitalWrite(RH_ENB, HIGH);
   digitalWrite(SW_Mode, HIGH);
   digitalWrite(ESTOP, HIGH);
-  digitalWrite(LSR_Out1, HIGH);
-  digitalWrite(LSR_Out2, HIGH);
-  digitalWrite(LSR_Out3, HIGH);
+  digitalWrite(LSR_Out1, LOW);
+  digitalWrite(LSR_Out2, LOW);
+  digitalWrite(LSR_Out3, LOW);
 
   pinMode(CS_STT, INPUT);
   pinMode(CS_STP, INPUT);
