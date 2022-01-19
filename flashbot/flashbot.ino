@@ -345,7 +345,7 @@ void loop()
   {
     incc=0;
   }
-  delay(100);
+  delay(1000);
 Serial.println(incc);
 
     // Serial.println("Remote Mode");
