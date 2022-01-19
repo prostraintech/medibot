@@ -82,9 +82,9 @@ void setup()
   digitalWrite(RH_ENB, HIGH);
   digitalWrite(SW_Mode, HIGH);
   digitalWrite(ESTOP, HIGH);
-  digitalWrite(LSR_Out1, LOW);
-  digitalWrite(LSR_Out2, LOW);
-  digitalWrite(LSR_Out3, LOW);
+  digitalWrite(LSR_Out1, HIGH);
+  digitalWrite(LSR_Out2, HIGH);
+  digitalWrite(LSR_Out3, HIGH);
 
   pinMode(CS_STT, INPUT);
   pinMode(CS_STP, INPUT);
