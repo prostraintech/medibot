@@ -336,6 +336,15 @@ void loop()
 
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
+    
+     set_led_right(r, 255, 0); //RGB
+  set_led_left(r, 255, 0);  //RGB
+  r++;
+  if (r == 255)
+  {
+    r=0;
+  }
+  delay(100);
 
 
     // Serial.println("Remote Mode");
