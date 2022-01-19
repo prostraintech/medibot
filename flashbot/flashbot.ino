@@ -64,11 +64,11 @@ boolean newData = false;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
-
+  int incc=0;
 void setup()
 {
 
-  int r=0;
+
   pinMode(LH_ENA, INPUT);
   pinMode(LH_ENB, INPUT);
   pinMode(RH_ENA, INPUT);
@@ -338,12 +338,12 @@ void loop()
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
     
-     set_led_right(r, 255, 0); //RGB
-  set_led_left(r, 255, 0);  //RGB
-  r++;
-  if (r == 255)
+     set_led_right(incc, 255, 0); //RGB
+  set_led_left(incc, 255, 0);  //RGB
+  incc++;
+  if (incc == 255)
   {
-    r=0;
+    incc=0;
   }
   delay(100);
 Serial.println(r);
