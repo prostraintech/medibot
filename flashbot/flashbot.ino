@@ -38,6 +38,7 @@ int LED_B_LH = 12;
 int LED_R_RH = 7;
 int LED_G_RH = 8;
 int LED_B_RH = 9; //Digital Output (PWM)
+int r=0;
 
 #define LH_ENA 44
 #define LH_ENB 43
@@ -153,8 +154,15 @@ void loop()
 +  LED   +
 +--------*/
 
-  set_led_right(255, 255, 0); //RGB
-  set_led_left(255, 255, 0);  //RGB
+ 
+  
+  set_led_right(r++, 255, 0); //RGB
+  set_led_left(r++, 255, 0);  //RGB
+  
+  if (r == 255)
+  {
+    r=0;
+  }
 
   /*-------+
 + DEBUG  +
