@@ -163,6 +163,7 @@ void loop()
   {
     r=0;
   }
+  delay(100);
 
   /*-------+
 + DEBUG  +
