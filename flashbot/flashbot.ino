@@ -346,7 +346,7 @@ void loop()
     incc=0;
   }
   delay(100);
-Serial.println(r);
+Serial.println(incc);
 
     // Serial.println("Remote Mode");
     /*if (digitalRead(LSR_Out2) ==1 ){
