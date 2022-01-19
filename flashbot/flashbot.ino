@@ -38,7 +38,7 @@ int LED_B_LH = 12;
 int LED_R_RH = 7;
 int LED_G_RH = 8;
 int LED_B_RH = 9; //Digital Output (PWM)
-int r=0;
+
 
 #define LH_ENA 44
 #define LH_ENB 43
@@ -68,6 +68,7 @@ volatile unsigned int encoder_LH = 0;
 void setup()
 {
 
+  int r=0;
   pinMode(LH_ENA, INPUT);
   pinMode(LH_ENB, INPUT);
   pinMode(RH_ENA, INPUT);
