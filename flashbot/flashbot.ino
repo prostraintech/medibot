@@ -64,7 +64,11 @@ boolean newData = false;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
-  int incc=0;
+//int incc=0;
+unsigned long pasttime1 = 0;
+unsigned long currenttime1 = 0;
+bool flag1 = 0;
+
 void setup()
 {
 
@@ -338,15 +342,23 @@ void loop()
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
     
-  set_led_right(255, 0, 255); //RGB
-  set_led_left(255, 0, 255);  //RGB
-  incc++;
-  if (incc == 255)
-  {
-    incc=0;
+  currenttime1 = millis();  
+  if (flag1 == 0) {
+    set_led_right(255, 0, 255); //RGB
+    set_led_left(255, 0, 255);  //RGB
+    if ((currenttime1 - pasttime1) > 750) {
+      flag1 = 1;
+      pasttime1 = currenttime1;
+    }
   }
-  delay(100);
-Serial.println(incc);
+  else {
+    set_led_right(255, 255, 255); //RGB
+    set_led_left(255, 255, 255);  //RGB
+    if ((currenttime1 - pasttime1) > 350) {
+      flag1 = 0;
+      pasttime1 = currenttime1;
+    }
+  }
 
     // Serial.println("Remote Mode");
     /*if (digitalRead(LSR_Out2) ==1 ){
