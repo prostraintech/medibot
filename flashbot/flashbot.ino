@@ -338,8 +338,8 @@ void loop()
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
     
-  set_led_right(255, 0, 0); //RGB
-  set_led_left(255, 0, 0);  //RGB
+  set_led_right(0, 0, 255); //RGB
+  set_led_left(0, 0, 255);  //RGB
   incc++;
   if (incc == 255)
   {
