@@ -68,7 +68,7 @@ volatile unsigned int encoder_LH = 0;
 unsigned long pasttime1 = 0;
 unsigned long currenttime1 = 0;
 bool flag1 = 0;
-
+bool flag2 = 0;
 void setup()
 {
 
@@ -343,19 +343,36 @@ void loop()
   { // 1 = Remote
     
   currenttime1 = millis();  
-  if (flag1 == 0) {
-    set_led_right(255, 0, 255); //RGB
-    set_led_left(255, 0, 255);  //RGB
-    if ((currenttime1 - pasttime1) > 750) {
+  if (flag1 == 0 && flag2 == 0) {
+    set_led_right(255, 0, 255); //RGB purple
+    set_led_left(255, 0, 255);  //RGB purple
+    if ((currenttime1 - pasttime1) > 1000) {
       flag1 = 1;
       pasttime1 = currenttime1;
     }
   }
-  else {
-    set_led_right(255, 255, 255); //RGB
-    set_led_left(255, 255, 255);  //RGB
-    if ((currenttime1 - pasttime1) > 350) {
+  else if(flag1 == 1 && flag2 == 0){
+    set_led_right(255, 255, 255); //RGB white
+    set_led_left(255, 255, 255);  //RGB white
+    if ((currenttime1 - pasttime1) > 1000) {
+      flag2 = 1;
+      pasttime1 = currenttime1;
+    }
+  }
+  else if(flag1 == 1 && flag2 == 1){
+    set_led_right(255, 255, 0); //RGB yellow
+    set_led_left(255, 255, 0);  //RGB yellow
+    if ((currenttime1 - pasttime1) > 1000) {
       flag1 = 0;
+      pasttime1 = currenttime1;
+    }
+  }
+  
+  else if(flag1 == 0 && flag2 == 1){
+    set_led_right(0, 255, 0); //RGB green
+    set_led_left(0, 255, 0);  //RGB green
+    if ((currenttime1 - pasttime1) > 1000) {
+      flag2 = 0;
       pasttime1 = currenttime1;
     }
   }
