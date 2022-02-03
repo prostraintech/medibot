@@ -1,3 +1,3 @@
 # Medibot Code Repository
 
-private repo for IIUm Medibot codes
+private repo for IIUM Medibot codes
