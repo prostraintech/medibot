@@ -1,5 +1,0 @@
-{
-    "sketch": "flashbot\\flashbot.ino",
-    "port": "COM1",
-    "board": "arduino:sam:arduino_due_x_dbg"
-}
