@@ -57,11 +57,6 @@ arduinoSerialPort.on('close', function () {
 });
 
 app.use(express.static('public'));
-//app.use(express.static('./public/js'));
-//app.use('',express.static(__dirname + '/css'));
-// app.use('/webfonts',express.static(__dirname + '/webfonts'));
-// app.use('/vendor',express.static(__dirname + '/vendor'));
-// app.use('/scss',express.static(__dirname + '/scss'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
