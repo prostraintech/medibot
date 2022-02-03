@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-//require('./public/js/index.js')();
 
 var https = require('https').createServer({
   key: fs.readFileSync('webrtcwwsocket-key.pem'),
@@ -113,25 +112,6 @@ io.on('connection', (socket) => {
 
   socket.on('navi', (status) => {
     socket.emit('navi', status);
-
-    /*if (cmd !== status) {
-      cmd = status;
-      res = '<' + cmd + '>';
-      arduinoSerialPort.write(res);
-      console.log(res);
-    }
-
-    else if (cmd === status) {
-
-      count++;
-
-      if (count > 10) {
-        res = '<' + cmd + '>';
-        arduinoSerialPort.write(res);
-        console.log(res);
-        count = 0;
-      }
-    }*/
 
     if (cmd !== status)
     {
