@@ -37,7 +37,7 @@ for (const name of Object.keys(nets)) {
 
 locip = results["wlan0"][0];
 
-var arduinoCOMPort = "/dev/ttyACM0";
+var arduinoCOMPort = "/dev/ttyACM1";
 
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
   baudRate: 38400
