@@ -32,10 +32,10 @@ function getGamepadState() {
     return;
   }
 
-  var speedAxis = gamepad.axes[6];
+  var speedAxis = gamepad.axes[3];
   var yAxis = gamepad.axes[1];
-  var pointTurnAxis = gamepad.axes[5];
-  var pan_tilt = gamepad.axes[9];
+  var pointTurnAxis = gamepad.axes[2];
+  var pan_tilt = gamepad.axes[5];
 
   /*start camera
   if (buttonPressed(gamepad.buttons[2])) {

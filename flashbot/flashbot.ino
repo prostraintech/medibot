@@ -64,11 +64,7 @@ boolean newData = false;
 
 volatile unsigned int encoder_RH = 0;
 volatile unsigned int encoder_LH = 0;
-//int incc=0;
-unsigned long pasttime1 = 0;
-unsigned long currenttime1 = 0;
-bool flag1 = 0;
-bool flag2 = 0;
+  int incc=0;
 void setup()
 {
 
@@ -177,12 +173,10 @@ void loop()
   debug_speed++;
   if (debug_speed % 20 == 0)
   {
-
     Serial.print("Mode  = ");
     Serial.println(digitalRead(SW_Mode));
     Serial.print("Estop  = ");
     Serial.println(digitalRead(ESTOP));
-
     Serial.print("CS Start,STOP,LH,RH,FWD,REV = ");
     Serial.print(digitalRead(CS_STT));
     Serial.print(digitalRead(CS_STP));
@@ -190,7 +184,6 @@ void loop()
     Serial.print(digitalRead(CS_RGT));
     Serial.print(digitalRead(CS_FWD));
     Serial.println(digitalRead(CS_RVR));
-
     int Analog_IR1 = analogRead(IR1);
     int Analog_IR2 = analogRead(IR2);
     int Analog_IR3 = analogRead(IR3);
@@ -214,7 +207,6 @@ void loop()
     Serial.println(encoder_RH);
     //Serial.print("Count "); Serial.println(count);
     Serial.println("");
-
     //prevent overflow
     if (debug_speed == 15000)
       debug_speed = 0;
@@ -224,7 +216,6 @@ void loop()
   /*-------+
 +  NOTE  +
 +--------+
-
 1 - MOVE FORWARD
 2 - MOVE REVERSE
 3 - MOVE RIGHT
@@ -233,7 +224,6 @@ void loop()
 6 - PAN RIGHT
 7 - TILT UP
 8 - TITL DOWN
-
 /*-------+
 + RESCUE +
 +--------*/
@@ -342,40 +332,15 @@ void loop()
   if (digitalRead(SW_Mode) == 1)
   { // 1 = Remote
     
-  currenttime1 = millis();  
-  if (flag1 == 0 && flag2 == 0) {
-    set_led_right(255, 0, 255); //RGB purple
-    set_led_left(255, 0, 255);  //RGB purple
-    if ((currenttime1 - pasttime1) > 1000) {
-      flag1 = 1;
-      pasttime1 = currenttime1;
-    }
+  set_led_right(255, 0, 0); //RGB
+  set_led_left(255, 0, 0);  //RGB
+  incc++;
+  if (incc == 255)
+  {
+    incc=0;
   }
-  else if(flag1 == 1 && flag2 == 0){
-    set_led_right(255, 255, 255); //RGB white
-    set_led_left(255, 255, 255);  //RGB white
-    if ((currenttime1 - pasttime1) > 1000) {
-      flag2 = 1;
-      pasttime1 = currenttime1;
-    }
-  }
-  else if(flag1 == 1 && flag2 == 1){
-    set_led_right(255, 255, 0); //RGB yellow
-    set_led_left(255, 255, 0);  //RGB yellow
-    if ((currenttime1 - pasttime1) > 1000) {
-      flag1 = 0;
-      pasttime1 = currenttime1;
-    }
-  }
-  
-  else if(flag1 == 0 && flag2 == 1){
-    set_led_right(0, 255, 0); //RGB green
-    set_led_left(0, 255, 0);  //RGB green
-    if ((currenttime1 - pasttime1) > 1000) {
-      flag2 = 0;
-      pasttime1 = currenttime1;
-    }
-  }
+  delay(100);
+Serial.println(incc);
 
     // Serial.println("Remote Mode");
     /*if (digitalRead(LSR_Out2) ==1 ){
