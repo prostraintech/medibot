@@ -1,15 +1,13 @@
 {
   "name": "medibot",
   "version": "1.0.0",
-  "description": "v4-base",
+  "description": "stable-rep",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1",
-    "pm2": "^4.4.1",
-    "serialport": "^9.2.4",
-    "shelljs": "^0.8.4",
-    "socket.io": "^2.4.1",
-    "socketio": "^1.0.0"
+    "express": "^4.17.3",
+    "serialport": "^9.2.8",
+    "shelljs": "^0.8.5",
+    "socket.io": "^4.4.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -19,8 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/afifhusman/medibot.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Afif Husman",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/afifhusman/medibot/issues"
